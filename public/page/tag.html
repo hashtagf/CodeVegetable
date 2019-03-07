@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>Smart Farm</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<!-- framework Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="../app.js"></script>
+	<!-- <script src="../js/hole.js"></script> -->
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- Moment time -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+
+	<!-- Microgear -->
+	<script src="https://cdn.netpie.io/microgear.js"></script>
+
+	<!-- Compiled and minified CSS -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"> -->
+  <!-- Compiled and minified JavaScript -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script> -->
+
+</head>
+<script>
+
+</script>
+<body ng-controller="TodoListController">
+<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<!-- navbar -->
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	      <a class="navbar-brand" href="../index.html">Smart Farm Cabinet</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	    <ul class="nav navbar-nav">
+	      <li><a href="../index.html">Home</a></li>
+	      <li><a href="googleSheets.html">Google Sheets</a></li>
+	      <li class="active"><a href="#">Status</a></li>
+	      <li><a href="picture.html">Picture</a></li>
+	    </ul>
+	  </div>
+	  </div>
+	</nav>
+
+	<div  class="container"><!-- container -->
+
+		<!-- <button ng-click="tree(1)" class="btn btn-primary btn-xs" id="button" ng-iff="calday1 > 0">{{ (totalHole[0].status === false)?  'Add' : 'Reset'}} 1</button>
+		<button ng-click="tree(1)" class="btn btn-warning btn-xs" id="button" ng-if="calday1 <= 0">Reset 1</button> -->
+
+	<div class="row">
+<!-- Left////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+		<div class="col-md-6 col-sd-6" >
+			<div class="row">
+				<div class="col-md-8 col-sd-8 col-md-offset-2 col-sd-offset-2">
+
+				<div class="panel panel-success" style="background-color: #f3ffef;">
+				<div class="panel-heading"><h4><center>Floor 3 Left</center></h4></div>
+				<div class="panel-body">
+
+					<div class="row">
+						<div class="col-md-12 col-sd-12 " style="background-color: #f3ffef;">
+						<center>
+
+							<table border="0">
+								<tr>
+<!-- hole 1 -->
+								  <td>
+
+									  <button ng-click="tree(1)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday1 < 0">
+									  	Hole 1<br>Add</button>
+										<button ng-click="tree(1)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday1 >= 0 && calday1 <= 10">
+											Hole 1<br>{{calday1}} Day<br>Reset</button>
+										<button ng-click="tree(1)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday1 >= 11 && calday1 <= 19">
+											Hole 1<br>{{calday1}} Day<br>Reset</button>
+										<button ng-click="tree(1)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday1 >= 20">
+											Hole 1<br>{{calday1}} Days<br>Left</button>
+								  </td>
+								  <td>
+								  <p class="typeveg">{{holeveg1}}</p>
+										<select ng-model="veg1">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole1(veg1)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 2 -->
+								  <td>
+									  <!-- <button ng-click="tree(2)" class="btn btn-primary btn-xs" id="buttonhole" >2</button> -->
+									  <button ng-click="tree(2)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday2 < 0">
+									  	Hole 2<br>Add</button>
+										<button ng-click="tree(2)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday2 >= 0 && calday2 <= 10">
+											Hole 2<br>{{calday2}} Day <br>Reset</button>
+										<button ng-click="tree(2)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday2 >= 11 && calday2 <= 19">
+											Hole 2<br>{{calday2}} Day <br>Reset</button>
+										<button ng-click="tree(2)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday2 >= 20">
+											Hole 2<br>{{calday2}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg2}}</p>
+										<select ng-model="veg2">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole2(veg2)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<tr>
+									<td><br></td>
+									<td><br></td>
+								</tr>
+								<tr>
+<!-- hole 3 -->
+								  <td >
+									  <!-- <button ng-click="tree(3)" class="btn btn-primary btn-xs" id="buttonhole" >3</button> -->
+									  <button ng-click="tree(3)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday3 < 0">
+									  	Hole 3<br>Add</button>
+										<button ng-click="tree(3)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday3 >= 0 && calday3 <= 10">
+											Hole 3<br>{{calday3}} Day <br>Reset</button>
+										<button ng-click="tree(3)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday3 >= 11 && calday3 <= 19">
+											Hole 3<br>{{calday3}} Day <br>Reset</button>
+										<button ng-click="tree(3)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday3 >= 20">
+											Hole 3<br>{{calday3}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg3}}</p>
+										<select ng-model="veg3">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole3(veg3)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 4 -->
+								  <td >
+								  	<!-- <button ng-click="tree(4)" class="btn btn-primary btn-xs" id="buttonhole" >4</button> -->
+								  	<button ng-click="tree(4)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday4 < 0">
+								  		Hole 4<br>Add</button>
+										<button ng-click="tree(4)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday4 >= 0 && calday4 <= 10">
+											Hole 4<br>{{calday4}} Day <br>Reset</button>
+										<button ng-click="tree(4)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday4 >= 11 && calday4 <= 19">
+											Hole 4<br>{{calday4}} Day <br>Reset</button>
+										<button ng-click="tree(4)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday4 >= 20">
+											Hole 4<br>{{calday4}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg4}}</p>
+										<select ng-model="veg4">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole4(veg4)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<tr>
+									<td><br></td>
+									<td><br></td>
+								</tr>
+<!-- hole 5 -->
+								<tr>
+								  <td >
+								 		<!-- <button ng-click="tree(5)" class="btn btn-primary btn-xs" id="buttonhole" >5</button> -->
+								  	<button ng-click="tree(5)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday5 < 0">
+								  		Hole 5<br>Add</button>
+										<button ng-click="tree(5)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday5 >= 0 && calday5 <= 10">
+											Hole 5<br>{{calday5}} Day <br>Reset</button>
+										<button ng-click="tree(5)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday5 >= 11 && calday5 <= 19">
+											Hole 5<br>{{calday5}} Day <br>Reset</button>
+										<button ng-click="tree(5)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday5 >= 20">
+											Hole 5<br>{{calday5}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg5}}</p>
+										<select ng-model="veg5">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole5(veg5)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 6 -->
+								  <td >
+								  	<!-- <button ng-click="tree(6)" class="btn btn-primary btn-xs" id="buttonhole" >6</button> -->
+								  	<button ng-click="tree(6)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday6 < 0">
+								  		Hole 6<br>Add</button>
+										<button ng-click="tree(6)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday6 >= 0 && calday6 <= 10">
+											Hole 6<br>{{calday6}} Day <br>Reset</button>
+										<button ng-click="tree(6)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday6 >= 11 && calday6 <= 19">
+											Hole 6<br>{{calday6}} Day <br>Reset</button>
+										<button ng-click="tree(6)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday6 >= 20">
+											Hole 6<br>{{calday6}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg6}}</p>
+										<select ng-model="veg6">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole6(veg6)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+
+							</table>
+							<br>
+						</center>
+						</div>
+					</div>
+				</div>
+				</div>
+
+				<div class="panel panel-info" style="background-color: #f3ffef;">
+				<div class="panel-heading"><h4><center>Floor 2 Left</center></h4></div>
+				<div class="panel-body">
+
+					<div class="row">
+						<div class="col-md-12 col-sd-12 " style="background-color: #f3ffef;">
+						<center>
+							<table>
+								<tr>
+<!-- hole 13 -->
+								  <td >
+								  <!-- <button ng-click="tree(13)" class="btn btn-primary btn-xs" id="buttonhole" >13</button> -->
+								  	<button ng-click="tree(13)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday13 < 0">
+								  		Hole 13<br>Add</button>
+										<button ng-click="tree(13)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday13 >= 0 && calday13 <= 10">
+											Hole 13<br>{{calday13}} Day <br>Reset</button>
+										<button ng-click="tree(13)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday13 >= 11 && calday13 <= 19">
+											Hole 13<br>{{calday13}} Day <br>Reset</button>
+										<button ng-click="tree(13)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday13 >= 20">
+											Hole 13<br>{{calday13}} Days <br>Left</button>
+								  </td>
+								  <td>
+								  <p class="typeveg">{{holeveg13}}</p>
+										<select ng-model="veg13">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole13(veg13)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 14 -->
+								  <td >
+								  <!-- <button ng-click="tree(14)" class="btn btn-primary btn-xs" id="buttonhole" >14</button> -->
+								  	<button ng-click="tree(14)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday14 < 0">
+								  		Hole 14<br>Add</button>
+										<button ng-click="tree(14)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday14 >= 0 && calday14 <= 10">
+											Hole 14<br>{{calday14}} Day <br>Reset</button>
+										<button ng-click="tree(14)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday14 >= 11 && calday14 <= 19">
+											Hole 14<br>{{calday14}} Day <br>Reset</button>
+										<button ng-click="tree(14)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday14 >= 20">
+											Hole 14<br>{{calday14}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg14}}</p>
+										<select ng-model="veg14">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole14(veg14)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<td><br></td>
+								<td><br></td>
+								<tr>
+<!-- hole 15 -->
+								  <td >
+								  <!-- <button ng-click="tree(15)" class="btn btn-primary btn-xs" id="buttonhole" >15</button> -->
+								  	<button ng-click="tree(15)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday15 < 0">
+								  		Hole 15<br>Add</button>
+										<button ng-click="tree(15)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday15 >= 0 && calday15 <= 10">
+											Hole 15<br>{{calday15}} Day <br>Reset</button>
+										<button ng-click="tree(15)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday15 >= 11 && calday15 <= 19">
+											Hole 15<br>{{calday15}} Day <br>Reset</button>
+										<button ng-click="tree(15)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday15 >= 20">
+											Hole 15<br>{{calday15}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg15}}</p>
+										<select ng-model="veg15">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole15(veg15)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 16 -->
+								  <td >
+								  <!-- <button ng-click="tree(16)" class="btn btn-primary btn-xs" id="buttonhole" >16</button> -->
+								  	<button ng-click="tree(16)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday16 < 0">
+								  		Hole 16<br>Add</button>
+										<button ng-click="tree(16)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday16 >= 0 && calday16 <= 10">
+											Hole 16<br>{{calday16}} Day <br>Reset</button>
+										<button ng-click="tree(16)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday16 >= 11 && calday16 <= 19">
+											Hole 16<br>{{calday16}} Day <br>Reset</button>
+										<button ng-click="tree(16)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday16 >= 20">
+											Hole 16<br>{{calday16}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg16}}</p>
+										<select ng-model="veg16">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole16(veg16)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<td><br></td>
+								<td><br></td>
+								<tr>
+<!-- hole 17 -->
+								  <td >
+								  <!-- <button ng-click="tree(17)" class="btn btn-primary btn-xs" id="buttonhole" >17</button> -->
+								  	<button ng-click="tree(17)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday17 < 0">
+								  		Hole 17<br>Add</button>
+										<button ng-click="tree(17)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday17 >= 0 && calday17 <= 10">
+											Hole 17<br>{{calday17}} Day <br>Reset</button>
+										<button ng-click="tree(17)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday17 >= 11 && calday17 <= 19">
+											Hole 17<br>{{calday17}} Day <br>Reset</button>
+										<button ng-click="tree(17)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday17 >= 20">
+											Hole 17<br>{{calday17}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg17}}</p>
+										<select ng-model="veg17">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole17(veg17)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 18 -->
+								  <td >
+								  <!-- <button ng-click="tree(18)" class="btn btn-primary btn-xs" id="buttonhole" >18</button> -->
+								  	<button ng-click="tree(18)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday18 < 0">
+								  		Hole 18<br>Add</button>
+										<button ng-click="tree(18)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday18 >= 0 && calday18 <= 10">
+											Hole 18<br>{{calday18}} Day <br>Reset</button>
+										<button ng-click="tree(18)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday18 >= 11 && calday18 <= 19">
+											Hole 18<br>{{calday18}} Day <br>Reset</button>
+										<button ng-click="tree(18)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday18 >= 20">
+											Hole 18<br>{{calday18}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg18}}</p>
+										<select ng-model="veg18">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole18(veg18)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+							</table>
+							<br>
+						</center>
+						</div>
+					</div>
+
+				</div>
+				</div>
+
+				<div class="panel panel-warning" style="background-color: #f3ffef;">
+				<div class="panel-heading"><h4><center>Floor 1 Left</center></h4></div>
+				<div class="panel-body">
+
+					<div class="row">
+						<div class="col-md-12 col-sd-12 " style="background-color: #f3ffef;">
+						<center>
+							<table>
+								<tr>
+<!-- hole 25 -->
+								  <td >
+								  <!-- <button ng-click="tree(25)" class="btn btn-primary btn-xs" id="buttonhole" >25</button> -->
+								  	<button ng-click="tree(25)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday25 < 0">
+								  		Hole 25<br>Add</button>
+										<button ng-click="tree(25)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday25 >= 0 && calday25 <= 10">
+											Hole 25<br>{{calday25}} Day <br>Reset</button>
+										<button ng-click="tree(25)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday25 >= 11 && calday25 <= 19">
+											Hole 25<br>{{calday25}} Day <br>Reset</button>
+										<button ng-click="tree(25)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday25 >= 20">
+											Hole 25<br>{{calday25}} Days <br>Left</button>
+								  </td>
+								  <td>
+								  <p class="typeveg">{{holeveg25}}</p>
+										<select ng-model="veg25">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole25(veg25)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 26 -->
+								  <td >
+								  <!-- <button ng-click="tree(26)" class="btn btn-primary btn-xs" id="buttonhole" >26</button> -->
+								  	<button ng-click="tree(26)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday26 < 0">
+								  		Hole 26<br>Add</button>
+										<button ng-click="tree(26)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday26 >= 0 && calday26 <= 10">
+											Hole 26<br>{{calday26}} Day <br>Reset</button>
+										<button ng-click="tree(26)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday26 >= 11 && calday26 <= 19">
+											Hole 26<br>{{calday26}} Day <br>Reset</button>
+										<button ng-click="tree(26)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday26 >= 20">
+											Hole 26<br>{{calday26}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg26}}</p>
+										<select ng-model="veg26">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole26(veg26)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<td><br></td>
+								<td><br></td>
+								<tr>
+<!-- hole 27 -->
+								  <td >
+								  <!-- <button ng-click="tree(27)" class="btn btn-primary btn-xs" id="buttonhole" >27</button> -->
+								  	<button ng-click="tree(27)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday27 < 0">
+								  		Hole 27<br>Add</button>
+										<button ng-click="tree(27)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday27 >= 0 && calday27 <= 10">
+											Hole 27<br>{{calday27}} Day <br>Reset</button>
+										<button ng-click="tree(27)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday27 >= 11 && calday27 <= 19">
+											Hole 27<br>{{calday27}} Day <br>Reset</button>
+										<button ng-click="tree(27)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday27 >= 20">
+											Hole 27<br>{{calday27}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg27}}</p>
+										<select ng-model="veg27">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole27(veg27)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 28 -->
+								  <td >
+								  <!-- <button ng-click="tree(28)" class="btn btn-primary btn-xs" id="buttonhole" >28</button> -->
+								  	<button ng-click="tree(28)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday28 < 0">
+								  		Hole 28<br>Add</button>
+										<button ng-click="tree(28)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday28 >= 0 && calday28 <= 10">
+											Hole 28<br>{{calday28}} Day <br>Reset</button>
+										<button ng-click="tree(28)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday28 >= 11 && calday28 <= 19">
+											Hole 28<br>{{calday28}} Day <br>Reset</button>
+										<button ng-click="tree(28)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday28 >= 20">
+											Hole 28<br>{{calday28}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg28}}</p>
+										<select ng-model="veg28">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole28(veg28)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<td><br></td>
+								<td><br></td>
+								<tr>
+<!-- hole 29 -->
+								  <td >
+								  <!-- <button ng-click="tree(29)" class="btn btn-primary btn-xs" id="buttonhole" >29</button> -->
+								  	<button ng-click="tree(29)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday29 < 0">
+								  		Hole 29<br>Add</button>
+										<button ng-click="tree(29)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday29 >= 0 && calday29 <= 10">
+											Hole 29<br>{{calday29}} Day <br>Reset</button>
+										<button ng-click="tree(29)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday29 >= 11 && calday29 <= 19">
+											Hole 29<br>{{calday29}} Day <br>Reset</button>
+										<button ng-click="tree(29)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday29 >= 20">
+											Hole 29<br>{{calday29}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg29}}</p>
+										<select ng-model="veg29">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole29(veg29)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 30 -->
+								  <td >
+								  <!-- <button ng-click="tree(30)" class="btn btn-primary btn-xs" id="buttonhole" >30</button> -->
+								  	<button ng-click="tree(30)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday30 < 0">
+								  		Hole 30<br>Add</button>
+										<button ng-click="tree(30)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday30 >= 0 && calday30 <= 10">
+											Hole 30<br>{{calday30}} Day <br>Reset</button>
+										<button ng-click="tree(30)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday30 >= 11 && calday30 <= 19">
+											Hole 30<br>{{calday30}} Day <br>Reset</button>
+										<button ng-click="tree(30)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday30 >= 20">
+											Hole 30<br>{{calday30}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg30}}</p>
+										<select ng-model="veg30">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole30(veg30)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+							</table>
+							<br>
+						</center>
+						</div>
+					</div>
+				</div>
+				</div>
+
+				</div>
+			</div>
+		</div>
+<!-- Right////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+		<div class="col-md-6 col-sd-6" >
+			<div class="row">
+				<div class="col-md-8 col-sd-8 col-md-offset-2 col-sd-offset-2">
+
+				<div class="panel panel-success" style="background-color: #f3ffef;">
+				<div class="panel-heading"><h4><center>Floor 3 Right</center></h4></div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12 col-sd-12 " style="background-color: #f3ffef;">
+						<center>
+						
+							<table border="0">
+								<tr>
+<!-- hole 7 -->
+								  <td >
+								  <!-- <button ng-click="tree(7)" class="btn btn-primary btn-xs" id="buttonhole" >7</button> -->
+								  	<button ng-click="tree(7)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday7 < 0">
+								  		Hole 7<br>Add</button>
+										<button ng-click="tree(7)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday7 >= 0 && calday7 <= 10">
+											Hole 7<br>{{calday7}} Day <br>Reset</button>
+										<button ng-click="tree(7)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday7 >= 11 && calday7 <= 19">
+											Hole 7<br>{{calday7}} Day <br>Reset</button>
+										<button ng-click="tree(7)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday7 >= 20">
+											Hole 7<br>{{calday7}} Days <br>Left</button>
+								  </td>
+								  <td>
+								  <p class="typeveg">{{holeveg7}}</p>
+										<select ng-model="veg7">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole7(veg7)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 8 -->
+								  <td >
+								  <!-- <button ng-click="tree(8)" class="btn btn-primary btn-xs" id="buttonhole" >8</button> -->
+								  	<button ng-click="tree(8)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday8 < 0">
+								  		Hole 8<br>Add</button>
+										<button ng-click="tree(8)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday8 >= 0 && calday8 <= 10">
+											Hole 8<br>{{calday8}} Day <br>Reset</button>
+										<button ng-click="tree(8)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday8 >= 11 && calday8 <= 19">
+											Hole 8<br>{{calday8}} Day <br>Reset</button>
+										<button ng-click="tree(8)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday8 >= 20">
+											Hole 8<br>{{calday8}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg8}}</p>
+										<select ng-model="veg8">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole8(veg8)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<td><br></td>
+								<td><br></td>
+								<tr>
+<!-- hole 9 -->
+								  <td >
+								  <!-- <button ng-click="tree(9)" class="btn btn-primary btn-xs" id="buttonhole" >9</button> -->
+								  	<button ng-click="tree(9)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday9 < 0">
+									  		Hole 9<br>Add</button>
+										<button ng-click="tree(9)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday9 >= 0 && calday9 <= 10">
+											Hole 9<br>{{calday9}} Day <br>Reset</button>
+										<button ng-click="tree(9)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday9 >= 11 && calday9 <= 19">
+											Hole 9<br>{{calday9}} Day <br>Reset</button>
+										<button ng-click="tree(9)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday9 >= 20">
+											Hole 9<br>{{calday9}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg9}}</p>
+										<select ng-model="veg9">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole9(veg9)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 10 -->
+								  <td >
+								  <!-- <button ng-click="tree(10)" class="btn btn-primary btn-xs" id="buttonhole" >10</button> -->
+								  	<button ng-click="tree(10)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday10 < 0">
+								  		Hole 10<br>Add</button>
+										<button ng-click="tree(10)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday10 >= 0 && calday10 <= 10">
+											Hole 10<br>{{calday10}} Day <br>Reset</button>
+										<button ng-click="tree(10)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday10 >= 11 && calday10 <= 19">
+											Hole 10<br>{{calday10}} Day <br>Reset</button>
+										<button ng-click="tree(10)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday10 >= 20">
+											Hole 10<br>{{calday10}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg10}}</p>
+										<select ng-model="veg10">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole10(veg10)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<td><br></td>
+								<td><br></td>
+								<tr>
+<!-- hole 11 -->
+								  <td >
+								  <!-- <button ng-click="tree(11)" class="btn btn-primary btn-xs" id="buttonhole" >11</button> -->
+									  	<button ng-click="tree(11)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday11 < 0">
+									  		Hole 11<br>Add</button>
+											<button ng-click="tree(11)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday11 >= 0 && calday11 <= 10">
+												Hole 11<br>{{calday11}} Day <br>Reset</button>
+											<button ng-click="tree(11)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday11 >= 11 && calday11 <= 19">
+												Hole 11<br>{{calday11}} Day <br>Reset</button>
+											<button ng-click="tree(11)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday11 >= 20">
+												Hole 11<br>{{calday11}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg11}}</p>
+										<select ng-model="veg11">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole11(veg11)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 12 -->
+								  <td >
+								  <!-- <button ng-click="tree(12)" class="btn btn-primary btn-xs" id="buttonhole" >12</button> -->
+								  	<button ng-click="tree(12)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday12 < 0">
+								  		Hole 12<br>Add</button>
+										<button ng-click="tree(12)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday12 >= 0 && calday12 <= 10">
+											Hole 12<br>{{calday12}} Day <br>Reset</button>
+										<button ng-click="tree(12)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday12 >= 11 && calday12 <= 19">
+											Hole 12<br>{{calday12}} Day <br>Reset</button>
+										<button ng-click="tree(12)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday12 >= 20">
+											Hole 12<br>{{calday12}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg12}}</p>
+										<select ng-model="veg12">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole12(veg12)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+							</table>
+							<br>
+						</center>
+						</div>
+					</div>
+				</div>
+				</div>
+
+				<div class="panel panel-info" style="background-color: #f3ffef;">
+				<div class="panel-heading"><h4><center>Floor 2 Right</center></h4></div>
+				<div class="panel-body">
+
+					<div class="row">
+						<div class="col-md-12 col-sd-12 "  style="background-color: #f3ffef;">
+						<center>
+						
+							<table>
+								<tr>
+<!-- hole 19 -->
+								  <td >
+								  <!-- <button ng-click="tree(19)" class="btn btn-primary btn-xs" id="buttonhole" >19</button> -->
+								  	<button ng-click="tree(19)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday19 < 0">
+								  		Hole 19<br>Add</button>
+										<button ng-click="tree(19)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday19 >= 0 && calday19 <= 10">
+											Hole 19<br>{{calday19}} Day <br>Reset</button>
+										<button ng-click="tree(19)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday19 >= 11 && calday19 <= 19">
+											Hole 19<br>{{calday19}} Day <br>Reset</button>
+										<button ng-click="tree(19)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday19 >= 20">
+											Hole 19<br>{{calday19}} Days <br>Left</button>
+								  </td>
+								  <td>
+								  <p class="typeveg">{{holeveg19}}</p>
+										<select ng-model="veg19">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole19(veg19)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 20 -->
+								  <td >
+								  <!-- <button ng-click="tree(20)" class="btn btn-primary btn-xs" id="buttonhole" >20</button> -->
+								  	<button ng-click="tree(20)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday20 < 0">
+								  		Hole 20<br>Add</button>
+										<button ng-click="tree(20)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday20 >= 0 && calday20 <= 10">
+											Hole 20<br>{{calday20}} Day <br>Reset</button>
+										<button ng-click="tree(20)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday20 >= 11 && calday20 <= 19">
+											Hole 20<br>{{calday20}} Day <br>Reset</button>
+										<button ng-click="tree(20)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday20 >= 20">
+											Hole 20<br>{{calday20}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg20}}</p>
+										<select ng-model="veg20">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole20(veg20)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<td><br></td>
+								<td><br></td>
+								<tr>
+<!-- hole 21 -->
+								  <td >
+								  <!-- <button ng-click="tree(21)" class="btn btn-primary btn-xs" id="buttonhole" >21</button> -->
+								  	<button ng-click="tree(21)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday21 < 0">
+								  		Hole 21<br>Add</button>
+										<button ng-click="tree(21)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday21 >= 0 && calday21 <= 10">
+											Hole 21<br>{{calday21}} Day <br>Reset</button>
+										<button ng-click="tree(21)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday21 >= 11 && calday21 <= 19">
+											Hole 21<br>{{calday21}} Day <br>Reset</button>
+										<button ng-click="tree(21)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday21 >= 20">
+											Hole 21<br>{{calday21}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg21}}</p>
+										<select ng-model="veg21">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole21(veg21)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 22 -->
+								  <td >
+								  <!-- <button ng-click="tree(22)" class="btn btn-primary btn-xs" id="buttonhole" >22</button> -->
+								  	<button ng-click="tree(22)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday22 < 0">
+								  		Hole 22<br>Add</button>
+										<button ng-click="tree(22)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday22 >= 0 && calday22 <= 10">
+											Hole 22<br>{{calday22}} Day <br>Reset</button>
+										<button ng-click="tree(22)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday22 >= 11 && calday22 <= 19">
+											Hole 22<br>{{calday22}} Day <br>Reset</button>
+										<button ng-click="tree(22)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday22 >= 20">
+											Hole 22<br>{{calday22}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg22}}</p>
+										<select ng-model="veg22">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole22(veg22)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<td><br></td>
+								<td><br></td>
+								<tr>
+<!-- hole 23 -->
+								  <td >
+								  <!-- <button ng-click="tree(23)" class="btn btn-primary btn-xs" id="buttonhole" >23</button> -->
+								  	<button ng-click="tree(23)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday23 < 0">
+								  		Hole 23<br>Add</button>
+										<button ng-click="tree(23)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday23 >= 0 && calday23 <= 10">
+											Hole 23<br>{{calday23}} Day <br>Reset</button>
+										<button ng-click="tree(23)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday23 >= 11 && calday23 <= 19">
+											Hole 23<br>{{calday23}} Day <br>Reset</button>
+										<button ng-click="tree(23)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday23 >= 20">
+											Hole 23<br>{{calday23}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg23}}</p>
+										<select ng-model="veg23">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole23(veg23)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 24 -->
+								  <td >
+								  <!-- <button ng-click="tree(24)" class="btn btn-primary btn-xs" id="buttonhole" >24</button> -->
+								  	<button ng-click="tree(24)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday24 < 0">
+								  		Hole 24<br>Add</button>
+										<button ng-click="tree(24)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday24 >= 0 && calday24 <= 10">
+											Hole 24<br>{{calday24}} Day <br>Reset</button>
+										<button ng-click="tree(24)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday24 >= 11 && calday24 <= 19">
+											Hole 24<br>{{calday24}} Day <br>Reset</button>
+										<button ng-click="tree(24)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday24 >= 20">
+											Hole 24<br>{{calday24}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg24}}</p>
+										<select ng-model="veg24">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole24(veg24)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+							</table>
+							<br>
+						</center>
+						</div>
+					</div>
+
+				</div>
+				</div>
+
+				<div class="panel panel-warning" style="background-color: #f3ffef;">
+				<div class="panel-heading"><h4><center>Floor 1 Right</center></h4></div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12 col-sd-12 " style="background-color: #f3ffef;">
+						<center>
+							<table>
+								<tr>
+<!-- hole 31 -->
+								  <td >
+								  <!-- <button ng-click="tree(31)" class="btn btn-primary btn-xs" id="buttonhole" >31</button> -->
+								  	<button ng-click="tree(31)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday31 < 0">
+								  		Hole 31<br>Add</button>
+										<button ng-click="tree(31)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday31 >= 0 && calday31 <= 10">
+											Hole 31<br>{{calday31}} Day <br>Reset</button>
+										<button ng-click="tree(31)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday31 >= 11 && calday31 <= 19">
+											Hole 31<br>{{calday31}} Day <br>Reset</button>
+										<button ng-click="tree(31)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday31 >= 20">
+											Hole 31<br>{{calday31}} Days <br>Left</button>
+								  </td>
+								  <td>
+								  <p class="typeveg">{{holeveg31}}</p>
+										<select ng-model="veg31">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole31(veg31)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 32 -->
+								  <td >
+								  <!-- <button ng-click="tree(32)" class="btn btn-primary btn-xs" id="buttonhole" >32</button> -->
+								  	<button ng-click="tree(32)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday32 < 0">
+								  		Hole 32<br>Add</button>
+										<button ng-click="tree(32)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday32 >= 0 && calday32 <= 10">
+											Hole 32<br>{{calday32}} Day <br>Reset</button>
+										<button ng-click="tree(32)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday32 >= 11 && calday32 <= 19">
+											Hole 32<br>{{calday32}} Day <br>Reset</button>
+										<button ng-click="tree(32)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday32 >= 20">
+											Hole 32<br>{{calday32}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg32}}</p>
+										<select ng-model="veg32">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole32(veg32)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<td><br></td>
+								<td><br></td>
+								<tr>
+<!-- hole 33 -->
+								  <td >
+								  <!-- <button ng-click="tree(33)" class="btn btn-primary btn-xs" id="buttonhole" >33</button> -->
+								  	<button ng-click="tree(33)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday33 < 0">
+								  		Hole 33<br>Add</button>
+										<button ng-click="tree(33)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday33 >= 0 && calday33 <= 10">
+											Hole 33<br>{{calday33}} Day <br>Reset</button>
+										<button ng-click="tree(33)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday33 >= 11 && calday33 <= 19">
+											Hole 33<br>{{calday33}} Day <br>Reset</button>
+										<button ng-click="tree(33)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday33 >= 20">
+											Hole 33<br>{{calday33}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg33}}</p>
+										<select ng-model="veg33">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole33(veg33)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 34 -->
+								  <td >
+								  <!-- <button ng-click="tree(34)" class="btn btn-primary btn-xs" id="buttonhole" >34</button> -->
+								  	<button ng-click="tree(34)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday34 < 0">
+								  		Hole 34<br>Add</button>
+										<button ng-click="tree(34)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday34 >= 0 && calday34 <= 10">
+											Hole 34<br>{{calday34}} Day <br>Reset</button>
+										<button ng-click="tree(34)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday34 >= 11 && calday34 <= 19">
+											Hole 34<br>{{calday34}} Day <br>Reset</button>
+										<button ng-click="tree(34)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday34 >= 20">
+											Hole 34<br>{{calday34}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg34}}</p>
+										<select ng-model="veg34">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole34(veg34)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+								<td><br></td>
+								<td><br></td>
+								<tr>
+<!-- hole 35 -->
+								  <td >
+								  <!-- <button ng-click="tree(35)" class="btn btn-primary btn-xs" id="buttonhole" >35</button> -->
+								  	<button ng-click="tree(35)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday35 < 0">
+								  		Hole 35<br>Add</button>
+										<button ng-click="tree(35)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday35 >= 0 && calday35 <= 10">
+											Hole 35<br>{{calday35}} Day <br>Reset</button>
+										<button ng-click="tree(35)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday35 >= 11 && calday35 <= 19">
+											Hole 35<br>{{calday35}} Day <br>Reset</button>
+										<button ng-click="tree(35)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday35 >= 20">
+											Hole 35<br>{{calday35}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg35}}</p>
+										<select ng-model="veg35">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole35(veg35)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+									<td>&nbsp&nbsp</td>
+<!-- hole 36 -->
+								  <td >
+								  <!-- <button ng-click="tree(36)" class="btn btn-primary btn-xs" id="buttonhole" >36</button> -->
+								  	<button ng-click="tree(36)" class="btn btn-primary btn-xs" id="buttonhole" ng-if="calday36 < 0">
+								  		Hole 36<br>Add</button>
+										<button ng-click="tree(36)" class="btn btn-success btn-xs" id="buttonhole" ng-if="calday36 >= 0 && calday36 <= 10">
+											Hole 36<br>{{calday36}} Day <br>Reset</button>
+										<button ng-click="tree(36)" class="btn btn-warning btn-xs" id="buttonhole" ng-if="calday36 >= 11 && calday36 <= 19">
+											Hole 36<br>{{calday36}} Day <br>Reset</button>
+										<button ng-click="tree(36)" class="btn btn-danger btn-xs" id="buttonhole" ng-if="calday36 >= 20">
+											Hole 36<br>{{calday36}} Days <br>Left</button>
+									</td>
+									<td>
+								  <p class="typeveg">{{holeveg36}}</p>
+										<select ng-model="veg36">
+										  <option value="1">สลัดแก้ว</option>
+										  <option value="2">กรีนโอ๊ค</option>
+										  <option value="3">เรดโอ๊ค</option>
+										  <option value="4">คอส</option>
+										</select>
+										<center>
+											<button ng-click="hole36(veg36)" class="btn btn-xs btntop">OK</button>
+										</center>
+									</td>
+								</tr>
+							</table>
+							<br>
+						</center>
+						</div>
+					</div>
+
+				</div>
+				</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<br>
+			<div class="row">
+				<div class="col-md-12 col-sd-12"><center><h4>Select Hole for Reset</h4></center></div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-2 col-sd-2 col-md-offset-5 col-sd-offset-5"></div>
+				<div class="col-md-2 col-sd-2 col-md-offset-5 col-sd-offset-5">
+				<center>
+
+					<select class="form-control " ng-model="list" width="10%">
+						<!-- <option>-- Floor 3 Box Left --</option> -->
+						<option value="0">Hole 1</option>
+						<option value="1">Hole 2</option>
+						<option value="2">Hole 3</option>
+						<option value="3">Hole 4</option>
+						<option value="4">Hole 5</option>
+						<option value="5">Hole 6</option>
+
+						<!-- <option>-- Floor 3 Box Right --</option> -->
+						<option value="6">Hole 7</option>
+						<option value="7">Hole 8</option>
+						<option value="8">Hole 9</option>
+						<option value="9">Hole 10</option>
+						<option value="10">Hole 11</option>
+						<option value="11">Hole 12</option>
+
+						<!-- <option>-- Floor 2 Box Left --</option> -->
+						<option value="12">Hole 13</option>
+						<option value="13">Hole 14</option>
+						<option value="14">Hole 15</option>
+						<option value="15">Hole 16</option>
+						<option value="16">Hole 17</option>
+						<option value="17">Hole 18</option>
+
+						<!-- <option>-- Floor 2 Box Right --</option> -->
+						<option value="18">Hole 19</option>
+						<option value="19">Hole 20</option>
+						<option value="20">Hole 21</option>
+						<option value="21">Hole 22</option>
+						<option value="22">Hole 23</option>
+						<option value="23">Hole 24</option>
+
+						<!-- <option>-- Floor 1 Box Left --</option> -->
+						<option value="24">Hole 25</option>
+						<option value="25">Hole 26</option>
+						<option value="26">Hole 27</option>
+						<option value="27">Hole 28</option>
+						<option value="28">Hole 29</option>
+						<option value="29">Hole 30</option>
+
+						<!-- <option>-- Floor 1 Box Right --</option> -->
+						<option value="30">Hole 31</option>
+						<option value="31">Hole 32</option>
+						<option value="32">Hole 33</option>
+						<option value="33">Hole 34</option>
+						<option value="34">Hole 35</option>
+						<option value="35">Hole 36</option>
+					</select>
+				</center>
+				</div>
+				<div class="col-md-4 col-sd-4"></div>
+
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-12 col-sd-12">
+					<center>
+						<button ng-click="reday(list)" class="btn btn-primary">Reset</button>
+					</center>
+				</div>
+			</div>
+			<br>
+
+
+			<!-- <button ng-click="tree(1)" class="btn btn-primary btn-xs" id="button" ng-if="calday1 < 0">Add</button>
+			<button ng-click="tree(1)" class="btn btn-success btn-xs" id="button" ng-if="calday1 >= 0 && calday1 <= 10">{{calday1}} Day <br>Reset</button>
+			<button ng-click="tree(1)" class="btn btn-warning btn-xs" id="button" ng-if="calday1 >= 11 && calday1 <= 19">{{calday1}} Day <br>Reset</button>
+			<button ng-click="tree(1)" class="btn btn-danger btn-xs" id="button" ng-if="calday1 >= 20">{{calday1}} Days <br>Left</button> -->
+
+			<!-- <button ng-click="tree(2)" class="btn btn-primary btn-xs" id="button" ng-if="calday2 < 0">Add</button>
+			<button ng-click="tree(2)" class="btn btn-success btn-xs" id="button" ng-if="calday2 >= 0 && calday2 <= 10">{{calday2}} Day <br>Reset</button>
+			<button ng-click="tree(2)" class="btn btn-warning btn-xs" id="button" ng-if="calday2 >= 11 && calday2 <= 19">{{calday2}} Day <br>Reset</button>
+			<button ng-click="tree(2)" class="btn btn-danger btn-xs" id="button" ng-if="calday2 >= 20">{{calday2}} Days <br>Left</button> -->
+
+			<!-- <button ng-click="tree(3)" class="btn btn-primary btn-xs" id="button" ng-if="calday3 < 0">Add</button>
+			<button ng-click="tree(3)" class="btn btn-success btn-xs" id="button" ng-if="calday3 >= 0 && calday3 <= 10">{{calday3}} Day <br>Reset</button>
+			<button ng-click="tree(3)" class="btn btn-warning btn-xs" id="button" ng-if="calday3 >= 11 && calday3 <= 19">{{calday3}} Day <br>Reset</button>
+			<button ng-click="tree(3)" class="btn btn-danger btn-xs" id="button" ng-if="calday3 >= 20">{{calday3}} Days <br>Left</button> -->
+
+			<!-- <button ng-click="tree(4)" class="btn btn-primary btn-xs" id="button" ng-if="calday4 < 0">Add</button>
+			<button ng-click="tree(4)" class="btn btn-success btn-xs" id="button" ng-if="calday4 >= 0 && calday4 <= 10">{{calday4}} Day <br>Reset</button>
+			<button ng-click="tree(4)" class="btn btn-warning btn-xs" id="button" ng-if="calday4 >= 11 && calday4 <= 19">{{calday4}} Day <br>Reset</button>
+			<button ng-click="tree(4)" class="btn btn-danger btn-xs" id="button" ng-if="calday4 >= 20">{{calday4}} Days <br>Left</button> -->
+
+			<!-- <button ng-click="tree(5)" class="btn btn-primary btn-xs" id="button" ng-if="calday5 < 0">Add</button>
+			<button ng-click="tree(5)" class="btn btn-success btn-xs" id="button" ng-if="calday5 >= 0 && calday5 <= 10">{{calday5}} Day <br>Reset</button>
+			<button ng-click="tree(5)" class="btn btn-warning btn-xs" id="button" ng-if="calday5 >= 11 && calday5 <= 19">{{calday5}} Day <br>Reset</button>
+			<button ng-click="tree(5)" class="btn btn-danger btn-xs" id="button" ng-if="calday5 >= 20">{{calday5}} Days <br>Left</button> -->
+
+			<!-- <button ng-click="tree(6)" class="btn btn-primary btn-xs" id="button" ng-if="calday6 < 0">Add</button>
+			<button ng-click="tree(6)" class="btn btn-success btn-xs" id="button" ng-if="calday6 >= 0 && calday6 <= 10">{{calday6}} Day <br>Reset</button>
+			<button ng-click="tree(6)" class="btn btn-warning btn-xs" id="button" ng-if="calday6 >= 11 && calday6 <= 19">{{calday6}} Day <br>Reset</button>
+			<button ng-click="tree(6)" class="btn btn-danger btn-xs" id="button" ng-if="calday6 >= 20">{{calday6}} Days <br>Left</button> -->
+
+
+		<!-- <button ng-click="tree(2)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[1].status === false)?  'Add' : 'Reset'    }} 2</button>
+		<button ng-click="tree(3)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[2].status === false)?  'Add' : 'Reset'    }} 3</button>
+		<button ng-click="tree(4)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[3].status === false)?  'Add' : 'Reset'    }} 4</button>
+		<button ng-click="tree(5)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[4].status === false)?  'Add' : 'Reset'    }} 5</button>
+		<button ng-click="tree(6)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[5].status === false)?  'Add' : 'Reset'    }} 6</button>
+		<br>
+		<button ng-click="tree(7)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[6].status === false)?  'Add' : 'Reset'    }} 7</button>
+		<button ng-click="tree(8)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[7].status === false)?  'Add' : 'Reset'    }} 8</button>
+		<button ng-click="tree(9)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[8].status === false)?  'Add' : 'Reset'    }} 9</button>
+		<button ng-click="tree(10)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[9].status === false)?  'Add' : 'Reset'    }} 10</button>
+		<button ng-click="tree(11)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[10].status === false)?  'Add' : 'Reset'    }} 11</button>
+		<button ng-click="tree(12)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[11].status === false)?  'Add' : 'Reset'    }} 12</button>
+		<br>
+		<button ng-click="tree(13)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[12].status === false)?  'Add' : 'Reset'    }} 13</button>
+		<button ng-click="tree(14)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[13].status === false)?  'Add' : 'Reset'    }} 14</button>
+		<button ng-click="tree(15)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[14].status === false)?  'Add' : 'Reset'    }} 15</button>
+		<button ng-click="tree(16)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[15].status === false)?  'Add' : 'Reset'    }} 16</button>
+		<button ng-click="tree(17)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[16].status === false)?  'Add' : 'Reset'    }} 17</button>
+		<button ng-click="tree(18)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[17].status === false)?  'Add' : 'Reset'    }} 18</button>
+		<br>
+		<button ng-click="tree(19)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[18].status === false)?  'Add' : 'Reset'    }} 19</button>
+		<button ng-click="tree(20)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[19].status === false)?  'Add' : 'Reset'    }} 20</button>
+		<button ng-click="tree(21)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[20].status === false)?  'Add' : 'Reset'    }} 21</button>
+		<button ng-click="tree(22)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[21].status === false)?  'Add' : 'Reset'    }} 22</button>
+		<button ng-click="tree(23)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[22].status === false)?  'Add' : 'Reset'    }} 23</button>
+		<button ng-click="tree(24)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[23].status === false)?  'Add' : 'Reset'    }} 24</button>
+		<br>
+		<button ng-click="tree(25)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[24].status === false)?  'Add' : 'Reset'    }} 25</button>
+		<button ng-click="tree(26)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[25].status === false)?  'Add' : 'Reset'    }} 26</button>
+		<button ng-click="tree(27)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[26].status === false)?  'Add' : 'Reset'    }} 27</button>
+		<button ng-click="tree(28)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[27].status === false)?  'Add' : 'Reset'    }} 28</button>
+		<button ng-click="tree(29)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[28].status === false)?  'Add' : 'Reset'    }} 29</button>
+		<button ng-click="tree(30)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[29].status === false)?  'Add' : 'Reset'    }} 30</button>
+		<br>
+		<button ng-click="tree(31)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[30].status === false)?  'Add' : 'Reset'    }} 31</button>
+		<button ng-click="tree(32)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[31].status === false)?  'Add' : 'Reset'    }} 32</button>
+		<button ng-click="tree(33)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[32].status === false)?  'Add' : 'Reset'    }} 33</button>
+		<button ng-click="tree(34)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[33].status === false)?  'Add' : 'Reset'    }} 34</button>
+		<button ng-click="tree(35)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[34].status === false)?  'Add' : 'Reset'    }} 35</button>
+		<button ng-click="tree(36)" class="btn btn-primary btn-xs" id="button">{{   (totalHole[35].status === false)?  'Add' : 'Reset'    }} 36</button> -->
+
+		
+
+	</div> <!-- container -->
+
+
+
+
+
+	<!-- <div class="dropdown" >
+	    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" >Select Hole
+	    	<span class="caret"></span>
+	    </button>
+
+	    <ul class="dropdown-menu" >
+	      <li class="dropdown-header">Floor 1 Left</li>
+	      		<li><a value="0">Hole 1</a></li>
+	       	<li><a value="1">Hole 2</a></li>
+	       	<li><a value="2">Hole 3</a></li>
+	       	<li><a value="3">Hole 4</a></li>
+	       	<li><a value="4">Hole 5</a></li>
+	       	<li><a value="5"">Hole 6</a></li>
+	      <li class="divider"></li>
+	      <li class="dropdown-header">Floor 1 Right</li>
+	      		<li><a href="#">Hole 1</a></li>
+	       	<li><a href="#">Hole 2</a></li>
+	       	<li><a href="#">Hole 3</a></li>
+	       	<li><a href="#">Hole 4</a></li>
+	       	<li><a href="#">Hole 5</a></li>
+	       	<li><a href="#">Hole 6</a></li>
+	      <li class="divider"></li>
+	       <li class="dropdown-header">Floor 2 Left</li>
+	      		<li><a href="#">Hole 1</a></li>
+	       	<li><a href="#">Hole 2</a></li>
+	       	<li><a href="#">Hole 3</a></li>
+	       	<li><a href="#">Hole 4</a></li>
+	       	<li><a href="#">Hole 5</a></li>
+	       	<li><a href="#">Hole 6</a></li>
+	      <li class="divider"></li>
+	       <li class="dropdown-header">Floor 2 Right</li>
+	      		<li><a href="#">Hole 1</a></li>
+	       	<li><a href="#">Hole 2</a></li>
+	       	<li><a href="#">Hole 3</a></li>
+	       	<li><a href="#">Hole 4</a></li>
+	       	<li><a href="#">Hole 5</a></li>
+	       	<li><a href="#">Hole 6</a></li>
+	      <li class="divider"></li>
+	     	<li class="dropdown-header">Floor 3 Left</li>
+	      		<li><a href="#">Hole 1</a></li>
+	       	<li><a href="#">Hole 2</a></li>
+	       	<li><a href="#">Hole 3</a></li>
+	       	<li><a href="#">Hole 4</a></li>
+	       	<li><a href="#">Hole 5</a></li>
+	       	<li><a href="#">Hole 6</a></li>
+	      <li class="divider"></li>
+	       <li class="dropdown-header">Floor 3 Right</li>
+	      		<li><a href="#">Hole 1</a></li>
+	       	<li><a href="#">Hole 2</a></li>
+	       	<li><a href="#">Hole 3</a></li>
+	       	<li><a href="#">Hole 4</a></li>
+	       	<li><a href="#">Hole 5</a></li>
+	       	<li><a href="#">Hole 6</a></li>
+	      <li class="divider"></li>
+	    </ul>
+	  </div>
+
+	  <button ng-click="reday(list)">Reset</button> -->
+
+<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+		<!-- <button ng-click="tree(1)" class="btn btn-primary btn-xs" id="buttonhole" >1</button>
+		<button ng-click="tree(2)" class="btn btn-primary btn-xs" id="buttonhole" >2</button>
+		<button ng-click="tree(3)" class="btn btn-primary btn-xs" id="buttonhole" >3</button>
+		<button ng-click="tree(4)" class="btn btn-primary btn-xs" id="buttonhole" >4</button>
+		<button ng-click="tree(5)" class="btn btn-primary btn-xs" id="buttonhole" >5</button>
+		<button ng-click="tree(6)" class="btn btn-primary btn-xs" id="buttonhole" >6</button>
+		<button ng-click="tree(7)" class="btn btn-primary btn-xs" id="buttonhole" >7</button>
+		<button ng-click="tree(8)" class="btn btn-primary btn-xs" id="buttonhole" >8</button>
+		<button ng-click="tree(9)" class="btn btn-primary btn-xs" id="buttonhole" >9</button>
+		<button ng-click="tree(10)" class="btn btn-primary btn-xs" id="buttonhole" >10</button>
+
+		<button ng-click="tree(11)" class="btn btn-primary btn-xs" id="buttonhole" >11</button>
+		<button ng-click="tree(12)" class="btn btn-primary btn-xs" id="buttonhole" >12</button>
+		<button ng-click="tree(13)" class="btn btn-primary btn-xs" id="buttonhole" >13</button>
+		<button ng-click="tree(14)" class="btn btn-primary btn-xs" id="buttonhole" >14</button>
+		<button ng-click="tree(15)" class="btn btn-primary btn-xs" id="buttonhole" >15</button>
+		<button ng-click="tree(16)" class="btn btn-primary btn-xs" id="buttonhole" >16</button>
+		<button ng-click="tree(17)" class="btn btn-primary btn-xs" id="buttonhole" >17</button>
+		<button ng-click="tree(18)" class="btn btn-primary btn-xs" id="buttonhole" >18</button>
+		<button ng-click="tree(19)" class="btn btn-primary btn-xs" id="buttonhole" >19</button>
+		<button ng-click="tree(20)" class="btn btn-primary btn-xs" id="buttonhole" >20</button>
+
+		<button ng-click="tree(21)" class="btn btn-primary btn-xs" id="buttonhole" >21</button>
+		<button ng-click="tree(22)" class="btn btn-primary btn-xs" id="buttonhole" >22</button>
+		<button ng-click="tree(23)" class="btn btn-primary btn-xs" id="buttonhole" >23</button>
+		<button ng-click="tree(24)" class="btn btn-primary btn-xs" id="buttonhole" >24</button>
+		<button ng-click="tree(25)" class="btn btn-primary btn-xs" id="buttonhole" >25</button>
+		<button ng-click="tree(26)" class="btn btn-primary btn-xs" id="buttonhole" >26</button>
+		<button ng-click="tree(27)" class="btn btn-primary btn-xs" id="buttonhole" >27</button>
+		<button ng-click="tree(28)" class="btn btn-primary btn-xs" id="buttonhole" >28</button>
+		<button ng-click="tree(29)" class="btn btn-primary btn-xs" id="buttonhole" >29</button>
+		<button ng-click="tree(30)" class="btn btn-primary btn-xs" id="buttonhole" >30</button>
+
+		<button ng-click="tree(31)" class="btn btn-primary btn-xs" id="buttonhole" >31</button>
+		<button ng-click="tree(32)" class="btn btn-primary btn-xs" id="buttonhole" >32</button>
+		<button ng-click="tree(33)" class="btn btn-primary btn-xs" id="buttonhole" >33</button>
+		<button ng-click="tree(34)" class="btn btn-primary btn-xs" id="buttonhole" >34</button>
+		<button ng-click="tree(35)" class="btn btn-primary btn-xs" id="buttonhole" >35</button>
+		<button ng-click="tree(36)" class="btn btn-primary btn-xs" id="buttonhole" >36</button> -->
+
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>Smart Farm</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="jquery-1.11.3.min.js"></script>
+  	<script src="mqttws31.js"></script>
+	<!-- framework Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="app.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- Moment time -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+
+	<!-- Microgear -->
+	<script src="https://cdn.netpie.io/microgear.js"></script>
+
+	<!-- Compiled and minified CSS -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"> -->
+  <!-- Compiled and minified JavaScript -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script> -->
+
+</head>
+<!-- <script>
+
+var config = {
+  mqtt_server: "m10.cloudmqtt.com",
+  mqtt_websockets_port: 39505,
+  mqtt_user: "Test",
+  mqtt_password: "1234"
+};
+
+$(document).ready(function(e) {
+
+  client = new Paho.MQTT.Client(config.mqtt_server, config.mqtt_websockets_port, "web_" + parseInt(Math.random() * 100, 10));
+
+  client.connect({
+    useSSL: true,
+    userName: config.mqtt_user,
+    password: config.mqtt_password,
+    onSuccess: function() {
+
+      $("#status").text("Connected").removeClass().addClass("connected");
+      client.subscribe("/ESP/PUMP");
+      mqttSend("/ESP/PUMP", "GET");
+      client.subscribe("/ESP/LED");
+      mqttSend("/ESP/LED", "GET");
+    },
+    onFailure: function(e) {
+      $("#status").text("Error : " + e).removeClass().addClass("error");
+
+    }
+  });
+
+  client.onConnectionLost = function(responseObject) {
+    if (responseObject.errorCode !== 0) {
+      $("#status").text("onConnectionLost:" + responseObject.errorMessage).removeClass().addClass("connect");
+      setTimeout(function() { client.connect() }, 1000);
+    }
+  }
+
+  client.onMessageArrived = function(message) {
+
+    var statuspump = message.payloadString;
+
+    // console.log(message.payloadString);
+    if (message.payloadString == "PUMPON" || message.payloadString == "PUMPOFF") {
+      $("#pump-on").attr( (message.payloadString == "PUMPON" ? true : false)/*,$('#st').html("On")*/);
+      $("#pump-off").attr( (message.payloadString == "PUMPOFF" ? true : false)/*,$('#st').html("Off")*/);
+
+      if(message.payloadString == "PUMPON"){
+        $('#stpump').html("Off");
+      }else if(message.payloadString == "PUMPOFF"){
+        $('#stpump').html("On");
+      }
+    }
+
+    if (message.payloadString == "LEDON" || message.payloadString == "LEDOFF") {
+      $("#led-on").attr( (message.payloadString == "LEDON" ? true : false)/*,$('#st').html("On")*/);
+      $("#led-off").attr( (message.payloadString == "LEDOFF" ? true : false)/*,$('#st').html("Off")*/);
+// "disabled",
+      if(message.payloadString == "LEDON"){
+        $('#stled').html("Off");
+      }else if(message.payloadString == "PUMPOFF"){
+        $('#stled').html("On");
+      }
+    }
+  }
+
+  $("#pump-on").click(function(e) {
+        mqttSend("/ESP/PUMP", "PUMPON");
+    });
+
+  $("#pump-off").click(function(e) {
+        mqttSend("/ESP/PUMP", "PUMPOFF");
+    });
+
+  $("#led-on").click(function(e) {
+        mqttSend("/ESP/LED", "LEDON");
+    });
+
+  $("#led-off").click(function(e) {
+        mqttSend("/ESP/LED", "LEDOFF");
+    });
+
+
+});
+
+var mqttSend = function(topic, msg) {
+  var message = new Paho.MQTT.Message(msg);
+  message.destinationName = topic;
+  client.send(message);
+}
+
+</script> -->
+
+<script>
+
+  const APPID = "APPID";
+  const KEY = "oT7qT5XkIuSyvDb";
+  const SECRET = "6IMFn3bZrNlVEopa0BWlhszUa";
+
+  const ALIAS = "DigitalOUTPUT_HTML_web";     //  ชื่อตัวเอง
+  const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
+
+  function switchPress(logic){
+console.log("============>",logic);
+    if(logic == 1 ){
+      microgear.chat(thing1,"ON");
+      console.log("On")
+    }else if(logic == 0 ){
+      microgear.chat(thing1,"OFF");
+      console.log("Off")
+    }
+  }
+
+  var microgear = Microgear.create({
+    key: KEY,
+    secret: SECRET,
+    alias : ALIAS
+  });
+
+
+  microgear.on('message', function(topic,data) {
+    console.log(topic, data);
+    if(data=="ON"){
+      document.getElementById("Status").innerHTML =  "Load is ON.";
+    }else if(data=="OFF"){
+      document.getElementById("Status").innerHTML =  "Load is OFF.";
+    }
+  });
+
+  microgear.on('connected', function() {
+    microgear.setAlias(ALIAS);
+    document.getElementById("connected_NETPIE").innerHTML = "Connected to NETPIE"
+  });
+
+  microgear.on('present', function(event) {
+    console.log(event);
+  });
+
+  microgear.on('absent', function(event) {
+    console.log(event);
+  });
+
+  microgear.resettoken(function(err) {
+    microgear.connect(APPID);
+  });
+
+</script>
+<body ng-controller="TodoListController">
+<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<!-- navbar -->
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	      <a class="navbar-brand" href="#">Smart Farm Cabinet</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="#">Home</a></li>
+	      <li><a href="page/googleSheets.html">Google Sheets</a></li>
+	      <li><a href="page/tag.html">Status</a></li>
+	      <li><a href="page/picture.html">Picture</a></li>
+	    </ul>
+	  </div>
+	  </div>
+	</nav>
+<!-- navbar -->
+
+
+	<div class="container">
+
+	<!-- <center> -->
+	  <!-- <h1 id="connected_NETPIE"></h1> -->
+	  <!-- <button type="button" onclick="switchPress(1)" class="btn btn-primary btn-lg active">Chcek</button> -->
+	  <!-- <button type="button" onclick="switchPress(0)">Turn OFF</button> -->
+	  <!-- <p><strong id="Status">Load is OFF.</strong></p> -->
+	<!-- </center> -->
+
+		<center>
+		<!-- <button class="btn btn-danger btn-lg active" ng-click="first()">first</button> -->
+		<h1>Smart Farm Cabinet</h1>
+	  <p>Control LED Grow Light And Control Water pump</p>
+	  </center>
+	  <hr width="50%">
+		<div class="row">
+<!-- switch -->
+			<div class="col-md-4"></div>
+			<div class="col-md-4" id="div1">
+			<center>
+			Setting LED Grow Light system<br>
+			Status : {{stasystem}}<br>
+			<button class="btn btn-danger btn-xs active" ng-click="auto()" ng-if="stasystem === 'Manual'">Auto</button>
+			<button class="btn btn-success btn-xs active" ng-click="man()" ng-if="stasystem === 'Auto'">Manually</button>
+
+			<h3>Control LED Status : {{LEDSta}} </h3>
+			<!-- <p class="bg-info">Status : {{LEDSta}} </p> -->
+
+			<!-- <h2>Control LED</h2>
+			  <button id="led-on" >&nbsp;OFF LED&nbsp;</button>&nbsp;&nbsp;&nbsp;
+			  <button id="led-off" disabled>&nbsp;ON LED&nbsp;</button>
+			<h2>Status LED : <span id="stled"></span></h2> -->
+
+			 <button id="led-on" class="btn btn-danger btn-lg active" ng-click="ledOff()" ng-if="stasystem === 'Manual'">Off</button>
+			 <button id="led-off" class="btn btn-success btn-lg active" ng-click="ledOn()" ng-if="stasystem === 'Manual'">On</button>
+
+
+				<!-- <div class="holder">
+					<input type="checkbox" value="true" id="check" name="check" ng-click="controlSwitch()" class="check-ios" ng-model="conLED"/>
+					<label for="check"></label>
+					<span></span>
+				</div> -->
+				</center>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4" id="div1">
+			<center>
+			<h3>Control Pump Status : {{pumpSta}} </h3>
+			<!-- <p class="bg-info">Status : {{pumpSta}} </p> -->
+
+
+				<button id="pump-on" class="btn btn-danger btn-lg active" ng-click="pumpOff()" >Off</button>
+			 	<button id="pump-off" class="btn btn-success btn-lg active" ng-click="pumpOn()" >On</button>
+				<!-- <div class="holder">
+					<input type="checkbox" value="true" id="check2" name="check2" class="check-ios2" ng-click="controlSwitch()" ng-model="conPump"/>
+					<label for="check2"></label>
+					<span></span>
+				</div> -->
+				</center>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4" id="div1">
+			<center>
+			<h3>Control Fog Status : {{fogSta}} </h3>
+			<!-- <p class="bg-info">Status : {{pumpSta}} </p> -->
+
+
+				<button id="fog-off" class="btn btn-danger btn-lg active" ng-click="fogOff()" >Off</button>
+			 	<button id="fog-on" class="btn btn-success btn-lg active" ng-click="fogOn()" >On</button>
+				<!-- <div class="holder">
+					<input type="checkbox" value="true" id="check2" name="check2" class="check-ios2" ng-click="controlSwitch()" ng-model="conPump"/>
+					<label for="check2"></label>
+					<span></span>
+				</div> -->
+				</center>
+			</div>
+			<div class="col-md-4"></div>
+		</div><br>
+
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4" id="div1">
+			<center>
+			<h3>Check</h3>
+			<p>Sent values to Google Sheets</p>
+			  <h3 id="connected_NETPIE"></h3>
+			  <button type="button" onclick="switchPress(1)" class="btn btn-primary btn-lg active">Check</button>
+			  <!-- <button type="button" onclick="switchPress(0)">Turn OFF</button> -->
+			  <!-- <p><strong id="Status">Load is OFF.</strong></p> -->
+			  </center>
+
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</div>
+<!-- switch -->
+<hr width="50%">
+
+<div class="container">
+	<div class="row">
+		<div class="container">
+			<div class="col-xs-4"></div>
+		  <div class="col-xs-1"><img src="icon/calendar.png" width="50px"  class="icon"></div>
+		  <!-- <div class="col-xs-7"><h3><div style="float:left;">Date :&nbsp;</div><div style="float:left;">{{items.Date}}</div></h3></div> -->
+		  <div class="col-xs-7"><h3><div style="float:left;">Date :&nbsp;</div><div style="float:left;">{{items.Date}}</div></h3></div>
+	  </div>
+	</div>
+<br>
+	<div class="row">
+		<div class="container">
+			<div class="col-xs-4"></div>
+		  <div class="col-xs-1"><img src="icon/humidity.png" width="50px" class="icon"></div>
+		  <div class="col-xs-7">
+		  	<h3>
+		  		<div style="float:left;">Humidity :&nbsp;</div>
+		  		<div style="float:left; color: red" ng-if="items.Humidity >= 70" >{{items.Humidity}}</div>
+		  		<div style="float:left; color: green" ng-if="items.Humidity < 70" >{{items.Humidity}}</div>
+		  	</h3>
+		 	</div>
+		  <!-- <div class="col-xs-7"><h3>Humidity : {{items.Humidity}}</h3></div> -->
+	  </div>
+	</div>
+<br>
+	<div class="row">
+		<div class="container">
+			<div class="col-xs-4"></div>
+		  <div class="col-xs-1"><img src="icon/temperature.png" width="50px" class="icon"></div>
+		   <div class="col-xs-7">
+		  	<h3>
+		  		<div style="float:left;">Temp :&nbsp;</div>
+		  		<div style="float:left; color: red" ng-if="items.Temperature >= 29" >{{items.Temperature}}</div>
+		  		<div style="float:left; color: green" ng-if="items.Temperature < 29" >{{items.Temperature}}</div>
+		  	</h3>
+		 	</div>
+		  <!-- <div class="col-xs-7"><h3>Temp : {{items.Temperature}}</h3></div> -->
+	  </div>
+	</div>
+<br>
+	<div class="row">
+		<div class="container">
+			<div class="col-xs-4"></div>
+		  <div class="col-xs-1"><img src="icon/EC.png" width="50px" class="icon"></div>
+		  <div class="col-xs-7">
+		  	<h3>
+		  		<div style="float:left;">EC :&nbsp;</div>
+		  		<div style="float:left; color: red" ng-if="items.EC < 1" >{{items.EC}}</div>
+		  		<div style="float:left; color: red" ng-if="items.EC > 2" >{{items.EC}}</div>
+		  		<div style="float:left; color: green" ng-if="items.EC >= 1 && items.EC <= 2">{{items.EC}}</div>
+		  	</h3>
+		 	</div>
+		  <!-- <div class="col-xs-7"><h3>EC : {{items.EC}}</h3></div> -->
+	  </div>
+	</div>
+<br>
+	<div class="row">
+		<div class="container">
+			<div class="col-xs-4"></div>
+		  <div class="col-xs-1"><img src="icon/pH.png" width="50px" class="icon"></div>
+		  <div class="col-xs-7">
+		  	<h3>
+		  		<div style="float:left;">pH :&nbsp;</div>
+		  		<div style="float:left; color: red" ng-if="items.pH < 6 " >{{items.pH}}</div>
+		  		<div style="float:left; color: red" ng-if="items.pH > 7 " >{{items.pH}}</div>
+		  		<div style="float:left; color: green" ng-if="items.pH >= 6 && items.pH <= 7">{{items.pH}}</div>
+		  	</h3>
+		 	</div>
+		  <!-- <div class="col-xs-7"><h3>pH : {{items.pH}}</h3></div> -->
+	  </div>
+	</div>
+</div>
+<hr width="50%">
+<!-- <div class="row">
+	<center>
+		<div class="container">
+			<table>
+				<tr>
+					<td>
+						<div class="col-xs-1"><img src="icon/calendar.png" width="50px"  class="icon"></div>
+					</td>
+					<td>
+						<h3>Date : &nbsp;</h3>
+					</td>
+					<td>
+						<h3>{{items.Date}}</h3>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="col-xs-1"><img src="icon/humidity.png" width="50px" class="icon"></div>
+					</td>
+					<td>
+						<h3>Humidity : &nbsp;</h3>
+					</td>
+					<td>
+						<h3>{{items.Humidity}}</h3>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="col-xs-1"><img src="icon/temperature.png" width="50px" class="icon"></div>
+					</td>
+					<td>
+						<h3>Temp : &nbsp;</h3>
+					</td>
+					<td>
+						<h3>{{items.Temperature}}</h3>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="col-xs-1"><img src="icon/EC.png" width="50px" class="icon"></div>
+					</td>
+					<td>
+						<h3>EC : &nbsp;</h3>
+					</td>
+					<td>
+						<h3>{{items.EC}}</h3>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="col-xs-1"><img src="icon/pH.png" width="50px" class="icon"></div>
+					</td>
+					<td>
+						<h3>pH : &nbsp;</h3>
+					</td>
+					<td>
+						<h3>{{items.pH}}</h3>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</center>
+</div> -->
+
+<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+</body>
+</html>

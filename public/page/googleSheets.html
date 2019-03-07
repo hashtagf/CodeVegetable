@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>Smart Farm</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<!-- framework Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="../app.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- Moment time -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+
+	<!-- Microgear -->
+	<script src="https://cdn.netpie.io/microgear.js"></script>
+
+	<!-- Compiled and minified CSS -->
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"> -->
+	<!-- Compiled and minified JavaScript -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script> -->
+
+</head>
+<script>
+
+</script>
+<body ng-controller="TodoListController">
+<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<!-- navbar -->
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	      <a class="navbar-brand" href="../index.html">Smart Farm Cabinet</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	    <ul class="nav navbar-nav">
+	      <li><a href="../index.html">Home</a></li>
+	      <li class="active"><a href="#">Google Sheets</a></li>
+	      <li><a href="tag.html">Status</a></li>
+	      <li><a href="picture.html">Picture</a></li>
+	    </ul>
+	  </div>
+	  </div>
+	</nav>
+<!-- navbar -->
+
+	<div class="container">
+		<center>
+			<h1>Google Sheets</h1>
+		  <p>Data from Google Sheets</p>
+	  </center>
+	  <hr width="50%">
+		<div class="row">
+		  <div class="form-group form-group-sm col-xs-4">
+
+		      <input class="form-control" type="text" id="formGroupInputSmall" placeholder="Search" ng-model="datas">
+		    </div>
+
+		  </div>
+
+	  <br>
+
+	<div class="table-responsive">
+
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th class="col-md-2 col-xs-2">Date</th>
+	      <th class="col-md-3 col-xs-3">Temp</th>
+	      <th class="col-md-3 col-xs-3">Humidity</th>
+	      <th class="col-md-2 col-xs-2">EC</th>
+	      <th class="col-md-2 col-xs-2">pH</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="show in sheets | filter:datas">
+	      <td>{{show.Date}}</td>
+	      <td>{{show.Temperature}}</td>
+	      <td>{{show.Humidity}}</td>
+	      <td>{{show.EC}}</td>
+	      <td>{{show.pH}}</td>
+	    </tr>
+	  </tbody>
+	</table>
+
+	</div>
+
+	</div>
+
+
+
+<hr width="50%">
+
+<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+</body>
+</html>
