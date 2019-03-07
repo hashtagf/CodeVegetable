@@ -75,7 +75,7 @@ angular.module('app', [])
 		$scope.totalbtn = []
 		// $scope.pumpSta = ''
 		$scope.LEDSta = ''
-		console.log('fogStatus',fogSta)
+		
 		function getbtn() {
 			$http.get('/btn').then(res => {
 				$scope.totalbtn = res.data
