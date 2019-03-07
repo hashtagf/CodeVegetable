@@ -218,8 +218,29 @@ angular.module('app', [])
 			})
 		}
 
-		//}//checkstatus
+		// Fog *//// Fog /// Fog
+		if ($scope.staFog === true) {
+			$scope.fogSta = 'ON'
+			$http.get('/fogOn').then(function (response) {
+				// console.log(response)
+			})
+			$scope.stabtn[1].statusbtn = true///////////////////////////////
+			console.log("fogOn")
+			$http.put('/btn/' + $scope.totalbtn[2]._id, $scope.stabtn[2]).then(res => {
+				$scope.totalbtn[2].statusbtn = res.data.statusbtn
+			})
 
+		} else if ($scope.staFog === false) {
+			$scope.fogSta = 'OFF'
+			$http.get('/fogOff').then(function (response) {
+				// console.log(response)
+			})
+			$scope.stabtn[1].statusbtn = false///////////////////////////////
+			console.log("fogOff")
+			$http.put('/btn/' + $scope.totalbtn[2]._id, $scope.stabtn[2]).then(res => {
+				$scope.totalbtn[2].statusbtn = res.data.statusbtn
+			})
+		}
 		//$scope.checkstatus()
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////fn LEDon
