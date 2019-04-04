@@ -127,9 +127,9 @@ var mqttSend = function(topic, msg) {
 
 <script>
 
-  const APPID = "APPID";
-  const KEY = "oT7qT5XkIuSyvDb";
-  const SECRET = "6IMFn3bZrNlVEopa0BWlhszUa";
+  const APPID = "Vegetable001";
+  const KEY = "dfhiaN7XLOFf7S3";
+  const SECRET = "EsJgEv08jtXzSbwdKUxTpSYq7";
 
   const ALIAS = "DigitalOUTPUT_HTML_web";     //  ชื่อตัวเอง
   const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
@@ -151,9 +151,11 @@ console.log("============>",logic);
     alias : ALIAS
   });
 
-
+	var netpieData = {}
   microgear.on('message', function(topic,data) {
-    console.log(topic, data);
+		console.log(topic, data);
+		netpieData[topic]= data
+		console.log(netpieData)
     if(data=="ON"){
       document.getElementById("Status").innerHTML =  "Load is ON.";
     }else if(data=="OFF"){
