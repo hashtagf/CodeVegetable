@@ -13,9 +13,9 @@
 #define DHTTYPE DHT22
 
 //Microgear
-#define APPID   "APPID"
-#define KEY     "6Z4pu5Yqnogsp7D"
-#define SECRET  "0bBYiQH4UtKrO4anw10O5SV9r"
+#define APPID   "Vegetable001"
+#define KEY     "dfhiaN7XLOFf7S3"
+#define SECRET  "EsJgEv08jtXzSbwdKUxTpSYq7"
 
 #define ALIAS   "NodeMCU1"
 #define TargetWeb "DigitalOUTPUT_HTML_web"
@@ -23,7 +23,7 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 const char WEBSITE[] = "api.pushingbox.com"; //pushingbox API server
-const String devid = "vB1BCF705A509A44"; //device ID from Pushingbox
+const String devid = "vC72A27011256BCC"; //device ID from Pushingbox
 
 const int analogInPin = A0; //Analog EC input pin 
 const int analogOutPin = D8; //Analog EC output pin 
