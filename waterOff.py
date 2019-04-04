@@ -4,5 +4,5 @@ import os
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(27, GPIO.OUT)
-GPIO.output(27, GPIO.HIGH)
+GPIO.setup(4, GPIO.OUT)
+GPIO.output(4, GPIO.HIGH)
