@@ -68,6 +68,20 @@ app.get('/fogOff', function(req, res, next){
 	})
 })
 
+app.get('/waterOn', function(req, res, next){
+	PyhonShell.run('waterOn.py', function(err){
+		if(err){res.send(err)}
+			else res.send({message: 'done'})
+	})
+})
+
+app.get('/waterOff', function(req, res, next){
+	PyhonShell.run('waterOff.py', function(err){
+		if(err){res.send(err)}
+			else res.send({message: 'done'})
+	})
+})
+
 app.get('/takeCam', function(req, res, next){
 	PyhonShell.run('takeCam.py', function(err){
 		if(err){res.send(err)}
