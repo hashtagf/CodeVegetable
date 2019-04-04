@@ -69,6 +69,10 @@ angular.module('app', [])
     }, {
       btnnum: 3,
       statusbtn: false
+    },
+    {
+      btnnum: 4,
+      statusbtn: false
     }
     ]
 
