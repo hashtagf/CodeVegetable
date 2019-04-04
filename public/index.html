@@ -151,18 +151,6 @@ console.log("============>",logic);
     alias : ALIAS
   });
 
-	var netpieData = {}
-  microgear.on('message', function(topic,data) {
-		console.log(topic, data);
-		netpieData[topic]= data
-		console.log(netpieData)
-    if(data=="ON"){
-      document.getElementById("Status").innerHTML =  "Load is ON.";
-    }else if(data=="OFF"){
-      document.getElementById("Status").innerHTML =  "Load is OFF.";
-    }
-  });
-
   microgear.on('connected', function() {
     microgear.setAlias(ALIAS);
     document.getElementById("connected_NETPIE").innerHTML = "Connected to NETPIE"
@@ -178,6 +166,18 @@ console.log("============>",logic);
 
   microgear.resettoken(function(err) {
     microgear.connect(APPID);
+	});
+	
+	var netpieData = {}
+  microgear.on('message', function(topic,data) {
+		console.log(topic, data);
+		netpieData[topic]= data
+		console.log(netpieData)
+    if(data=="ON"){
+      document.getElementById("Status").innerHTML =  "Load is ON.";
+    }else if(data=="OFF"){
+      document.getElementById("Status").innerHTML =  "Load is OFF.";
+    }
   });
 
 </script>
