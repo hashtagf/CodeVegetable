@@ -297,6 +297,26 @@ console.log("============>",logic);
 			<div class="col-md-4"></div>
 			<div class="col-md-4" id="div1">
 			<center>
+			<h3>Control Water Filter Status : {{waterSta}} </h3>
+			<!-- <p class="bg-info">Status : {{pumpSta}} </p> -->
+
+
+				<button id="water-off" class="btn btn-danger btn-lg active" ng-click="waterOff()" >Off</button>
+			 	<button id="water-on" class="btn btn-success btn-lg active" ng-click="waterOn()" >On</button>
+				<!-- <div class="holder">
+					<input type="checkbox" value="true" id="check2" name="check2" class="check-ios2" ng-click="controlSwitch()" ng-model="conPump"/>
+					<label for="check2"></label>
+					<span></span>
+				</div> -->
+				</center>
+			</div>
+			<div class="col-md-4"></div>
+		</div><br>
+
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4" id="div1">
+			<center>
 			<h3>Check</h3>
 			<p>Sent values to Google Sheets</p>
 			  <h3 id="connected_NETPIE"></h3>

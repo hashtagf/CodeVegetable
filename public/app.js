@@ -82,6 +82,7 @@ angular.module('app', [])
         $scope.staLED = res.data[0].statusbtn
         $scope.staPump = res.data[1].statusbtn
         $scope.staFog = res.data[2].statusbtn
+        $scope.staWater = res.data[3].statusbtn
         if ($scope.staPump == true) {
           $scope.pumpSta = 'ON'
           // console.log("chcek")
@@ -102,6 +103,14 @@ angular.module('app', [])
           // console.log("chcek")
         } else if ($scope.staFog == false) {
           $scope.fogSta = 'OFF'
+          // console.log("chcek")
+        }
+
+        if ($scope.staWater == true) {
+          $scope.waterSta = 'ON'
+          // console.log("chcek")
+        } else if ($scope.staWater == false) {
+          $scope.waterSta = 'OFF'
           // console.log("chcek")
         }
 
@@ -224,7 +233,7 @@ angular.module('app', [])
       $http.get('/fogOn').then(function (response) {
         // console.log(response)
       })
-      $scope.stabtn[1].statusbtn = true///////////////////////////////
+      $scope.stabtn[2].statusbtn = true///////////////////////////////
       console.log("fogOn")
       $http.put('/btn/' + $scope.totalbtn[2]._id, $scope.stabtn[2]).then(res => {
         $scope.totalbtn[2].statusbtn = res.data.statusbtn
@@ -235,14 +244,35 @@ angular.module('app', [])
       $http.get('/fogOff').then(function (response) {
         // console.log(response)
       })
-      $scope.stabtn[1].statusbtn = false///////////////////////////////
+      $scope.stabtn[2].statusbtn = false///////////////////////////////
       console.log("fogOff")
       $http.put('/btn/' + $scope.totalbtn[2]._id, $scope.stabtn[2]).then(res => {
         $scope.totalbtn[2].statusbtn = res.data.statusbtn
       })
     }
     //$scope.checkstatus()
+    if ($scope.staWater === true) {
+      $scope.waterSta = 'ON'
+      $http.get('/waterOn').then(function (response) {
+        // console.log(response)
+      })
+      $scope.stabtn[3].statusbtn = true///////////////////////////////
+      console.log("waterOn")
+      $http.put('/btn/' + $scope.totalbtn[3]._id, $scope.stabtn[3]).then(res => {
+        $scope.totalbtn[3].statusbtn = res.data.statusbtn
+      })
 
+    } else if ($scope.staWater === false) {
+      $scope.waterSta = 'OFF'
+      $http.get('/waterOff').then(function (response) {
+        // console.log(response)
+      })
+      $scope.stabtn[3].statusbtn = false///////////////////////////////
+      console.log("waterOff")
+      $http.put('/btn/' + $scope.totalbtn[3]._id, $scope.stabtn[3]).then(res => {
+        $scope.totalbtn[3].statusbtn = res.data.statusbtn
+      })
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////fn LEDon
 
     $scope.ledOn = function () {
@@ -329,6 +359,34 @@ angular.module('app', [])
         $scope.totalbtn[2].statusbtn = res.data.statusbtn
       })
     }
+
+    /// Water
+    $scope.waterOn = function () {
+      $scope.waterSta = 'ON'
+      $http.get('/waterOn').then(function (response) {
+        console.log(response)
+      })
+      $scope.stabtn[3].statusbtn = true///////////////////////////////
+      // $http.post('/btn', $scope.stabtn[1]).then(function (response){})///////////////////////////////
+      console.log("waterOn")
+      $http.put('/btn/' + $scope.totalbtn[3]._id, $scope.stabtn[3]).then(res => {
+        $scope.totalbtn[3].statusbtn = res.data.statusbtn
+      })
+    }
+
+    $scope.waterOff = function () {
+      $scope.waterSta = 'OFF'
+      $http.get('/waterOff').then(function (response) {
+        console.log(response)
+      })
+      $scope.stabtn[3].statusbtn = false///////////////////////////////
+      // $http.post('/btn', $scope.stabtn[1]).then(function (response){})///////////////////////////////
+      console.log("waterOff")
+      $http.put('/btn/' + $scope.totalbtn[3]._id, $scope.stabtn[3]).then(res => {
+        $scope.totalbtn[3].statusbtn = res.data.statusbtn
+      })
+    }
+
 
     $scope.takeCam = function () {
       $http.get('/takeCam').then(function (response) {
