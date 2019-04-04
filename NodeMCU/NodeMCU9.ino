@@ -247,6 +247,10 @@ void loop() {
   Serial.print("Temperature : ");
   Serial.print(t);
   Serial.println(" *C");
+
+  microgear.publish("/Humidity", h);
+  microgear.publish("/Temperature", t);
+
 //    digitalWrite(GR1, HIGH);
 //    delay(5000);
 //    digitalWrite(GR1, LOW);
@@ -271,7 +275,7 @@ void loop() {
   
     if(countUp == 1){
       WiFiClient client;  //Instantiate WiFi object
-  
+
       //Start or API service using our WiFi Client through PushingBox
       if (client.connect(WEBSITE, 80)){ 
            client.print("GET /pushingbox?devid=" + devid
