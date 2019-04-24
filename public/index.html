@@ -378,8 +378,9 @@ var mqttSend = function(topic, msg) {
 				<div class="col-xs-7">
 					<h3>
 						<div style="float:left;">Humidity :&nbsp;</div>
-						<div id="humidity" style="float:left; color: red" ng-if="items.Humidity >= 70">{{items.Humidity}}</div>
-						<div id="humidity" style="float:left; color: green" ng-if="items.Humidity < 70">{{items.Humidity}}</div>
+						<div id="humidity" style="float:left;" >Loading..</div>
+						<!-- <div id="humidity" style="float:left; color: red" ng-if="items.Humidity >= 70">{{items.Humidity}}</div> -->
+						<!-- <div id="humidity" style="float:left; color: green" ng-if="items.Humidity < 70">{{items.Humidity}}</div> -->
 					</h3>
 				</div>
 				<!-- <div class="col-xs-7"><h3>Humidity : {{items.Humidity}}</h3></div> -->
@@ -393,8 +394,9 @@ var mqttSend = function(topic, msg) {
 				<div class="col-xs-7">
 					<h3>
 						<div style="float:left;">Temp :&nbsp;</div>
-						<div id="temp" style="float:left; color: red" ng-if="items.Temperature >= 29">{{items.Temperature}}</div>
-						<div id="temp" style="float:left; color: green" ng-if="items.Temperature < 29">{{items.Temperature}}</div>
+						<div id="temp" style="float:left;" >Loading..</div>
+						<!-- <div id="temp" style="float:left; color: red" ng-if="items.Temperature >= 29">{{items.Temperature}}</div>
+						<div id="temp" style="float:left; color: green" ng-if="items.Temperature < 29">{{items.Temperature}}</div> -->
 					</h3>
 				</div>
 				<!-- <div class="col-xs-7"><h3>Temp : {{items.Temperature}}</h3></div> -->
@@ -408,9 +410,10 @@ var mqttSend = function(topic, msg) {
 				<div class="col-xs-7">
 					<h3>
 						<div style="float:left;">EC :&nbsp;</div>
-						<div id="sensorValue" style="float:left; color: red" ng-if="items.EC < 1">{{items.EC}}</div>
+						<div id="sensorValue" style="float:left;" >Loading..</div>
+						<!-- <div id="sensorValue" style="float:left; color: red" ng-if="items.EC < 1">{{items.EC}}</div>
 						<div id="sensorValue" style="float:left; color: red" ng-if="items.EC > 2">{{items.EC}}</div>
-						<div id="sensorValue" style="float:left; color: green" ng-if="items.EC >= 1 && items.EC <= 2">{{items.EC}}
+						<div id="sensorValue" style="float:left; color: green" ng-if="items.EC >= 1 && items.EC <= 2">{{items.EC}} -->
 						</div>
 					</h3>
 				</div>
@@ -425,9 +428,10 @@ var mqttSend = function(topic, msg) {
 				<div class="col-xs-7">
 					<h3>
 						<div style="float:left;">pH :&nbsp;</div>
-						<div id="pH" style="float:left; color: red" ng-if="items.pH < 6 ">{{items.pH}}</div>
+						<div id="pH" style="float:left;" >Loading..</div>
+						<!-- <div id="pH" style="float:left; color: red" ng-if="items.pH < 6 ">{{items.pH}}</div>
 						<div id="pH" style="float:left; color: red" ng-if="items.pH > 7 ">{{items.pH}}</div>
-						<div id="pH" style="float:left; color: green" ng-if="items.pH >= 6 && items.pH <= 7">{{items.pH}}</div>
+						<div id="pH" style="float:left; color: green" ng-if="items.pH >= 6 && items.pH <= 7">{{items.pH}}</div> -->
 					</h3>
 				</div>
 				<!-- <div class="col-xs-7"><h3>pH : {{items.pH}}</h3></div> -->
