@@ -134,6 +134,8 @@ var mqttSend = function(topic, msg) {
   const ALIAS = "DigitalOUTPUT_HTML_web";     //  ชื่อตัวเอง
   const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
 
+	document.getElementById("date").innerHTML =  Date.now().toLocaleDateString();
+
   function switchPress(logic){
 console.log("============>",logic);
     if(logic == 1 ){
@@ -347,7 +349,7 @@ console.log("============>",logic);
 			<div class="col-xs-4"></div>
 		  <div class="col-xs-1"><img src="icon/calendar.png" width="50px"  class="icon"></div>
 		  <!-- <div class="col-xs-7"><h3><div style="float:left;">Date :&nbsp;</div><div style="float:left;">{{items.Date}}</div></h3></div> -->
-		  <div class="col-xs-7"><h3><div style="float:left;">Date :&nbsp;</div><div style="float:left;">{{items.Date}}</div></h3></div>
+		  <div id="date" class="col-xs-7"><h3><div style="float:left;">Date :&nbsp;</div><div style="float:left;">{{items.Date}}</div></h3></div>
 	  </div>
 	</div>
 <br>
