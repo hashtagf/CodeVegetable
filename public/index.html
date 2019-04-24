@@ -152,7 +152,8 @@ console.log("============>",logic);
   });
 
   microgear.on('connected', function() {
-    microgear.setAlias(ALIAS);
+		microgear.setAlias(ALIAS);
+		microgear.subscribe("/#");
 		document.getElementById("connected_NETPIE").innerHTML = "Connected to NETPIE"
 		console.log('connect')
   });
