@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html ng-app="app">
+
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<title>Smart Farm</title>
 	<link rel="stylesheet" href="css/style.css">
 	<script src="jquery-1.11.3.min.js"></script>
-  	<script src="mqttws31.js"></script>
+	<script src="mqttws31.js"></script>
 	<!-- framework Angular -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="app.js"></script>
 
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
 
 	<!-- Moment time -->
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
@@ -27,9 +32,9 @@
 	<script src="https://cdn.netpie.io/microgear.js"></script>
 
 	<!-- Compiled and minified CSS -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"> -->
-  <!-- Compiled and minified JavaScript -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script> -->
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"> -->
+	<!-- Compiled and minified JavaScript -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script> -->
 
 </head>
 <!-- <script>
@@ -127,134 +132,142 @@ var mqttSend = function(topic, msg) {
 
 <script>
 
-  const APPID = "Vegetable001";
-  const KEY = "dfhiaN7XLOFf7S3";
-  const SECRET = "EsJgEv08jtXzSbwdKUxTpSYq7";
+	const APPID = "Vegetable001";
+	const KEY = "dfhiaN7XLOFf7S3";
+	const SECRET = "EsJgEv08jtXzSbwdKUxTpSYq7";
 
-  const ALIAS = "DigitalOUTPUT_HTML_web";     //  ชื่อตัวเอง
-  const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
+	const ALIAS = "DigitalOUTPUT_HTML_web";     //  ชื่อตัวเอง
+	const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
 
-	
 
-  function switchPress(logic){
-console.log("============>",logic);
-    if(logic == 1 ){
-      microgear.chat(thing1,"ON");
-      console.log("On")
-    }else if(logic == 0 ){
-      microgear.chat(thing1,"OFF");
-      console.log("Off")
-    }
-  }
 
-  var microgear = Microgear.create({
-    key: KEY,
-    secret: SECRET,
-    alias : ALIAS
-  });
+	function switchPress(logic) {
+		console.log("============>", logic);
+		if (logic == 1) {
+			microgear.chat(thing1, "ON");
+			console.log("On")
+		} else if (logic == 0) {
+			microgear.chat(thing1, "OFF");
+			console.log("Off")
+		}
+	}
 
-  microgear.on('connected', function() {
+	var microgear = Microgear.create({
+		key: KEY,
+		secret: SECRET,
+		alias: ALIAS
+	});
+
+	microgear.on('connected', function () {
 		microgear.setAlias(ALIAS);
 		microgear.subscribe("/#");
 		document.getElementById("connected_NETPIE").innerHTML = "Connected to NETPIE"
 		console.log('connect')
-  });
-
-  microgear.on('present', function(event) {
-    console.log(event);
-  });
-
-  microgear.on('absent', function(event) {
-    console.log(event);
-  });
-
-  microgear.resettoken(function(err) {
-		microgear.connect(APPID);
-		
 	});
-	
+
+	microgear.on('present', function (event) {
+		console.log(event);
+	});
+
+	microgear.on('absent', function (event) {
+		console.log(event);
+	});
+
+	microgear.resettoken(function (err) {
+		microgear.connect(APPID);
+
+	});
+
 	var netpieData = {}
-  microgear.on('message', function(topic,data) {
-		console.log('Message',topic,data)
-		netpieData[topic]= data
+	microgear.on('message', function (topic, data) {
+		console.log('Message', topic, data)
+		netpieData[topic] = data
 		console.log(netpieData)
-    if(data=="ON"){
-      document.getElementById("Status").innerHTML =  "Load is ON.";
-    }else if(data=="OFF"){
-      document.getElementById("Status").innerHTML =  "Load is OFF.";
+		if (data == "ON") {
+			document.getElementById("Status").innerHTML = "Load is ON.";
+		} else if (data == "OFF") {
+			document.getElementById("Status").innerHTML = "Load is OFF.";
 		}
-		document.getElementById("temp").innerHTML =  netpieData['/Vegetable001/temperature'];
-		document.getElementById("humidity").innerHTML =  netpieData['/Vegetable001/humidity'];
-		document.getElementById("sensorValue").innerHTML =  netpieData['/Vegetable001/sensorValue'];
-		document.getElementById("pH").innerHTML =  netpieData['/Vegetable001/pH'];
-  });
+		if (topic == '/Vegetable001/temperature') {
+			document.getElementById("temp").innerHTML = data;
+		} else if (topic == '/Vegetable001/humidity') {
+			document.getElementById("humidity").innerHTML = data;
+		} else if (topic == '/Vegetable001/sensorValue') {
+			document.getElementById("sensorValue").innerHTML = data;
+		} else if (topic == '/Vegetable001/pH') {
+			document.getElementById("pH").innerHTML = data;
+		}
+	});
 
 </script>
-<body ng-controller="TodoListController">
-<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-<!-- navbar -->
+<body ng-controller="TodoListController">
+	<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- navbar -->
 	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-	      <a class="navbar-brand" href="#">Smart Farm Cabinet</a>
-	    </div>
-	    <div class="collapse navbar-collapse" id="myNavbar">
-	    <ul class="nav navbar-nav">
-	      <li class="active"><a href="#">Home</a></li>
-	      <li><a href="page/googleSheets.html">Google Sheets</a></li>
-	      <li><a href="page/tag.html">Status</a></li>
-	      <li><a href="page/picture.html">Picture</a></li>
-	    </ul>
-	  </div>
-	  </div>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Smart Farm Cabinet</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="page/googleSheets.html">Google Sheets</a></li>
+					<li><a href="page/tag.html">Status</a></li>
+					<li><a href="page/picture.html">Picture</a></li>
+				</ul>
+			</div>
+		</div>
 	</nav>
-<!-- navbar -->
+	<!-- navbar -->
 
 
 	<div class="container">
 
-	<!-- <center> -->
-	  <!-- <h1 id="connected_NETPIE"></h1> -->
-	  <!-- <button type="button" onclick="switchPress(1)" class="btn btn-primary btn-lg active">Chcek</button> -->
-	  <!-- <button type="button" onclick="switchPress(0)">Turn OFF</button> -->
-	  <!-- <p><strong id="Status">Load is OFF.</strong></p> -->
-	<!-- </center> -->
+		<!-- <center> -->
+		<!-- <h1 id="connected_NETPIE"></h1> -->
+		<!-- <button type="button" onclick="switchPress(1)" class="btn btn-primary btn-lg active">Chcek</button> -->
+		<!-- <button type="button" onclick="switchPress(0)">Turn OFF</button> -->
+		<!-- <p><strong id="Status">Load is OFF.</strong></p> -->
+		<!-- </center> -->
 
 		<center>
-		<!-- <button class="btn btn-danger btn-lg active" ng-click="first()">first</button> -->
-		<h1>Smart Farm Cabinet</h1>
-	  <p>Control LED Grow Light And Control Water pump</p>
-	  </center>
-	  <hr width="50%">
+			<!-- <button class="btn btn-danger btn-lg active" ng-click="first()">first</button> -->
+			<h1>Smart Farm Cabinet</h1>
+			<p>Control LED Grow Light And Control Water pump</p>
+		</center>
+		<hr width="50%">
 		<div class="row">
-<!-- switch -->
+			<!-- switch -->
 			<div class="col-md-4"></div>
 			<div class="col-md-4" id="div1">
-			<center>
-			Setting LED Grow Light system<br>
-			Status : {{stasystem}}<br>
-			<button class="btn btn-danger btn-xs active" ng-click="auto()" ng-if="stasystem === 'Manual'">Auto</button>
-			<button class="btn btn-success btn-xs active" ng-click="man()" ng-if="stasystem === 'Auto'">Manually</button>
+				<center>
+					Setting LED Grow Light system<br>
+					Status : {{stasystem}}<br>
+					<button class="btn btn-danger btn-xs active" ng-click="auto()" ng-if="stasystem === 'Manual'">Auto</button>
+					<button class="btn btn-success btn-xs active" ng-click="man()" ng-if="stasystem === 'Auto'">Manually</button>
 
-			<h3>Control LED Status : {{LEDSta}} </h3>
-			<!-- <p class="bg-info">Status : {{LEDSta}} </p> -->
+					<h3>Control LED Status : {{LEDSta}} </h3>
+					<!-- <p class="bg-info">Status : {{LEDSta}} </p> -->
 
-			<!-- <h2>Control LED</h2>
+					<!-- <h2>Control LED</h2>
 			  <button id="led-on" >&nbsp;OFF LED&nbsp;</button>&nbsp;&nbsp;&nbsp;
 			  <button id="led-off" disabled>&nbsp;ON LED&nbsp;</button>
 			<h2>Status LED : <span id="stled"></span></h2> -->
 
-			 <button id="led-on" class="btn btn-danger btn-lg active" ng-click="ledOff()" ng-if="stasystem === 'Manual'">Off</button>
-			 <button id="led-off" class="btn btn-success btn-lg active" ng-click="ledOn()" ng-if="stasystem === 'Manual'">On</button>
+					<button id="led-on" class="btn btn-danger btn-lg active" ng-click="ledOff()"
+						ng-if="stasystem === 'Manual'">Off</button>
+					<button id="led-off" class="btn btn-success btn-lg active" ng-click="ledOn()"
+						ng-if="stasystem === 'Manual'">On</button>
 
 
-				<!-- <div class="holder">
+					<!-- <div class="holder">
 					<input type="checkbox" value="true" id="check" name="check" ng-click="controlSwitch()" class="check-ios" ng-model="conLED"/>
 					<label for="check"></label>
 					<span></span>
@@ -267,14 +280,14 @@ console.log("============>",logic);
 		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4" id="div1">
-			<center>
-			<h3>Control Pump Status : {{pumpSta}} </h3>
-			<!-- <p class="bg-info">Status : {{pumpSta}} </p> -->
+				<center>
+					<h3>Control Pump Status : {{pumpSta}} </h3>
+					<!-- <p class="bg-info">Status : {{pumpSta}} </p> -->
 
 
-				<button id="pump-on" class="btn btn-danger btn-lg active" ng-click="pumpOff()" >Off</button>
-			 	<button id="pump-off" class="btn btn-success btn-lg active" ng-click="pumpOn()" >On</button>
-				<!-- <div class="holder">
+					<button id="pump-on" class="btn btn-danger btn-lg active" ng-click="pumpOff()">Off</button>
+					<button id="pump-off" class="btn btn-success btn-lg active" ng-click="pumpOn()">On</button>
+					<!-- <div class="holder">
 					<input type="checkbox" value="true" id="check2" name="check2" class="check-ios2" ng-click="controlSwitch()" ng-model="conPump"/>
 					<label for="check2"></label>
 					<span></span>
@@ -287,14 +300,14 @@ console.log("============>",logic);
 		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4" id="div1">
-			<center>
-			<h3>Control Fog Status : {{fogSta}} </h3>
-			<!-- <p class="bg-info">Status : {{pumpSta}} </p> -->
+				<center>
+					<h3>Control Fog Status : {{fogSta}} </h3>
+					<!-- <p class="bg-info">Status : {{pumpSta}} </p> -->
 
 
-				<button id="fog-off" class="btn btn-danger btn-lg active" ng-click="fogOff()" >Off</button>
-			 	<button id="fog-on" class="btn btn-success btn-lg active" ng-click="fogOn()" >On</button>
-				<!-- <div class="holder">
+					<button id="fog-off" class="btn btn-danger btn-lg active" ng-click="fogOff()">Off</button>
+					<button id="fog-on" class="btn btn-success btn-lg active" ng-click="fogOn()">On</button>
+					<!-- <div class="holder">
 					<input type="checkbox" value="true" id="check2" name="check2" class="check-ios2" ng-click="controlSwitch()" ng-model="conPump"/>
 					<label for="check2"></label>
 					<span></span>
@@ -307,14 +320,14 @@ console.log("============>",logic);
 		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4" id="div1">
-			<center>
-			<h3>Control Water Filter Status : {{waterSta}} </h3>
-			<!-- <p class="bg-info">Status : {{pumpSta}} </p> -->
+				<center>
+					<h3>Control Water Filter Status : {{waterSta}} </h3>
+					<!-- <p class="bg-info">Status : {{pumpSta}} </p> -->
 
 
-				<button id="water-off" class="btn btn-danger btn-lg active" ng-click="waterOff()" >Off</button>
-			 	<button id="water-on" class="btn btn-success btn-lg active" ng-click="waterOn()" >On</button>
-				<!-- <div class="holder">
+					<button id="water-off" class="btn btn-danger btn-lg active" ng-click="waterOff()">Off</button>
+					<button id="water-on" class="btn btn-success btn-lg active" ng-click="waterOn()">On</button>
+					<!-- <div class="holder">
 					<input type="checkbox" value="true" id="check2" name="check2" class="check-ios2" ng-click="controlSwitch()" ng-model="conPump"/>
 					<label for="check2"></label>
 					<span></span>
@@ -327,96 +340,102 @@ console.log("============>",logic);
 		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4" id="div1">
-			<center>
-			<h3>Check</h3>
-			<p>Sent values to Google Sheets</p>
-			  <h3 id="connected_NETPIE"></h3>
-			  <button type="button" onclick="switchPress(1)" class="btn btn-primary btn-lg active">Check</button>
-			  <!-- <button type="button" onclick="switchPress(0)">Turn OFF</button> -->
-			  <!-- <p><strong id="Status">Load is OFF.</strong></p> -->
-			  </center>
+				<center>
+					<h3>Check</h3>
+					<p>Sent values to Google Sheets</p>
+					<h3 id="connected_NETPIE"></h3>
+					<button type="button" onclick="switchPress(1)" class="btn btn-primary btn-lg active">Check</button>
+					<!-- <button type="button" onclick="switchPress(0)">Turn OFF</button> -->
+					<!-- <p><strong id="Status">Load is OFF.</strong></p> -->
+				</center>
 
 			</div>
 			<div class="col-md-4"></div>
 		</div>
 	</div>
-<!-- switch -->
-<hr width="50%">
+	<!-- switch -->
+	<hr width="50%">
 
-<div class="container">
-	<div class="row">
-		<div class="container">
-			<div class="col-xs-4"></div>
-		  <div class="col-xs-1"><img src="icon/calendar.png" width="50px"  class="icon"></div>
-		  <!-- <div class="col-xs-7"><h3><div style="float:left;">Date :&nbsp;</div><div style="float:left;">{{items.Date}}</div></h3></div> -->
-		  <div id="date" class="col-xs-7"><h3><div style="float:left;">Date :&nbsp;</div><div style="float:left;">{{items.Date}}</div></h3></div>
-	  </div>
+	<div class="container">
+		<div class="row">
+			<div class="container">
+				<div class="col-xs-4"></div>
+				<div class="col-xs-1"><img src="icon/calendar.png" width="50px" class="icon"></div>
+				<!-- <div class="col-xs-7"><h3><div style="float:left;">Date :&nbsp;</div><div style="float:left;">{{items.Date}}</div></h3></div> -->
+				<div id="date" class="col-xs-7">
+					<h3>
+						<div style="float:left;">Date :&nbsp;</div>
+						<div style="float:left;">{{items.Date}}</div>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="container">
+				<div class="col-xs-4"></div>
+				<div class="col-xs-1"><img src="icon/humidity.png" width="50px" class="icon"></div>
+				<div class="col-xs-7">
+					<h3>
+						<div style="float:left;">Humidity :&nbsp;</div>
+						<div id="humidity" style="float:left; color: red" ng-if="items.Humidity >= 70">{{items.Humidity}}</div>
+						<div id="humidity" style="float:left; color: green" ng-if="items.Humidity < 70">{{items.Humidity}}</div>
+					</h3>
+				</div>
+				<!-- <div class="col-xs-7"><h3>Humidity : {{items.Humidity}}</h3></div> -->
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="container">
+				<div class="col-xs-4"></div>
+				<div class="col-xs-1"><img src="icon/temperature.png" width="50px" class="icon"></div>
+				<div class="col-xs-7">
+					<h3>
+						<div style="float:left;">Temp :&nbsp;</div>
+						<div id="temp" style="float:left; color: red" ng-if="items.Temperature >= 29">{{items.Temperature}}</div>
+						<div id="temp" style="float:left; color: green" ng-if="items.Temperature < 29">{{items.Temperature}}</div>
+					</h3>
+				</div>
+				<!-- <div class="col-xs-7"><h3>Temp : {{items.Temperature}}</h3></div> -->
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="container">
+				<div class="col-xs-4"></div>
+				<div class="col-xs-1"><img src="icon/EC.png" width="50px" class="icon"></div>
+				<div class="col-xs-7">
+					<h3>
+						<div style="float:left;">EC :&nbsp;</div>
+						<div id="sensorValue" style="float:left; color: red" ng-if="items.EC < 1">{{items.EC}}</div>
+						<div id="sensorValue" style="float:left; color: red" ng-if="items.EC > 2">{{items.EC}}</div>
+						<div id="sensorValue" style="float:left; color: green" ng-if="items.EC >= 1 && items.EC <= 2">{{items.EC}}
+						</div>
+					</h3>
+				</div>
+				<!-- <div class="col-xs-7"><h3>EC : {{items.EC}}</h3></div> -->
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="container">
+				<div class="col-xs-4"></div>
+				<div class="col-xs-1"><img src="icon/pH.png" width="50px" class="icon"></div>
+				<div class="col-xs-7">
+					<h3>
+						<div style="float:left;">pH :&nbsp;</div>
+						<div id="pH" style="float:left; color: red" ng-if="items.pH < 6 ">{{items.pH}}</div>
+						<div id="pH" style="float:left; color: red" ng-if="items.pH > 7 ">{{items.pH}}</div>
+						<div id="pH" style="float:left; color: green" ng-if="items.pH >= 6 && items.pH <= 7">{{items.pH}}</div>
+					</h3>
+				</div>
+				<!-- <div class="col-xs-7"><h3>pH : {{items.pH}}</h3></div> -->
+			</div>
+		</div>
 	</div>
-<br>
-	<div class="row">
-		<div class="container">
-			<div class="col-xs-4"></div>
-		  <div class="col-xs-1"><img src="icon/humidity.png" width="50px" class="icon"></div>
-		  <div class="col-xs-7">
-		  	<h3>
-		  		<div style="float:left;">Humidity :&nbsp;</div>
-		  		<div id="humidity" style="float:left; color: red" ng-if="items.Humidity >= 70" >{{items.Humidity}}</div>
-		  		<div id="humidity" style="float:left; color: green" ng-if="items.Humidity < 70" >{{items.Humidity}}</div>
-		  	</h3>
-		 	</div>
-		  <!-- <div class="col-xs-7"><h3>Humidity : {{items.Humidity}}</h3></div> -->
-	  </div>
-	</div>
-<br>
-	<div class="row">
-		<div class="container">
-			<div class="col-xs-4"></div>
-		  <div class="col-xs-1"><img src="icon/temperature.png" width="50px" class="icon"></div>
-		   <div class="col-xs-7">
-		  	<h3>
-		  		<div style="float:left;">Temp :&nbsp;</div>
-		  		<div id="temp" style="float:left; color: red" ng-if="items.Temperature >= 29" >{{items.Temperature}}</div>
-		  		<div id="temp" style="float:left; color: green" ng-if="items.Temperature < 29" >{{items.Temperature}}</div>
-		  	</h3>
-		 	</div>
-		  <!-- <div class="col-xs-7"><h3>Temp : {{items.Temperature}}</h3></div> -->
-	  </div>
-	</div>
-<br>
-	<div class="row">
-		<div class="container">
-			<div class="col-xs-4"></div>
-		  <div class="col-xs-1"><img src="icon/EC.png" width="50px" class="icon"></div>
-		  <div class="col-xs-7">
-		  	<h3>
-		  		<div style="float:left;">EC :&nbsp;</div>
-		  		<div id="sensorValue" style="float:left; color: red" ng-if="items.EC < 1" >{{items.EC}}</div>
-		  		<div id="sensorValue" style="float:left; color: red" ng-if="items.EC > 2" >{{items.EC}}</div>
-		  		<div id="sensorValue" style="float:left; color: green" ng-if="items.EC >= 1 && items.EC <= 2">{{items.EC}}</div>
-		  	</h3>
-		 	</div>
-		  <!-- <div class="col-xs-7"><h3>EC : {{items.EC}}</h3></div> -->
-	  </div>
-	</div>
-<br>
-	<div class="row">
-		<div class="container">
-			<div class="col-xs-4"></div>
-		  <div class="col-xs-1"><img src="icon/pH.png" width="50px" class="icon"></div>
-		  <div class="col-xs-7">
-		  	<h3>
-		  		<div style="float:left;">pH :&nbsp;</div>
-		  		<div id="pH" style="float:left; color: red" ng-if="items.pH < 6 " >{{items.pH}}</div>
-		  		<div id="pH" style="float:left; color: red" ng-if="items.pH > 7 " >{{items.pH}}</div>
-		  		<div id="pH" style="float:left; color: green" ng-if="items.pH >= 6 && items.pH <= 7">{{items.pH}}</div>
-		  	</h3>
-		 	</div>
-		  <!-- <div class="col-xs-7"><h3>pH : {{items.pH}}</h3></div> -->
-	  </div>
-	</div>
-</div>
-<hr width="50%">
-<!-- <div class="row">
+	<hr width="50%">
+	<!-- <div class="row">
 	<center>
 		<div class="container">
 			<table>
@@ -480,6 +499,7 @@ console.log("============>",logic);
 	</center>
 </div> -->
 
-<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 </body>
+
 </html>
