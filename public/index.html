@@ -172,6 +172,7 @@ console.log("============>",logic);
 	
 	var netpieData = {}
   microgear.on('message', function(topic,data) {
+		console.log('Message',topic,data)
 		netpieData[topic]= data
 		console.log(netpieData)
     if(data=="ON"){
