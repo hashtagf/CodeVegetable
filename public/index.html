@@ -138,8 +138,7 @@ var mqttSend = function(topic, msg) {
 
 	const ALIAS = "DigitalOUTPUT_HTML_web";     //  ชื่อตัวเอง
 	const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
-	var datenow = new Date(Date.now()).toLocaleDateString();
-	document.getElementById("datenow").innerHTML = datenow;
+
 	function switchPress(logic) {
 		console.log("============>", logic);
 		if (logic == 1) {
@@ -179,6 +178,8 @@ var mqttSend = function(topic, msg) {
 
 	var netpieData = {}
 	microgear.on('message', function (topic, data) {
+		var datenow = new Date(Date.now()).toLocaleDateString();
+		document.getElementById("datenow").innerHTML = datenow;
 		netpieData[topic] = data
 		if (data == "ON") {
 			document.getElementById("Status").innerHTML = "Load is ON.";
