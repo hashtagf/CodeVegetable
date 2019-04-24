@@ -140,7 +140,7 @@ var mqttSend = function(topic, msg) {
 	const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
 
 
-
+	document.getElementById("date").innerHTML = new Date(Date.now()).toLocaleDateString();
 	function switchPress(logic) {
 		console.log("============>", logic);
 		if (logic == 1) {
