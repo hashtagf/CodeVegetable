@@ -48,7 +48,7 @@ String pH; //ตัวแปลเก็บค่าที่ส่งมาจ�
 //char ssid[] = "Angular";
 //char pass[] = "123456789";
 
-char ssid[] = "Apple TV";   //network SSID (name)
+char ssid[] = "APPLE TV";   //network SSID (name)
 char pass[] = "appletv415"; //network password
 
 //char ssid[] = "BankunYa_1"; //network SSID (name)

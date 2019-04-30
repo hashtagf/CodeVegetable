@@ -95,11 +95,11 @@
 		} else if (data == "OFF") {
 			document.getElementById("Status").innerHTML = "Load is OFF.";
 		}
-		if (topic == '/Vegetable001/temperature') {
+		if (topic == '/Vegetable001/Temperature') {
 			document.getElementById("temp").innerHTML = data;
-		} else if (topic == '/Vegetable001/humidity') {
+		} else if (topic == '/Vegetable001/Humidity') { 
 			document.getElementById("humidity").innerHTML = data;
-		} else if (topic == '/Vegetable001/sensorValue') {
+		} else if (topic == '/Vegetable001/EC') {
 			document.getElementById("sensorValue").innerHTML = data;
 		} else if (topic == '/Vegetable001/pH') {
 			document.getElementById("pH").innerHTML = data;
