@@ -136,7 +136,7 @@ angular.module('app', [])
           $scope.totalbtn[0].statusbtn = res.data.statusbtn
         })
         console.log("ledOn")
-        $http.get('/ledOff').then(res => {
+        $http.get('/ledOn').then(res => {
           console.log("---------------------------------OK")
         })
       } else if ($scope.time1 >= '20:11:00 ' && $scope.time1 <= '18:00:00') {
