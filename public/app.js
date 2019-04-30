@@ -69,12 +69,10 @@ angular.module('app', [])
     }, {
       btnnum: 3,
       statusbtn: false
-    },
-    {
+    }, {
       btnnum: 4,
       statusbtn: false
-    }
-    ]
+    }]
 
     $scope.totalbtn = []
     // $scope.pumpSta = ''
@@ -87,6 +85,7 @@ angular.module('app', [])
         $scope.staPump = res.data[1].statusbtn
         $scope.staFog = res.data[2].statusbtn
         $scope.staWater = res.data[3].statusbtn
+
         if ($scope.staPump == true) {
           $scope.pumpSta = 'ON'
           // console.log("chcek")
@@ -132,21 +131,6 @@ angular.module('app', [])
 
       if ($scope.time1 > '18:00:00' || $scope.time1 < '06:00:00') {
         $scope.LEDSta = 'ON'
-        //				$http.get('/ledOn').then(function (response){
-        // console.log(response)
-        //				})
-        // if($scope.staLED === false){
-        // 	$scope.LEDSta = 'OFF'
-        // 	$http.get('/ledOff').then(function (response){
-        // 		// console.log(response)
-        // 	})
-        // }
-        // if($scope.staLED === true){
-        // 	$scope.LEDSta = 'ON'
-        // 	$http.get('/ledOn').then(function (response){
-        // 		// console.log(response)
-        // 	})
-        // }
         $scope.stabtn[0].statusbtn = true
         $http.put('/btn/' + $scope.totalbtn[0]._id, $scope.stabtn[0]).then(res => {
           $scope.totalbtn[0].statusbtn = res.data.statusbtn
@@ -155,19 +139,6 @@ angular.module('app', [])
         console.log("---------------------------------OK")
       } else if ($scope.time1 >= '06:00:00 ' || $scope.time1 <= '18:00:00') {
         $scope.LEDSta = 'OFF'
-        //				$http.get('/ledOff').then(function (response){
-        // console.log(response)
-        //				})
-        // if($scope.staLED === false){
-        // 	$http.get('/ledOff').then(function (response){
-        // 		// console.log(response)
-        // 	})
-        // }
-        // if($scope.staLED === true){
-        // 	$http.get('/ledOn').then(function (response){
-        // 		// console.log(response)
-        // 	})
-        // }
         $scope.stabtn[0].statusbtn = false
         $http.put('/btn/' + $scope.totalbtn[0]._id, $scope.stabtn[0]).then(res => {
           $scope.totalbtn[0].statusbtn = res.data.statusbtn
@@ -176,13 +147,7 @@ angular.module('app', [])
         console.log("---------------------------------OK")
       }
     }//Auto time
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////time auto
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////time
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////control
-
-    // $scope.checkstatus = function(){
 
     if ($scope.staLED === true) {
       $scope.LEDSta = 'ON'
