@@ -236,13 +236,13 @@ void loop()
   ///////////////////////////////////////////////////////////////////////pH
   pH = phValue(); // อ่าน Serial และนำไปเก็บในตัวแปร A
   Serial.print("pH value : ");
-  Serial.println(pH);
+  Serial.println(pH,2);
   ///////////////////////////////////////////////////////////////////////pH
 
   ///////////////////////////////////////////////////////////////////////DHT22
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
-  float f = dht.readTemperature(true);
+  float h = dht.getHumidity();
+  float t = dht.getTemperature();
+  float f = dht.getTemperature(true);
 
   if (isnan(h) || isnan(t) || isnan(f))
   {
@@ -357,9 +357,9 @@ void onMsghandler(char *topic, uint8_t *msg, unsigned int msglen)
   }
   Serial.println();
 
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
-  float f = dht.readTemperature(true);
+  float h = dht.getHumidity();
+  float t = dht.getTemperature();
+  float f = dht.getTemperature(true);
 
   if (isnan(h) || isnan(t) || isnan(f))
   {
