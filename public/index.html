@@ -96,11 +96,11 @@
 			document.getElementById("Status").innerHTML = "Load is OFF.";
 		}
 		if (topic == '/Vegetable001/Temperature') {
-      var dataFloat = parseFloat(data).toFixed(2);
-			document.getElementById("temp").innerHTML = dataFloat;
+      var dataFloat = parseFloat(data);
+			document.getElementById("temp").innerHTML = dataFloat.toFixed(2);
 		} else if (topic == '/Vegetable001/Humidity') { 
-      var dataFloat = parseFloat(data).toFixed(2);
-			document.getElementById("humidity").innerHTML = dataFloat;
+      var dataFloat = parseFloat(data);
+			document.getElementById("humidity").innerHTML = dataFloat.toFixed(2);
 		} else if (topic == '/Vegetable001/EC') {
 			document.getElementById("sensorValue").innerHTML = data;
 		} else if (topic == '/Vegetable001/pH') {
