@@ -41,12 +41,13 @@
 
   <!-- Microgear -->
   <script src="https://cdn.netpie.io/microgear.js"></script>
+  
   <!-- framework Angular -->
-  <!-- <script src="jquery-1.11.3.min.js"></script>
+  <script src="jquery-1.11.3.min.js"></script>
   <script src="mqttws31.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="app.js"></script> -->
+  <script src="app.js"></script>
 </head>
 
 <body class="aqua-gradient text-white">
@@ -78,27 +79,27 @@
     </div>
   </nav>
   <div class="container mt-2">
-    <div class="row border">
-      <div class="col-xs-12 col-sm-12 col-md-8" style="height:89vh;">
+    <div class="row border" style="height:90vh">
+      <div class="col-xs-12 col-sm-12 col-md-8">
         <div class="row" style="height:90%">
           MAIN PICture
         </div>
         <div class="row text-center">
           <div class="col-3">
             <h6>Temp</h6>
-            31.30
+            <div id="temp" >Loading..</div>
           </div>
           <div class="col-3">
             <h6>Humidity</h6>
-            75%
+            <div id="humidity" >Loading..</div>
           </div>
           <div class="col-3">
             <h6>EC</h6>
-            5
+            <div id="EC" >Loading..</div>
           </div>
           <div class="col-3">
             <h6>pH</h6>
-            6.8
+            <div id="pH" >Loading..</div>
           </div>
         </div>
       </div>
@@ -107,8 +108,14 @@
           <h4 class="card-title mt-1 ml-3">Control Smart Farm</h4>
           <div class="ml-5 card-text">
             <div class="custom-control custom-switch py-2">
-              <input type="checkbox" class="custom-control-input" id="Light">
-              <label class="custom-control-label" for="Light">Light</label>
+              <div ng-if="LEDSta === ON">
+                  <input type="checkbox" checked class="custom-control-input" id="Light" ng-click="ledOff()"> 
+                  <label class="custom-control-label" for="Light">Light</label>
+              </div>
+              <div ng-if-else="LEDSta === OFF">
+                  <input type="checkbox" class="custom-control-input" id="Light" ng-click="ledOn()"> 
+                  <label class="custom-control-label" for="Light">Light</label>
+              </div>
             </div>
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="Fog">
@@ -131,3 +138,74 @@
 </body>
 
 </html>
+
+<script>
+
+    const APPID = "Vegetable001";
+    const KEY = "dfhiaN7XLOFf7S3";
+    const SECRET = "EsJgEv08jtXzSbwdKUxTpSYq7";
+  
+    const ALIAS = "DigitalOUTPUT_HTML_web";     //  ชื่อตัวเอง
+    const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
+  
+    function switchPress(logic) {
+      console.log("============>", logic);
+      if (logic == 1) {
+        microgear.chat(thing1, "ON");
+        console.log("On")
+      } else if (logic == 0) {
+        microgear.chat(thing1, "OFF");
+        console.log("Off")
+      }
+    }
+  
+    var microgear = Microgear.create({
+      key: KEY,
+      secret: SECRET,
+      alias: ALIAS
+    });
+  
+    microgear.on('connected', function () {
+      microgear.setAlias(ALIAS);
+      microgear.subscribe("/#");
+      document.getElementById("connected_NETPIE").innerHTML = "Connected to NETPIE"
+      console.log('connect')
+    });
+  
+    microgear.on('present', function (event) {
+      console.log(event);
+    });
+  
+    microgear.on('absent', function (event) {
+      console.log(event);
+    });
+  
+    microgear.resettoken(function (err) {
+      microgear.connect(APPID);
+  
+    });
+  
+    var netpieData = {}
+    microgear.on('message', function (topic, data) {
+      var datenow = new Date(Date.now()).toLocaleDateString();
+      document.getElementById("datenow").innerHTML = datenow;
+      netpieData[topic] = data
+      if (data == "ON") {
+        document.getElementById("Status").innerHTML = "Load is ON.";
+      } else if (data == "OFF") {
+        document.getElementById("Status").innerHTML = "Load is OFF.";
+      }
+      if (topic == '/Vegetable001/Temperature') {
+        var dataFloat = parseFloat(data);
+        document.getElementById("temp").innerHTML = dataFloat.toFixed(2);
+      } else if (topic == '/Vegetable001/Humidity') { 
+        var dataFloat = parseFloat(data);
+        document.getElementById("humidity").innerHTML = dataFloat.toFixed(2);
+      } else if (topic == '/Vegetable001/EC') {
+        document.getElementById("EC").innerHTML = data;
+      } else if (topic == '/Vegetable001/pH') {
+        document.getElementById("pH").innerHTML = data;
+      }
+    });
+  
+  </script>
