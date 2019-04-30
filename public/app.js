@@ -127,7 +127,7 @@ angular.module('app', [])
     $scope.autotime = function () {
       var d = new Date()
       $scope.time1 = d.toLocaleTimeString()
-      // console.log($scope.time1)
+      console.log($scope.time1)
 
       if ($scope.time1 > '18:00:00' || $scope.time1 < '06:00:00') {
         $scope.LEDSta = 'ON'
