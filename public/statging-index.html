@@ -108,11 +108,11 @@
           <h4 class="card-title mt-1 ml-3">Control Smart Farm</h4>
           <div class="ml-5 card-text">
             <div class="custom-control custom-switch py-2">
-              <div ng-if="LEDSta === ON">
+              <div ng-if="LEDSta === 'ON'">
                   <input type="checkbox" checked class="custom-control-input" id="Light" ng-click="ledOff()"> 
                   <label class="custom-control-label" for="Light">Light</label>
               </div>
-              <div ng-if-else="LEDSta === OFF">
+              <div ng-if-else="LEDSta === 'OFF'">
                   <input type="checkbox" class="custom-control-input" id="Light" ng-click="ledOn()"> 
                   <label class="custom-control-label" for="Light">Light</label>
               </div>
