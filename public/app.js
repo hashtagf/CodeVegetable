@@ -129,7 +129,7 @@ angular.module('app', [])
       $scope.time1 = d.toLocaleTimeString()
       console.log($scope.time1)
 
-      if ($scope.time1 > '18:00:00' || $scope.time1 < '06:00:00') {
+      if ($scope.time1 > '18:00:00' || $scope.time1 < '20:05:00') {
         $scope.LEDSta = 'ON'
         $scope.stabtn[0].statusbtn = true
         $http.put('/btn/' + $scope.totalbtn[0]._id, $scope.stabtn[0]).then(res => {
@@ -137,7 +137,7 @@ angular.module('app', [])
         })
         console.log("ledOn")
         console.log("---------------------------------OK")
-      } else if ($scope.time1 >= '06:00:00 ' || $scope.time1 <= '18:00:00') {
+      } else if ($scope.time1 >= '20:05:00 ' || $scope.time1 <= '18:00:00') {
         $scope.LEDSta = 'OFF'
         $scope.stabtn[0].statusbtn = false
         $http.put('/btn/' + $scope.totalbtn[0]._id, $scope.stabtn[0]).then(res => {
