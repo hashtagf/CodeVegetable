@@ -250,6 +250,8 @@ void loop() {
 
   microgear.publish("/Humidity", h);
   microgear.publish("/Temperature", t);
+  microgear.publish("/EC", sensorValue);
+  microgear.publish("/pH", pH);
 
 //    digitalWrite(GR1, HIGH);
 //    delay(5000);
