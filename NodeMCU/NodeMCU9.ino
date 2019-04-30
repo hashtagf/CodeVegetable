@@ -4,8 +4,8 @@
 #include <DHT.h>
 #include <MicroGear.h>
 
-#define fan D3 //พัดลม
-#define pump D4 //ปั๊มน้ำ
+#define fan D4 //พัดลม
+// #define pump D4 //ปั๊มน้ำ
 #define light D0 //หลอดไฟ
 #define ledPin D7 //เทส
 
@@ -83,7 +83,7 @@ void setup() {
   dht.begin();
   
   pinMode(fan, OUTPUT);
-  pinMode(pump, OUTPUT);
+  // pinMode(pump, OUTPUT);
   pinMode(light, OUTPUT);
   
   Serial.println();
