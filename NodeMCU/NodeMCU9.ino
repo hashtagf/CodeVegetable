@@ -234,7 +234,7 @@ void loop()
   ///////////////////////////////////////////////////////////////////////EC
 
   ///////////////////////////////////////////////////////////////////////pH
-  pH = chat.readString(); // อ่าน Serial และนำไปเก็บในตัวแปร A
+  pH = phValue(); // อ่าน Serial และนำไปเก็บในตัวแปร A
   Serial.print("pH value : ");
   Serial.println(pH);
   ///////////////////////////////////////////////////////////////////////pH
@@ -409,6 +409,9 @@ void onConnected(char *attribute, uint8_t *msg, unsigned int msglen)
 
 double phValue()
 {
+  unsigned long int avgValue; //Store the average value of the sensor feedback
+  float b;
+  int buf[10], temp;
   for (int i = 0; i < 10; i++) //Get 10 sample value from the sensor for smooth the value
   {
     buf[i] = analogRead(analogInPin);
@@ -429,7 +432,7 @@ double phValue()
   avgValue = 0;
   for (int i = 2; i < 8; i++) //take the average value of 6 center sample
     avgValue += buf[i];
-  float phValue = (float)avgValue * 5.0 / 1024 / 6; //convert the analog into millivolt
-  phValue = 3.5 * phValue;                          //convert the millivolt into pH value
-  return phValue
+  float ph = (float)avgValue * 5.0 / 1024 / 6; //convert the analog into millivolt
+  ph = 3.5 * ph;                               //convert the millivolt into pH value
+  return ph
 }

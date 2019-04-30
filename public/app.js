@@ -196,7 +196,7 @@ angular.module('app', [])
       })
     }
 
-    // Fog *//// Fog /// Fog
+    // Fog 
     if ($scope.staFog === true) {
       $scope.fogSta = 'ON'
       $http.get('/fogOn').then(function (response) {
