@@ -90,17 +90,17 @@
 		var datenow = new Date(Date.now()).toLocaleDateString();
 		document.getElementById("datenow").innerHTML = datenow;
     netpieData[topic] = data
-    
 		if (data == "ON") {
 			document.getElementById("Status").innerHTML = "Load is ON.";
 		} else if (data == "OFF") {
 			document.getElementById("Status").innerHTML = "Load is OFF.";
 		}
 		if (topic == '/Vegetable001/Temperature') {
-      
-			document.getElementById("temp").innerHTML = parseFloat(data).toFixed(2);
+      var dataFloat = parseFloat(data).toFixed(2);
+			document.getElementById("temp").innerHTML = dataFloat;
 		} else if (topic == '/Vegetable001/Humidity') { 
-			document.getElementById("humidity").innerHTML = parseFloat(data).toFixed(2);
+      var dataFloat = parseFloat(data).toFixed(2);
+			document.getElementById("humidity").innerHTML = dataFloat;
 		} else if (topic == '/Vegetable001/EC') {
 			document.getElementById("sensorValue").innerHTML = data;
 		} else if (topic == '/Vegetable001/pH') {
