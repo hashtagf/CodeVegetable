@@ -115,6 +115,10 @@
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
+
+    if (scope.stasystem == 'AUTO') document.getElementById('auto-manual').checked = true
+    else document.getElementById('auto-manual').checked = false
+
     if (scope.LEDSta == 'ON') document.getElementById('Light').checked = true
     else document.getElementById('Light').checked = false
 
@@ -231,8 +235,10 @@
           <div class="ml-5 card-text">
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="auto-manual" onclick="changeSystem(this)">
-              <label class="custom-control-label text-success" for="auto-manual" ng-if="stasystem === 'Auto'">Automatically-Light</label>
-              <label class="custom-control-label text-danger" for="auto-manual" ng-if="stasystem === 'Manual'">Manaully-Light</label>
+              <label class="custom-control-label text-success" for="auto-manual"
+                ng-if="stasystem === 'Auto'">Automatically-Light</label>
+              <label class="custom-control-label text-danger" for="auto-manual"
+                ng-if="stasystem === 'Manual'">Manaully-Light</label>
             </div>
             <div class="custom-control custom-switch py-2" ng-if="stasystem === 'Manual'">
               <input type="checkbox" class="custom-control-input" id="Light" onclick="changeLight(this)">
