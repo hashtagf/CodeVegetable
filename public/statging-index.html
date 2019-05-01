@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 
 <head>
   <meta charset="UTF-8">
@@ -41,10 +41,8 @@
 
   <!-- Microgear -->
   <script src="https://cdn.netpie.io/microgear.js"></script>
-  
+
   <!-- framework Angular -->
-  <script src="jquery-1.11.3.min.js"></script>
-  <script src="mqttws31.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="app.js"></script>
@@ -59,7 +57,7 @@
 
   const ALIAS = "New_Output";     //  ชื่อตัวเอง
   const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
-  
+
   function switchPress(logic) {
     console.log("============>", logic);
     if (logic == 1) {
@@ -80,7 +78,8 @@
   microgear.on('connected', function () {
     microgear.setAlias(ALIAS);
     microgear.subscribe("/#");
-    console.log('connect')
+    checkStatus()
+    console.log('connect NETPIE')
   });
 
   microgear.on('present', function (event) {
@@ -94,12 +93,12 @@
   microgear.resettoken(function (err) {
     microgear.connect(APPID);
   });
-  
+
   microgear.on('message', function (topic, data) {
     if (topic == '/Vegetable001/Temperature') {
       var dataFloat = parseFloat(data);
       document.getElementById("temp").innerHTML = dataFloat.toFixed(2);
-    } else if (topic == '/Vegetable001/Humidity') { 
+    } else if (topic == '/Vegetable001/Humidity') {
       var dataFloat = parseFloat(data);
       document.getElementById("humidity").innerHTML = dataFloat.toFixed(2);
     } else if (topic == '/Vegetable001/EC') {
@@ -109,13 +108,67 @@
     }
   });
 
+  // init method
+  checkStatus = () => {
+    console.log('get status...')
+
+    var scope = angular.
+      element(document.getElementById('mainApp')).
+      scope();
+    if (scope.LEDSta == 'ON') document.getElementById('Light').checked = true
+    else  document.getElementById('Light').checked = false
+
+    if (scope.fogSta == 'ON') document.getElementById('Fog').checked = true
+    else  document.getElementById('Fog').checked = false
+
+    if (scope.pumpSta == 'ON') document.getElementById('waterPump').checked = true
+    else  document.getElementById('Pump').checked = false
+
+    if (scope.waterSta == 'ON') document.getElementById('WaterFilter').checked = true
+    else  document.getElementById('WaterFilter').checked = false
+
+    console.log('get status success')
+  }
+
+  // method controller
+  changeLight = (e) => {
+    var scope = angular.
+      element(document.getElementById('mainApp')).
+      scope();
+    if (e.checked) scope.ledOn()
+    else scope.ledOff()
+  }
+
+  changeFog = (e) => {
+    var scope = angular.
+      element(document.getElementById('mainApp')).
+      scope();
+    if (e.checked) scope.fogOn()
+    else scope.fogOff()
+  }
+
+  changePump = (e) => {
+    var scope = angular.
+      element(document.getElementById('mainApp')).
+      scope();
+    if (e.checked) scope.pumpOn()
+    else scope.pumpOff()
+  }
+
+  changeWater = (e) => {
+    var scope = angular.
+      element(document.getElementById('mainApp')).
+      scope();
+    if (e.checked) scope.waterOn()
+    else scope.waterOff()
+  }
+
 </script>
 
-<body class="aqua-gradient text-white"  ng-controller="TodoListController">
+<body id="mainApp" class="aqua-gradient text-white" ng-controller="TodoListController">
   <nav class="navbar navbar-expand-lg navbar-light bg-transparent " enable-gradients='true'>
     <a class="navbar-brand text-white" href="/">
-      <img src="#" width="30" height="30" class="d-inline-block align-top"
-        alt="">
+      <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
       Smart Farm Cabinet
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -148,19 +201,19 @@
         <div class="row text-center">
           <div class="col-3">
             <h6>Temp</h6>
-            <div id="temp" >Loading..</div>
+            <div id="temp">Loading..</div>
           </div>
           <div class="col-3">
             <h6>Humidity</h6>
-            <div id="humidity" >Loading..</div>
+            <div id="humidity">Loading..</div>
           </div>
           <div class="col-3">
             <h6>EC</h6>
-            <div id="EC" >Loading..</div>
+            <div id="EC">Loading..</div>
           </div>
           <div class="col-3">
             <h6>pH</h6>
-            <div id="pH" >Loading..</div>
+            <div id="pH">Loading..</div>
           </div>
         </div>
       </div>
@@ -169,25 +222,19 @@
           <h4 class="card-title mt-1 ml-3">Control Smart Farm</h4>
           <div class="ml-5 card-text">
             <div class="custom-control custom-switch py-2">
-              <div ng-if="LEDSta === 'ON'">
-                  <input type="checkbox" checked class="custom-control-input" id="Light" ng-click="ledOff()"> 
-                  <label class="custom-control-label" for="Light">Light</label>
-              </div>
-              <div ng-if-else="LEDSta === 'OFF'">
-                  <input type="checkbox" class="custom-control-input" id="Light" ng-click="ledOn()"> 
-                  <label class="custom-control-label" for="Light">Light</label>
-              </div>
+              <input type="checkbox" class="custom-control-input" id="Light" onclick="changeLight(this)">
+              <label class="custom-control-label" for="Light">Light</label>
             </div>
             <div class="custom-control custom-switch py-2">
-              <input type="checkbox" class="custom-control-input" id="Fog">
+              <input type="checkbox" class="custom-control-input" id="Fog" onclick="changeFog(this)">
               <label class="custom-control-label" for="Fog">Fog</label>
             </div>
             <div class="custom-control custom-switch py-2">
-              <input type="checkbox" class="custom-control-input" id="waterPump">
+              <input type="checkbox" class="custom-control-input" id="waterPump" onclick="changePump(this)">
               <label class="custom-control-label" for="waterPump">Water Pump</label>
             </div>
             <div class="custom-control custom-switch py-2">
-              <input type="checkbox" class="custom-control-input" id="waterFilter">
+              <input type="checkbox" class="custom-control-input" id="waterFilter" onclick="changeWater(this)">
               <label class="custom-control-label" for="waterFilter">Water Filter</label>
             </div>
           </div>
