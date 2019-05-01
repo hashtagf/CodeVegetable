@@ -50,10 +50,71 @@
   <script src="app.js"></script>
 </head>
 
+
+<script>
+
+  const APPID = "Vegetable001";
+  const KEY = "dfhiaN7XLOFf7S3";
+  const SECRET = "EsJgEv08jtXzSbwdKUxTpSYq7";
+
+  const ALIAS = "New_Output";     //  ชื่อตัวเอง
+  const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
+  
+  function switchPress(logic) {
+    console.log("============>", logic);
+    if (logic == 1) {
+      microgear.chat(thing1, "ON");
+      console.log("On")
+    } else if (logic == 0) {
+      microgear.chat(thing1, "OFF");
+      console.log("Off")
+    }
+  }
+
+  var microgear = Microgear.create({
+    key: KEY,
+    secret: SECRET,
+    alias: ALIAS
+  });
+
+  microgear.on('connected', function () {
+    microgear.setAlias(ALIAS);
+    microgear.subscribe("/#");
+    console.log('connect')
+  });
+
+  microgear.on('present', function (event) {
+    console.log(event);
+  });
+
+  microgear.on('absent', function (event) {
+    console.log(event);
+  });
+
+  microgear.resettoken(function (err) {
+    microgear.connect(APPID);
+  });
+  
+  microgear.on('message', function (topic, data) {
+    if (topic == '/Vegetable001/Temperature') {
+      var dataFloat = parseFloat(data);
+      document.getElementById("temp").innerHTML = dataFloat.toFixed(2);
+    } else if (topic == '/Vegetable001/Humidity') { 
+      var dataFloat = parseFloat(data);
+      document.getElementById("humidity").innerHTML = dataFloat.toFixed(2);
+    } else if (topic == '/Vegetable001/EC') {
+      document.getElementById("EC").innerHTML = data;
+    } else if (topic == '/Vegetable001/pH') {
+      document.getElementById("pH").innerHTML = data;
+    }
+  });
+
+</script>
+
 <body class="aqua-gradient text-white"  ng-controller="TodoListController">
   <nav class="navbar navbar-expand-lg navbar-light bg-transparent " enable-gradients='true'>
-    <a class="navbar-brand text-white" href="#">
-      <img src="/docs/4.3/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top"
+    <a class="navbar-brand text-white" href="/">
+      <img src="#" width="30" height="30" class="d-inline-block align-top"
         alt="">
       Smart Farm Cabinet
     </a>
@@ -64,7 +125,7 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item mx-5">
-          <a class="nav-link text-white" href="#">Home</a>
+          <a class="nav-link text-white" href="/">Home</a>
         </li>
         <li class="nav-item mx-5 ">
           <a class="nav-link text-white" href="page/googleSheets.html">Google Sheets</a>
@@ -138,74 +199,3 @@
 </body>
 
 </html>
-
-<script>
-
-    const APPID = "Vegetable001";
-    const KEY = "dfhiaN7XLOFf7S3";
-    const SECRET = "EsJgEv08jtXzSbwdKUxTpSYq7";
-  
-    const ALIAS = "DigitalOUTPUT_HTML_web";     //  ชื่อตัวเอง
-    const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
-  
-    function switchPress(logic) {
-      console.log("============>", logic);
-      if (logic == 1) {
-        microgear.chat(thing1, "ON");
-        console.log("On")
-      } else if (logic == 0) {
-        microgear.chat(thing1, "OFF");
-        console.log("Off")
-      }
-    }
-  
-    var microgear = Microgear.create({
-      key: KEY,
-      secret: SECRET,
-      alias: ALIAS
-    });
-  
-    microgear.on('connected', function () {
-      microgear.setAlias(ALIAS);
-      microgear.subscribe("/#");
-      document.getElementById("connected_NETPIE").innerHTML = "Connected to NETPIE"
-      console.log('connect')
-    });
-  
-    microgear.on('present', function (event) {
-      console.log(event);
-    });
-  
-    microgear.on('absent', function (event) {
-      console.log(event);
-    });
-  
-    microgear.resettoken(function (err) {
-      microgear.connect(APPID);
-  
-    });
-  
-    var netpieData = {}
-    microgear.on('message', function (topic, data) {
-      var datenow = new Date(Date.now()).toLocaleDateString();
-      document.getElementById("datenow").innerHTML = datenow;
-      netpieData[topic] = data
-      if (data == "ON") {
-        document.getElementById("Status").innerHTML = "Load is ON.";
-      } else if (data == "OFF") {
-        document.getElementById("Status").innerHTML = "Load is OFF.";
-      }
-      if (topic == '/Vegetable001/Temperature') {
-        var dataFloat = parseFloat(data);
-        document.getElementById("temp").innerHTML = dataFloat.toFixed(2);
-      } else if (topic == '/Vegetable001/Humidity') { 
-        var dataFloat = parseFloat(data);
-        document.getElementById("humidity").innerHTML = dataFloat.toFixed(2);
-      } else if (topic == '/Vegetable001/EC') {
-        document.getElementById("EC").innerHTML = data;
-      } else if (topic == '/Vegetable001/pH') {
-        document.getElementById("pH").innerHTML = data;
-      }
-    });
-  
-  </script>
