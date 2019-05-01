@@ -125,15 +125,6 @@
       console.log('Manaul')
     }
 
-    if (scope.LEDSta == 'ON') {
-      document.getElementById('Light').checked = true
-      console.log('Light ON')
-    }
-    else {
-      document.getElementById('Light').checked = false
-      console.log('Light OFF')
-    }
-
     if (scope.fogSta == 'ON') {
       document.getElementById('Fog').checked = true
       console.log('Fog ON')
@@ -159,6 +150,15 @@
     else {
       document.getElementById('WaterFilter').checked = false
       console.log('Water OFF')
+    }
+
+    if (scope.LEDSta == 'ON') {
+      document.getElementById('Light').checked = true
+      console.log('Light ON')
+    }
+    else {
+      document.getElementById('Light').checked = false
+      console.log('Light OFF')
     }
 
 
