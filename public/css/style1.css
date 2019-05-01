@@ -39,8 +39,21 @@
     background-color: #f2f2f2;
     padding: 20px;
 }
-
-
+.control {
+    border-radius: 25px!important;
+}
+.imglight {
+    position: absolute;
+    left: 0;
+    max-width: 100%;
+}
+.imgplan {
+    max-width: 544px;
+    max-height: 308px;
+    width: auto;
+    height: auto;
+    margin-top: 100px;
+}
 /*-------------------------------------------------------Switch*/
 /*.holder{
   width:56px;
