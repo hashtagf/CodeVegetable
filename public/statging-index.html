@@ -116,7 +116,7 @@
       element(document.getElementById('mainApp')).
       scope();
 
-    if (scope.stasystem == 'AUTO') document.getElementById('auto-manual').checked = true
+    if (scope.stasystem == 'Auto') document.getElementById('auto-manual').checked = true
     else document.getElementById('auto-manual').checked = false
 
     if (scope.LEDSta == 'ON') document.getElementById('Light').checked = true
@@ -130,6 +130,7 @@
 
     if (scope.waterSta == 'ON') document.getElementById('waterFilter').checked = true
     else document.getElementById('WaterFilter').checked = false
+
 
     console.log('get status success')
   }
