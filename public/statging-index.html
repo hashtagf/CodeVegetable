@@ -78,8 +78,8 @@
   microgear.on('connected', function () {
     microgear.setAlias(ALIAS);
     microgear.subscribe("/#");
-    checkStatus()
     console.log('connect NETPIE')
+    checkStatus()
   });
 
   microgear.on('present', function (event) {
@@ -116,16 +116,16 @@
       element(document.getElementById('mainApp')).
       scope();
     if (scope.LEDSta == 'ON') document.getElementById('Light').checked = true
-    else  document.getElementById('Light').checked = false
+    else document.getElementById('Light').checked = false
 
     if (scope.fogSta == 'ON') document.getElementById('Fog').checked = true
-    else  document.getElementById('Fog').checked = false
+    else document.getElementById('Fog').checked = false
 
     if (scope.pumpSta == 'ON') document.getElementById('waterPump').checked = true
-    else  document.getElementById('Pump').checked = false
+    else document.getElementById('Pump').checked = false
 
-    if (scope.waterSta == 'ON') document.getElementById('WaterFilter').checked = true
-    else  document.getElementById('WaterFilter').checked = false
+    if (scope.waterSta == 'ON') document.getElementById('waterFilter').checked = true
+    else document.getElementById('WaterFilter').checked = false
 
     console.log('get status success')
   }
@@ -161,6 +161,14 @@
       scope();
     if (e.checked) scope.waterOn()
     else scope.waterOff()
+  }
+
+  changeSystem = (e) => {
+    var scope = angular.
+      element(document.getElementById('mainApp')).
+      scope();
+    if (e.checked) scope.auto()
+    else scope.man()
   }
 
 </script>
@@ -220,8 +228,12 @@
       <div class="d-flex flex-column border justify-content-center col-xs-12 col-sm-12 col-md-4">
         <div class="card text-dark">
           <h4 class="card-title mt-1 ml-3">Control Smart Farm</h4>
+          <div class="custom-control custom-switch py-2" ng-if="stasystem === 'Auto'">
+            <input type="checkbox" class="custom-control-input" id="auto-manual" onclick="changeSystem(this)">
+            <label class="custom-control-label" for="auto-manual">Manually - Automatically</label>
+          </div>
           <div class="ml-5 card-text">
-            <div class="custom-control custom-switch py-2">
+            <div class="custom-control custom-switch py-2" ng-if="stasystem === 'Manual'">
               <input type="checkbox" class="custom-control-input" id="Light" onclick="changeLight(this)">
               <label class="custom-control-label" for="Light">Light</label>
             </div>
