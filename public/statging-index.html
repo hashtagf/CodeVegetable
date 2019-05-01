@@ -116,20 +116,50 @@
       element(document.getElementById('mainApp')).
       scope();
 
-    if (scope.stasystem == 'Auto') document.getElementById('auto-manual').checked = true
-    else document.getElementById('auto-manual').checked = false
+    if (scope.stasystem == 'Auto') {
+      document.getElementById('auto-manual').checked = true
+      console.log('Auto')
+    }
+    else {
+      document.getElementById('auto-manual').checked = false
+      console.log('Manaul')
+    }
 
-    if (scope.LEDSta == 'ON') document.getElementById('Light').checked = true
-    else document.getElementById('Light').checked = false
+    if (scope.LEDSta == 'ON') {
+      document.getElementById('Light').checked = true
+      console.log('Light ON')
+    }
+    else {
+      document.getElementById('Light').checked = false
+      console.log('Light OFF')
+    }
 
-    if (scope.fogSta == 'ON') document.getElementById('Fog').checked = true
-    else document.getElementById('Fog').checked = false
+    if (scope.fogSta == 'ON') {
+      document.getElementById('Fog').checked = true
+      console.log('Fog ON')
+    }
+    else {
+      document.getElementById('Fog').checked = false
+      console.log('Fog OFF')
+    }
 
-    if (scope.pumpSta == 'ON') document.getElementById('waterPump').checked = true
-    else document.getElementById('waterPump').checked = false
+    if (scope.pumpSta == 'ON') {
+      document.getElementById('waterPump').checked = true
+      console.log('Pump ON')
+    }
+    else {
+      document.getElementById('waterPump').checked = false
+      console.log('Pump OFF')
+    }
 
-    if (scope.waterSta == 'ON') document.getElementById('waterFilter').checked = true
-    else document.getElementById('WaterFilter').checked = false
+    if (scope.waterSta == 'ON') {
+      document.getElementById('waterFilter').checked = true
+      console.log('Water ON')
+    }
+    else {
+      document.getElementById('WaterFilter').checked = false
+      console.log('Water OFF')
+    }
 
 
     console.log('get status success')
