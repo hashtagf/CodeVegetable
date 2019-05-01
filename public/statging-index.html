@@ -228,12 +228,12 @@
       <div class="d-flex flex-column border justify-content-center col-xs-12 col-sm-12 col-md-4">
         <div class="card text-dark">
           <h4 class="card-title mt-1 ml-3">Control Smart Farm</h4>
-          <div class="custom-control custom-switch py-2" >
-            <input type="checkbox" class="custom-control-input" id="auto-manual" onclick="changeSystem(this)">
-            <label class="custom-control-label" for="auto-manual" ng-if="stasystem === 'Auto'">Automatically</label>
-            <label class="custom-control-label" for="auto-manual" ng-if="stasystem === 'Manual'">Automatically</label>
-          </div>
           <div class="ml-5 card-text">
+            <div class="custom-control custom-switch py-2">
+              <input type="checkbox" class="custom-control-input" id="auto-manual" onclick="changeSystem(this)">
+              <label class="custom-control-label text-danger" for="auto-manual" ng-if="stasystem === 'Auto'">Automatically</label>
+              <label class="custom-control-label text-success" for="auto-manual" ng-if="stasystem === 'Manual'">Manaully</label>
+            </div>
             <div class="custom-control custom-switch py-2" ng-if="stasystem === 'Manual'">
               <input type="checkbox" class="custom-control-input" id="Light" onclick="changeLight(this)">
               <label class="custom-control-label" for="Light">Light</label>
