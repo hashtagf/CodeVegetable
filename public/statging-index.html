@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Smart Farm Cabinet</title>
-  <link href="css/style1.css" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -46,6 +45,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="app.js"></script>
+  <link href="css/style1.css" rel="stylesheet">
+
 </head>
 
 
@@ -154,10 +155,12 @@
 
     if (scope.staLED) {
       document.getElementById('Light').checked = true
+      $("#graphiclight").show();
       console.log('Light ON')
     }
     else {
       document.getElementById('Light').checked = false
+      $("#graphiclight").removeAttr("style").hide();
       console.log('Light OFF')
     }
 
@@ -168,10 +171,13 @@
   // method controller
   changeLight = (e) => {
     var scope = angular.
-      element(document.getElementById('mainApp')).
       scope();
-    if (e.checked) scope.ledOn()
-    else scope.ledOff()
+    if (e.checked) {
+      scope.ledOn()
+    }
+    else {
+      scope.ledOff()
+    }
   }
 
   changeFog = (e) => {
@@ -239,7 +245,7 @@
       <div class="col-xs-12 col-sm-12 col-md-8">
         <div class="row" style="height:60%">
           <img src="icon/plan.png" class="align-top graphic imgplan mx-auto" alt="">
-          <img src="icon/light.png" class="align-top graphic imglight mx-auto" alt="">
+          <img src="icon/light.png" class="align-top graphic imglight mx-auto" id="graphiclight" alt="">
         </div>
         <div class="row text-center">
           <div class="col-lg-3 col-6">
