@@ -171,6 +171,7 @@
   // method controller
   changeLight = (e) => {
     var scope = angular.
+      element(document.getElementById('mainApp')).
       scope();
     if (e.checked) {
       scope.ledOn()
