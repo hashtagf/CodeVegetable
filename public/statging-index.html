@@ -174,9 +174,11 @@
       element(document.getElementById('mainApp')).
       scope();
     if (e.checked) {
+      $("#graphiclight").show();
       scope.ledOn()
     }
     else {
+      $("#graphiclight").removeAttr("style").hide();
       scope.ledOff()
     }
   }
