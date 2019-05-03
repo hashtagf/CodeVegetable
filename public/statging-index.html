@@ -241,13 +241,14 @@
     </div>
   </nav>
   <div class="container mt-2">
-    <div class="row border" style="height:90vh">
+    <div class="row border" style="">
       <div class="col-xs-12 col-sm-12 col-md-8">
-        <div class="row" style="height:60%">
-          <img src="icon/plan.png" class="align-top graphic imgplan mx-auto" alt="">
+        <div class="row py-5" style="height:60%">
+            <img src="icon/plan.png" class="align-top graphic imgplan mx-auto" alt="">
           <img src="icon/light.png" class="align-top graphic imglight mx-auto" id="graphiclight" alt="">
+          
         </div>
-        <div class="row text-center">
+        <div class="row py-5 text-center">
           <div class="col-lg-3 col-6">
             <h6>Temp</h6>
             <div class="h3" id="temp">Loading</div>
@@ -266,32 +267,32 @@
           </div>
         </div>
       </div>
-      <div class="d-flex flex-column border justify-content-center col-xs-12 col-sm-12 col-md-4">
-        <div class="card text-dark control shadow-none">
+      <div class="d-flex flex-column border justify-content-center col-xs-12 col-sm-12 col-md-4 py-3">
+        <div class="card text-dark control shadow-none py-3">
           <h4 class="card-title mt-1 ml-3">Control Smart Farm</h4>
           <div class="ml-5 card-text">
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="auto-manual" onclick="changeSystem(this)">
               <label class="custom-control-label text-success" for="auto-manual"
-                ng-if="stasystem === 'Auto'">Automatically-Light</label>
+                ng-if="stasystem === 'Auto'"><span class="ml-3">Automatically-Light</span></label>
               <label class="custom-control-label text-danger" for="auto-manual"
-                ng-if="stasystem === 'Manual'">Manaully-Light</label>
+                ng-if="stasystem === 'Manual'"><span class="ml-3">Manaully-Light</span></label>
             </div>
             <div class="custom-control custom-switch py-2" ng-if="stasystem === 'Manual'">
               <input type="checkbox" class="custom-control-input" id="Light" onclick="changeLight(this)">
-              <label class="custom-control-label" for="Light">Light</label>
+              <label class="custom-control-label" for="Light"><span class="ml-3">Light</span></label>
             </div>
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="Fog" onclick="changeFog(this)">
-              <label class="custom-control-label" for="Fog">Fog</label>
+              <label class="custom-control-label" for="Fog"><span class="ml-3">Fog</span></label>
             </div>
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="waterPump" onclick="changePump(this)">
-              <label class="custom-control-label" for="waterPump">Water Pump</label>
+              <label class="custom-control-label" for="waterPump"><span class="ml-3">Water Pump</span></label>
             </div>
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="waterFilter" onclick="changeWater(this)">
-              <label class="custom-control-label" for="waterFilter">Water Filter</label>
+              <label class="custom-control-label" for="waterFilter"><span class="ml-3">Water Filter</span></label>
             </div>
           </div>
         </div>

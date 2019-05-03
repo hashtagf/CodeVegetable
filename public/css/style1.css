@@ -1,4 +1,13 @@
+
+/* @media screen and (min-width: 992px) {
+    .imglight {
+        left: 20%;
+    }
+  } */
 /*-------------------------------------------------------Width button*/
+body{
+    height:100vh;
+}
 #button{
     width: 80px;
     height: 60px;
@@ -44,8 +53,8 @@
 }
 .imglight {
     position: absolute;
-    left: 0;
-    max-width: 100%;
+    left: 12%;
+    max-width: 85%;
 }
 .imgplan {
     max-width: 90%;
@@ -72,6 +81,16 @@
     -webkit-transform: translateX(1rem);
     transform: translateX(1rem);
 }
+@media screen and (min-width: 767px) {
+    .imglight {
+        left: 10%;
+    }
+}
+@media screen and (min-width: 992px) {
+    .imglight {
+        left: 20%;
+    }
+  }
 /*-------------------------------------------------------Switch*/
 /*.holder{
   width:56px;
