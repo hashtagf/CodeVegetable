@@ -244,12 +244,19 @@
     </div>
   </nav>
   <div class="container mt-2">
-    <div class="row border" style="">
+    <div class="row" style="">
       <div class="col-xs-12 col-sm-12 col-md-8">
         <div class="row py-5" style="height:60%">
-            <img src="icon/plan.png" class="align-top graphic imgplan mx-auto" alt="">
+          <img src="icon/plan.png" class="align-top graphic imgplan mx-auto" alt="">
           <img src="icon/light.png" class="align-top graphic imglight mx-auto" id="graphiclight" alt="">
-          
+          <div class="waveWater">
+            <div class="waveWrapper waveAnimation">
+              <div class="waveWrapperInner bgMiddle">
+                <div class="wave waveMiddle"
+                  style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png')"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="row py-5 text-center">
           <div class="col-lg-3 col-6">
@@ -270,16 +277,16 @@
           </div>
         </div>
       </div>
-      <div class="d-flex flex-column border justify-content-center col-xs-12 col-sm-12 col-md-4 py-3">
+      <div class="d-flex flex-column justify-content-center col-xs-12 col-sm-12 col-md-4 py-3">
         <div class="card text-dark control shadow-none py-3">
           <h4 class="card-title mt-1 ml-3">Control Smart Farm</h4>
           <div class="ml-5 card-text">
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="auto-manual" onclick="changeSystem(this)">
-              <label class="custom-control-label text-success" for="auto-manual"
-                ng-if="stasystem === 'Auto'"><span class="ml-3">Automatically-Light</span></label>
-              <label class="custom-control-label text-danger" for="auto-manual"
-                ng-if="stasystem === 'Manual'"><span class="ml-3">Manaully-Light</span></label>
+              <label class="custom-control-label text-success" for="auto-manual" ng-if="stasystem === 'Auto'"><span
+                  class="ml-3">Automatically-Light</span></label>
+              <label class="custom-control-label text-danger" for="auto-manual" ng-if="stasystem === 'Manual'"><span
+                  class="ml-3">Manaully-Light</span></label>
             </div>
             <div class="custom-control custom-switch py-2" ng-if="stasystem === 'Manual'">
               <input type="checkbox" class="custom-control-input" id="Light" onclick="changeLight(this)">
