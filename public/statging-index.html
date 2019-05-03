@@ -118,48 +118,48 @@
       scope();
 
     if (scope.stasystem == 'Auto') {
-      document.getElementById('auto-manual').checked = true
+      $('#auto-manual').prop('checked', true)
       console.log('Auto')
     }
     else {
-      document.getElementById('auto-manual').checked = false
+      $('#auto-manual').prop('checked', false)
       console.log('Manaul')
     }
 
     if (scope.staFog) {
-      document.getElementById('Fog').checked = true
+      $('#Fog').prop('checked', true)
       console.log('Fog ON')
     }
     else {
-      document.getElementById('Fog').checked = false
+      $('#Fog').prop('checked', false)
       console.log('Fog OFF')
     }
 
     if (scope.staPump) {
-      document.getElementById('waterPump').checked = true
+      $('#waterPump').prop('checked', true)
       console.log('Pump ON')
     }
     else {
-      document.getElementById('waterPump').checked = false
+      $('#waterPump').prop('checked', false)
       console.log('Pump OFF')
     }
 
     if (scope.staWater) {
-      document.getElementById('waterFilter').checked = true
+      $('#waterFilter').prop('checked', true)
       console.log('Water ON')
     }
     else {
-      document.getElementById('WaterFilter').checked = false
+      $('#waterFilter').prop('checked', false)
       console.log('Water OFF')
     }
 
     if (scope.staLED) {
-      document.getElementById('Light').checked = true
+      $('#Light').prop('checked', true)
       $("#graphiclight").show();
       console.log('Light ON')
     }
     else {
-      document.getElementById('Light').checked = false
+      $('#Fog').prop('checked', false)
       $("#graphiclight").removeAttr("style").hide();
       console.log('Light OFF')
     }
