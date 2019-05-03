@@ -1,38 +1,50 @@
 <!DOCTYPE html>
 <html ng-app="app">
+
 <head>
-	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<title>Smart Farm</title>
-	<link rel="stylesheet" href="../css/style.css">
-	<!-- framework Angular -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="../app.js"></script>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Smart Farm</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- framework Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="../app.js"></script>
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- Moment time -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
 
-		<!-- Moment time -->
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+  <!-- Microgear -->
+  <script src="https://cdn.netpie.io/microgear.js"></script>
 
-	<!-- Microgear -->
-	<script src="https://cdn.netpie.io/microgear.js"></script>
+  <!-- Uploadcare -->
+  <script src="https://ucarecdn.com/libs/widget/2.10.3/uploadcare.full.min.js" charset="utf-8"></script>
 
-	<!-- Uploadcare -->
-	<script src="https://ucarecdn.com/libs/widget/2.10.3/uploadcare.full.min.js" charset="utf-8"></script>
+  <script>
+    UPLOADCARE_LOCALE = "th";
+    UPLOADCARE_PUBLIC_KEY = "4353b3181184265c3b4a";
+  </script>
 
-	<script>
-	  UPLOADCARE_LOCALE = "th";
-	  UPLOADCARE_PUBLIC_KEY = "4353b3181184265c3b4a";
-	 </script>
-
-	<!-- Compiled and minified CSS -->
+  <!-- Compiled and minified CSS -->
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"> -->
   <!-- Compiled and minified JavaScript -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script> -->
@@ -41,104 +53,125 @@
 <script>
 
 </script>
+
 <body ng-controller="TodoListController" class="aqua-gradient text-white">
-<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-<!-- navbar -->
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-	      <a class="navbar-brand" href="../index.html">Smart Farm Cabinet</a>
-	    </div>
-	    <div class="collapse navbar-collapse" id="myNavbar">
-	    <ul class="nav navbar-nav">
-	      <li><a href="../index.html">Home</a></li>
-	      <li><a href="googleSheets.html">Google Sheets</a></li>
-	      <li><a href="tag.html">Status</a></li>
-	      <li class="active"><a href="#">Picture</a></li>
-	    </ul>
-	  </div>
-	</nav>
-<!-- navbar -->
+  <!-- navbar -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">Smart Farm Cabinet</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="googleSheets.html">Google Sheets</a></li>
+          <li><a href="tag.html">Status</a></li>
+          <li class="active"><a href="#">Picture</a></li>
+        </ul>
+      </div>
+  </nav>
+  <!-- navbar -->
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-2 col-sd-2 col-md-offset-2 col-sd-offset-2">
-				<button ng-click="takeCam()" class="btn btn-primary btn-lg active" data-toggle="modal" data-target="#myModal">Take Photo</button>
-			</div>
-			<!-- Modal -->
-				 <div class="modal fade" id="myModal" role="dialog">
-				 	<div class="modal-dialog">
-					      <!-- Modal content-->
-					      	<div class="modal-content">
-					        	<div class="modal-header">
-					          		<button type="button" class="close" data-dismiss="modal">&times;</button>
-					          		<h4 class="modal-title">Take a photo.</h4>
-					        	</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 col-sd-2 col-md-offset-2 col-sd-offset-2">
+        <button ng-click="takeCam()" class="btn btn-primary btn-lg active" data-toggle="modal"
+          data-target="#myModal">Take Photo</button>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Take a photo.</h4>
+            </div>
 
-					        	<div class="modal-body">
-					          		<p>Successful.</p>
-					        	</div>
-					        	<div class="modal-footer">
-					          		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					        	</div>
-					      </div>
-				    	</div>
-				</div>
+            <div class="modal-body">
+              <p>Successful.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-		</div>
-		<br>
+    </div>
+    <br>
 
-		<div class="row">
-			<div class="col-md-8 col-sd-8 col-md-offset-2 col-sd-offset-2">
-				<div class="panel panel-success" style="background-color: #f3ffef;">
-				<div class="panel-heading"><h4><center>Floor 3</center></h4></div>
-				<div class="panel-body"><center>
+    <div class="row">
+      <div class="col-md-8 col-sd-8 col-md-offset-2 col-sd-offset-2">
+        <div class="panel panel-success" style="background-color: #f3ffef;">
+          <div class="panel-heading">
+            <h4>
+              <center>Floor 3</center>
+            </h4>
+          </div>
+          <div class="panel-body">
+            <center>
 
-					<img src=" ../picture/cam2/Floor3.jpg" class="img-responsive" alt="Cinque Terre" width="500px" >
-				</center>
-				</div></div>
-				
-			</div>
-		</div>
+              <img src=" ../picture/cam2/Floor3.jpg" class="img-responsive" alt="Cinque Terre" width="500px">
+            </center>
+          </div>
+        </div>
 
-		<div class="row">
-			<div class="col-md-8 col-sd-8 col-md-offset-2 col-sd-offset-2">
-				<div class="panel panel-info" style="background-color: #f3ffef;">
-				<div class="panel-heading"><h4><center>Floor 2</center></h4></div>
-				<div class="panel-body"><center>
+      </div>
+    </div>
 
-					<img src=" ../picture/cam3/Floor2.jpg" class="img-responsive" alt="Cinque Terre" width="500px" >
-				</center>
-				</div></div>
-				
-			</div>
-		</div>
+    <div class="row">
+      <div class="col-md-8 col-sd-8 col-md-offset-2 col-sd-offset-2">
+        <div class="panel panel-info" style="background-color: #f3ffef;">
+          <div class="panel-heading">
+            <h4>
+              <center>Floor 2</center>
+            </h4>
+          </div>
+          <div class="panel-body">
+            <center>
 
-		<div class="row">
-			<div class="col-md-8 col-sd-8 col-md-offset-2 col-sd-offset-2">
-				<div class="panel panel-warning" style="background-color: #f3ffef;">
-				<div class="panel-heading"><h4><center>Floor 1</center></h4></div>
-				<div class="panel-body"><center>
+              <img src=" ../picture/cam3/Floor2.jpg" class="img-responsive" alt="Cinque Terre" width="500px">
+            </center>
+          </div>
+        </div>
 
-					<img src=" ../picture/cam1/Floor1.jpg" class="img-responsive" alt="Cinque Terre" width="500px" >
-				</center>
-				</div></div>
-				
-			</div>
-		</div>
-	</div>
+      </div>
+    </div>
 
-	
+    <div class="row">
+      <div class="col-md-8 col-sd-8 col-md-offset-2 col-sd-offset-2">
+        <div class="panel panel-warning" style="background-color: #f3ffef;">
+          <div class="panel-heading">
+            <h4>
+              <center>Floor 1</center>
+            </h4>
+          </div>
+          <div class="panel-body">
+            <center>
+
+              <img src=" ../picture/cam1/Floor1.jpg" class="img-responsive" alt="Cinque Terre" width="500px">
+            </center>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 
 
 
-<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+  <!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 </body>
+
 </html>
