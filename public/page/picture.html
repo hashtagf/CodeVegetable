@@ -9,11 +9,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="../app.js"></script>
-
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -58,28 +53,34 @@
   <!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
   <!-- navbar -->
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="../index.html">Smart Farm Cabinet</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="googleSheets.html">Google Sheets</a></li>
-          <li><a href="tag.html">Status</a></li>
-          <li class="active"><a href="#">Picture</a></li>
-        </ul>
-      </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-none pt-3" enable-gradients='true'>
+    <a class="navbar-brand text-white" href="/">
+      <img src="../icon/logo.png" width="auto" height="30" class="d-inline-block align-top ml-2" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav font-weight-bold">
+        <li class="nav-item mx-3">
+          <a class="nav-link text-white" href="/">Home</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link text-white" href="googleSheets.html">Google Sheets</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link text-white" href="tag.html">Status</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link text-white" href="picture.html">Photo</a>
+        </li>
+      </ul>
+    </div>
   </nav>
   <!-- navbar -->
 
-  <div class="container">
+  <div class="container text-dark ">
     <div class="row">
       <div class="col-md-2 col-sd-2 col-md-offset-2 col-sd-offset-2">
         <button ng-click="takeCam()" class="btn btn-primary btn-lg active" data-toggle="modal"
@@ -91,8 +92,8 @@
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">Take a photo.</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <div class="modal-body">
@@ -108,18 +109,18 @@
     </div>
     <br>
 
-    <div class="row">
-      <div class="col-md-8 col-sd-8 col-md-offset-2 col-sd-offset-2">
-        <div class="panel panel-success" style="background-color: #f3ffef;">
+    <div class="row pb-5">
+      <div class="col-12">
+        <div class="panel panel-success">
           <div class="panel-heading">
             <h4>
               <center>Floor 3</center>
             </h4>
           </div>
-          <div class="panel-body">
+          <div class="panel-body zoom">
             <center>
 
-              <img src=" ../picture/cam2/Floor3.jpg" class="img-responsive" alt="Cinque Terre" width="500px">
+              <img src=" ../picture/cam3/Floor3.jpg" class="img-responsive img-fluid z-depth-1" alt="Cinque Terre" width="500px">
             </center>
           </div>
         </div>
@@ -127,18 +128,18 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-8 col-sd-8 col-md-offset-2 col-sd-offset-2">
-        <div class="panel panel-info" style="background-color: #f3ffef;">
+    <div class="row pb-5">
+      <div class="col-12">
+        <div class="panel panel-info">
           <div class="panel-heading">
             <h4>
               <center>Floor 2</center>
             </h4>
           </div>
-          <div class="panel-body">
+          <div class="panel-body zoom">
             <center>
 
-              <img src=" ../picture/cam3/Floor2.jpg" class="img-responsive" alt="Cinque Terre" width="500px">
+              <img src=" ../picture/cam2/Floor2.jpg" class="img-responsive img-fluid z-depth-1" alt="Cinque Terre" width="500px">
             </center>
           </div>
         </div>
@@ -146,18 +147,18 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-8 col-sd-8 col-md-offset-2 col-sd-offset-2">
-        <div class="panel panel-warning" style="background-color: #f3ffef;">
+    <div class="row pb-5">
+      <div class="col-12">
+        <div class="panel panel-warning">
           <div class="panel-heading">
             <h4>
               <center>Floor 1</center>
             </h4>
           </div>
-          <div class="panel-body">
+          <div class="panel-body zoom">
             <center>
 
-              <img src=" ../picture/cam1/Floor1.jpg" class="img-responsive" alt="Cinque Terre" width="500px">
+              <img src=" ../picture/cam1/Floor1.jpg" class="img-responsive img-fluid z-depth-1" alt="Cinque Terre" width="500px">
             </center>
           </div>
         </div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="app">
+
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<title>Smart Farm</title>
@@ -9,15 +10,20 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="../app.js"></script>
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
+	<!-- JQuery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<!-- Moment time -->
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
 
@@ -33,79 +39,86 @@
 <script>
 
 </script>
-<body ng-controller="TodoListController">
-<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-<!-- navbar -->
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-	      <a class="navbar-brand" href="../index.html">Smart Farm Cabinet</a>
-	    </div>
-	    <div class="collapse navbar-collapse" id="myNavbar">
-	    <ul class="nav navbar-nav">
-	      <li><a href="../index.html">Home</a></li>
-	      <li class="active"><a href="#">Google Sheets</a></li>
-	      <li><a href="tag.html">Status</a></li>
-	      <li><a href="picture.html">Picture</a></li>
-	    </ul>
-	  </div>
-	  </div>
+<body ng-controller="TodoListController" class="aqua-gradient text-white">
+	<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-none pt-3 pb-5" enable-gradients='true'>
+		<a class="navbar-brand text-white" href="/">
+			<img src="../icon/logo.png" width="auto" height="30" class="d-inline-block align-top ml-2" alt="">
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+			<ul class="navbar-nav font-weight-bold">
+				<li class="nav-item mx-3">
+					<a class="nav-link text-white" href="/">Home</a>
+				</li>
+				<li class="nav-item mx-3">
+					<a class="nav-link text-white" href="googleSheets.html">Google Sheets</a>
+				</li>
+				<li class="nav-item mx-3">
+					<a class="nav-link text-white" href="tag.html">Status</a>
+				</li>
+				<li class="nav-item mx-3">
+					<a class="nav-link text-white" href="picture.html">Photo</a>
+				</li>
+			</ul>
+		</div>
 	</nav>
-<!-- navbar -->
+	<!-- navbar -->
 
 	<div class="container">
 		<center>
 			<h1>Google Sheets</h1>
-		  <p>Data from Google Sheets</p>
-	  </center>
-	  <hr width="50%">
+			<p>Data from Google Sheets</p>
+		</center>
+		<hr width="50%">
 		<div class="row">
-		  <div class="form-group form-group-sm col-xs-4">
+			<div class="form-group form-group-sm col-xs-4">
 
-		      <input class="form-control" type="text" id="formGroupInputSmall" placeholder="Search" ng-model="datas">
-		    </div>
+				<input class="form-control" type="text" id="formGroupInputSmall" placeholder="Search" ng-model="datas">
+			</div>
 
-		  </div>
+		</div>
 
-	  <br>
+		<br>
 
-	<div class="table-responsive">
+		<div class="table-responsive">
 
-	<table class="table">
-	  <thead>
-	    <tr>
-	      <th class="col-md-2 col-xs-2">Date</th>
-	      <th class="col-md-3 col-xs-3">Temp</th>
-	      <th class="col-md-3 col-xs-3">Humidity</th>
-	      <th class="col-md-2 col-xs-2">EC</th>
-	      <th class="col-md-2 col-xs-2">pH</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr ng-repeat="show in sheets | filter:datas">
-	      <td>{{show.Date}}</td>
-	      <td>{{show.Temperature}}</td>
-	      <td>{{show.Humidity}}</td>
-	      <td>{{show.EC}}</td>
-	      <td>{{show.pH}}</td>
-	    </tr>
-	  </tbody>
-	</table>
+			<table class="table text-white">
+				<thead>
+					<tr>
+						<th class="col-md-2 col-xs-2">Date</th>
+						<th class="col-md-3 col-xs-3">Temp</th>
+						<th class="col-md-3 col-xs-3">Humidity</th>
+						<th class="col-md-2 col-xs-2">EC</th>
+						<th class="col-md-2 col-xs-2">pH</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="show in sheets | filter:datas">
+						<td>{{show.Date}}</td>
+						<td>{{show.Temperature}}</td>
+						<td>{{show.Humidity}}</td>
+						<td>{{show.EC}}</td>
+						<td>{{show.pH}}</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
 
 	</div>
 
-	</div>
 
 
+	<hr width="50%">
 
-<hr width="50%">
-
-<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- body////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 </body>
+
 </html>
