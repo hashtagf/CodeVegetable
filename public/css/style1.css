@@ -1,4 +1,13 @@
+
+/* @media screen and (min-width: 992px) {
+    .imglight {
+        left: 20%;
+    }
+  } */
 /*-------------------------------------------------------Width button*/
+body{
+    height:100vh;
+}
 #button{
     width: 80px;
     height: 60px;
@@ -39,8 +48,49 @@
     background-color: #f2f2f2;
     padding: 20px;
 }
-
-
+.control {
+    border-radius: 25px!important;
+}
+.imglight {
+    position: absolute;
+    left: 12%;
+    max-width: 85%;
+}
+.imgplan {
+    max-width: 90%;
+    /* max-width: 544px; */
+    max-height: 308px;
+    width: auto;
+    height: auto;
+    margin-top: 100px;
+}
+.custom-switch .custom-control-label::before {
+    width: 2.25rem;
+}
+.custom-control-label::before {
+    height: 1.25rem;
+    background-color: #e3e3e3;
+    border: none;
+}
+.custom-switch .custom-control-label::after {
+    background-color: #ffffff;
+    width: calc(1.25rem - 4px);
+    height: calc(1.25rem - 4px);
+}
+.custom-switch .custom-control-input:checked~.custom-control-label::after {
+    -webkit-transform: translateX(1rem);
+    transform: translateX(1rem);
+}
+@media screen and (min-width: 767px) {
+    .imglight {
+        left: 10%;
+    }
+}
+@media screen and (min-width: 992px) {
+    .imglight {
+        left: 20%;
+    }
+  }
 /*-------------------------------------------------------Switch*/
 /*.holder{
   width:56px;
