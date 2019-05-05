@@ -320,7 +320,7 @@ angular.module('app', [])
         $scope.totalbtn[2].statusbtn = res.data.statusbtn
       })
       setTimeout(function () {
-        fogOff()
+        $scope.fogOff()
       }, 10000)
     }
 
