@@ -150,10 +150,12 @@
 
     if (scope.staWater) {
       $('#waterFilter').prop('checked', true)
+      $("#graphicwater").show();
       console.log('Water ON')
     }
     else {
       $('#waterFilter').prop('checked', false)
+      $("#graphicwater").removeAttr("style").hide();
       console.log('Water OFF')
     }
 
@@ -163,7 +165,7 @@
       console.log('Light ON')
     }
     else {
-      $('#Fog').prop('checked', false)
+      $('#Light').prop('checked', false)
       $("#graphiclight").removeAttr("style").hide();
       console.log('Light OFF')
     }
@@ -194,6 +196,11 @@
     if (e.checked) {
       $("#graphicfog").show();
       scope.fogOn()
+      setTimeout(()=> {
+        scope.fogOff()
+        $('#Fog').prop('checked', false)
+        $("#graphicfog").removeAttr("style").hide();
+      }, 10000)
     }
     else {
       $("#graphicfog").removeAttr("style").hide();
