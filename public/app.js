@@ -319,9 +319,6 @@ angular.module('app', [])
       $http.put('/btn/' + $scope.totalbtn[2]._id, $scope.stabtn[2]).then(res => {
         $scope.totalbtn[2].statusbtn = res.data.statusbtn
       })
-      setTimeout(()=> {
-        $scope.fogOff()
-      }, 10000)
     }
 
     $scope.fogOff = function () {
