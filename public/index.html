@@ -139,21 +139,21 @@
 
     if (scope.staPump) {
       $('#waterPump').prop('checked', true)
+      $("#graphiclight").show();
       console.log('Pump ON')
     }
     else {
       $('#waterPump').prop('checked', false)
+      $("#graphiclight").removeAttr("style").hide();
       console.log('Pump OFF')
     }
 
     if (scope.staWater) {
       $('#waterFilter').prop('checked', true)
-      $("#graphiclight").show();
       console.log('Water ON')
     }
     else {
       $('#waterFilter').prop('checked', false)
-      $("#graphiclight").removeAttr("style").hide();
       console.log('Water OFF')
     }
 
@@ -207,11 +207,11 @@
       scope();
     if (e.checked) {
       scope.pumpOn()
-      $("#graphiclight").show();
+      $("#graphicwater").show();
     }
     else {
     scope.pumpOff()
-    $("#graphiclight").removeAttr("style").hide();
+    $("#graphicwater").removeAttr("style").hide();
     }
   }
 
