@@ -197,9 +197,9 @@
       $("#graphicfog").show();
       scope.fogOn()
       setTimeout(()=> {
-        scope.fogOff()
         $('#Fog').prop('checked', false)
         $("#graphicfog").removeAttr("style").hide();
+        scope.fogOff()
       }, 10000)
     }
     else {
