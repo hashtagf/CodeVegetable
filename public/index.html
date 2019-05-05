@@ -114,10 +114,11 @@
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
-    console.log(scope.staFog,scope.fogSta)
-    console.log(scope.staLED,scope.LEDSta)
-    console.log(scope.staPump,scope.pumpSta)
-    console.log(scope.statWater,scope.waterSta)
+    console.log('system',scope.stasystem)  
+    console.log('Fog',scope.staFog,scope.fogSta)
+    console.log('LEd',scope.staLED,scope.LEDSta)
+    console.log('Pump',scope.staPump,scope.pumpSta)
+    console.log('Water',scope.statWater,scope.waterSta)
     if (scope.stasystem == 'Auto') {
       $('#auto-manual').prop('checked', true)
       console.log('Auto')
