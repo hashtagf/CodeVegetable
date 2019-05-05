@@ -114,11 +114,11 @@
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
-    console.log('system',scope.stasystem)  
-    console.log('Fog',scope.staFog,scope.fogSta)
-    console.log('LEd',scope.staLED,scope.LEDSta)
-    console.log('Pump',scope.staPump,scope.pumpSta)
-    console.log('Water',scope.statWater,scope.waterSta)
+    // console.log('system',scope.stasystem)  
+    // console.log('Fog',scope.staFog,scope.fogSta)
+    // console.log('LEd',scope.staLED,scope.LEDSta)
+    // console.log('Pump',scope.staPump,scope.pumpSta)
+    // console.log('Water',scope.statWater,scope.waterSta)
     if (scope.stasystem == 'Auto') {
       $('#auto-manual').prop('checked', true)
       console.log('Auto')
@@ -141,23 +141,21 @@
 
     if (scope.staPump) {
       $('#waterPump').prop('checked', true)
-      $("#graphiclight").show();
+      $("#graphicwater").show();
       console.log('Pump ON')
     }
     else {
       $('#waterPump').prop('checked', false)
-      $("#graphiclight").removeAttr("style").hide();
+      $("#graphicwater").removeAttr("style").hide();
       console.log('Pump OFF')
     }
 
     if (scope.staWater) {
       $('#waterFilter').prop('checked', true)
-      $("#graphicwater").show();
       console.log('Water ON')
     }
     else {
       $('#waterFilter').prop('checked', false)
-      $("#graphicwater").removeAttr("style").hide();
       console.log('Water OFF')
     }
 
