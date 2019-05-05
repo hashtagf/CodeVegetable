@@ -51,7 +51,6 @@
 
 
 <script>
-
   const APPID = "Vegetable001";
   const KEY = "dfhiaN7XLOFf7S3";
   const SECRET = "EsJgEv08jtXzSbwdKUxTpSYq7";
@@ -80,7 +79,6 @@
     microgear.setAlias(ALIAS);
     microgear.subscribe("/#");
     console.log('connect NETPIE')
-    checkStatus()
   });
 
   microgear.on('present', function (event) {
@@ -116,7 +114,11 @@
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
-    console.log(scope.staFog,scope.fogSta)
+    console.log('system',scope.stasystem)  
+    console.log('Fog',scope.staFog,scope.fogSta)
+    console.log('LEd',scope.staLED,scope.LEDSta)
+    console.log('Pump',scope.staPump,scope.pumpSta)
+    console.log('Water',scope.statWater,scope.waterSta)
     if (scope.stasystem == 'Auto') {
       $('#auto-manual').prop('checked', true)
       console.log('Auto')
@@ -238,6 +240,8 @@
     if (e.checked) scope.auto()
     else scope.man()
   }
+
+  checkStatus()
 
 </script>
 
