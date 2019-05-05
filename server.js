@@ -21,7 +21,7 @@ var evensys = mongoose.model('btnsys', thingSchema4)
 
 var app = express()
 
-mongoose.connect('mongodb://localhost:27017/farm')
+//mongoose.connect('mongodb://localhost:27017/farm')
 
 app.use(bodyParser.json())
 app.use(express.static('public'))

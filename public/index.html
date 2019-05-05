@@ -128,12 +128,12 @@
 
     if (scope.staFog) {
       $('#Fog').prop('checked', true)
-      //$("#graphicfog").show();
+      $("#graphicfog").show();
       console.log('Fog ON')
     }
     else {
       $('#Fog').prop('checked', false)
-      //$("#graphicfog").removeAttr("style").hide();
+      $("#graphicfog").removeAttr("style").hide();
       console.log('Fog OFF')
     }
 
@@ -148,10 +148,12 @@
 
     if (scope.staWater) {
       $('#waterFilter').prop('checked', true)
+      $("#graphiclight").show();
       console.log('Water ON')
     }
     else {
       $('#waterFilter').prop('checked', false)
+      $("#graphiclight").removeAttr("style").hide();
       console.log('Water OFF')
     }
 
@@ -203,8 +205,14 @@
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
-    if (e.checked) scope.pumpOn()
-    else scope.pumpOff()
+    if (e.checked) {
+      scope.pumpOn()
+      $("#graphiclight").show();
+    }
+    else {
+    scope.pumpOff()
+    $("#graphiclight").removeAttr("style").hide();
+    }
   }
 
   changeWater = (e) => {
@@ -253,7 +261,7 @@
   </nav>
   <div class="container mt-2">
     <div class="row">
-      <div class="waveWater">
+      <div class="waveWater"  id="graphicwater">
         <div class="waveWrapper waveAnimation">
           <div class="waveWrapperInner bgMiddle">
             <div class="wave waveMiddle"
