@@ -128,10 +128,12 @@
 
     if (scope.staFog) {
       $('#Fog').prop('checked', true)
+      //$("#graphicfog").show();
       console.log('Fog ON')
     }
     else {
       $('#Fog').prop('checked', false)
+      //$("#graphicfog").removeAttr("style").hide();
       console.log('Fog OFF')
     }
 
@@ -187,8 +189,14 @@
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
-    if (e.checked) scope.fogOn()
-    else scope.fogOff()
+    if (e.checked) {
+      $("#graphicfog").show();
+      scope.fogOn()
+    }
+    else {
+      $("#graphicfog").removeAttr("style").hide();
+      scope.fogOff()
+    }
   }
 
   changePump = (e) => {
@@ -244,19 +252,27 @@
     </div>
   </nav>
   <div class="container mt-2">
-    <div class="row" style="">
-      <div class="col-xs-12 col-sm-12 col-md-8">
-        <div class="row py-5" style="height:60%">
-          <img src="icon/plan.png" class="align-top graphic imgplan mx-auto" alt="">
-          <img src="icon/light.png" class="align-top graphic imglight mx-auto" id="graphiclight" alt="">
-          <div class="waveWater">
-            <div class="waveWrapper waveAnimation">
-              <div class="waveWrapperInner bgMiddle">
-                <div class="wave waveMiddle"
-                  style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png')"></div>
-              </div>
+    <div class="row">
+      <div class="waveWater">
+        <div class="waveWrapper waveAnimation">
+          <div class="waveWrapperInner bgMiddle">
+            <div class="wave waveMiddle"
+              style="background-image: url('https://drive.google.com/uc?id=1cGRfxYIszQiB7KMZ8U4ZYJ1RoZE3lpPi')"></div>
+          </div>
+        </div>
+      </div>
+      <div class="waveWater" id="graphicfog">
+          <div class="fogWrapper waveAnimation">
+            <div class="fogWrapperInner bgTop">
+              <div class="fog waveTop"
+                style="background-image: url('https://drive.google.com/uc?id=1cI4QvFwA0OsaRNovAOxGR4s2zNr_-_KT')"></div>
             </div>
           </div>
+        </div>
+      <div class="col-xs-12 col-sm-12 col-md-8">
+        <div class="row py-3">
+          <img src="icon/plan.png" class="align-top graphic imgplan mx-auto" alt="">
+          <img src="icon/light.png" class="align-top graphic imglight mx-auto" id="graphiclight" alt="">
         </div>
         <div class="row py-5 text-center">
           <div class="col-lg-3 col-6">
@@ -307,6 +323,8 @@
           </div>
         </div>
       </div>
+
+      <!--  -->
     </div>
   </div>
 

@@ -7,6 +7,10 @@
 /*-------------------------------------------------------Width button*/
 body{
     height:100vh;
+    /* overflow: scroll; */
+}
+.navbar {
+    z-index:3;
 }
 #button{
     width: 80px;
@@ -50,6 +54,7 @@ body{
 }
 .control {
     border-radius: 25px!important;
+    z-index: 3;
 }
 .imglight {
     position: absolute;
@@ -92,7 +97,7 @@ body{
     }
   }
 
-  @keyframes move_wave {
+@keyframes move_wave {
     0% {
         transform: translateX(0) translateZ(0) scaleY(1)
     }
@@ -102,6 +107,34 @@ body{
     100% {
         transform: translateX(-50%) translateZ(0) scaleY(1)
     }
+}
+
+@keyframes move_fog {
+    0% {
+        transform: translateX(-100%) translateZ(0) scaleY(1)
+    }
+    50% {
+        transform: translateX(0%) translateZ(0) scaleY(1)
+    }
+    100% {
+        transform: translateX(100%) translateZ(0) scaleY(1)
+    }
+}
+.fogWrapper {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+.fogWrapperInner {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    /*background-image: linear-gradient(to top, #000000 20%, #27273c 80%); */
 }
 .waveWrapper {
     overflow: hidden;
@@ -117,15 +150,14 @@ body{
     width: 100%;
     overflow: hidden;
     height: 100%;
-    bottom: -1px;
     /*background-image: linear-gradient(to top, #000000 20%, #27273c 80%); */
 }
 .bgTop {
-    z-index: 15;
-    opacity: 0.0;
+    z-index: 2;
+    opacity: 0.7;
 }
 .bgMiddle {
-    z-index: 10;
+    z-index: -15;
     opacity: 0.75;
 }
 .bgBottom {
@@ -140,14 +172,24 @@ body{
     background-position: 0 bottom;
     transform-origin: center bottom;
 }
+.fog {
+    position: absolute;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat no-repeat;
+    background-position: 0 bottom;
+    transform-origin: center bottom;
+}
 .waveTop {
-    background-size: 0% 0px;
+    background-size: 100% 100%;
 }
 .waveAnimation .waveTop {
-  animation: move-wave 3s;
+  /* animation: move-wave 3s;
    -webkit-animation: move-wave 3s;
    -webkit-animation-delay: 1s;
-   animation-delay: 1s;
+   animation-delay: 1s; */
+   animation: move_fog 20s linear infinite;
 }
 .waveMiddle {
     background-size: 50% 120px;
@@ -161,241 +203,3 @@ body{
 .waveAnimation .waveBottom {
     animation: move_wave 15s linear infinite;
 }
-/*-------------------------------------------------------Switch*/
-/*.holder{
-  width:56px;
-  margin:20px auto;
-  position:relative;
-  z-index:10;
-}
-
-.check-ios{
-  visibility: hidden;
-}
-
-.holder span{
-  background-color:#e2e2e2;
-  display:block;
-  height:30px;
-  width:54px;
-  position: absolute;
-  top:0;
-  left:0;
-  z-index:1;  
-
-  -webkit-border-radius: 15px;
-     -moz-border-radius: 15px;
-          border-radius: 15px;
-
-  -webkit-transition: all .5s ease;
-     -moz-transition: all .5s ease;
-       -o-transition: all .5s ease;
-      -ms-transition: all .5s ease;
-          transition: all .5s ease; 
-}
-
-.holder span:after {
-  background-color:#fff;
-  content:'';
-  display:block;
-  height:28px;
-  width:52px; 
-  position: absolute;
-  top:1px;
-  left:1px;
-  z-index:2;
-
-  -webkit-border-radius: 14px;
-     -moz-border-radius: 14px;
-          border-radius: 14px;
-
-  -webkit-transition: all .4s ease;
-     -moz-transition: all .4s ease;
-       -o-transition: all .4s ease;
-      -ms-transition: all .4s ease;
-          transition: all .4s ease;
-}
-
-
-.holder label{
-  background: #fff;
-  cursor: pointer;
-  display: block;
-  height: 28px;
-  width: 28px;
-  position: absolute;
-  top:1px;
-  left:1px;
-  z-index:3;  
-
-  -webkit-border-radius: 50%;
-     -moz-border-radius: 50%;
-          border-radius: 50%;
-
-  -webkit-transition: all .4s ease;
-     -moz-transition: all .4s ease;
-       -o-transition: all .4s ease;
-      -ms-transition: all .4s ease;
-          transition: all .4s ease;
-
-  -webkit-box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.3);
-     -moz-box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.3);
-      box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.3);
-}
-
-.check-ios:checked ~ span {
-  background-color:#4FD065;
-}
-
-.check-ios:checked ~ span:after {
-  height:0;
-  width:0;
-  left:50%;
-  top:50%;
-}
-
-.check-ios:checked + label {
-  left: 25px;
-}*/
-
-/*-------------------------------------------------------Switch*/
-/*.holder2{
-  width:56px;
-  margin:20px auto;
-  position:relative;
-  z-index:10;
-}
-
-.check-ios2{
-  visibility: hidden;
-}
-
-.holder2 span{
-  background-color:#e2e2e2;
-  display:block;
-  height:30px;
-  width:54px;
-  position: absolute;
-  top:0;
-  left:0;
-  z-index:1;  
-
-  -webkit-border-radius: 15px;
-     -moz-border-radius: 15px;
-          border-radius: 15px;
-
-  -webkit-transition: all .5s ease;
-     -moz-transition: all .5s ease;
-       -o-transition: all .5s ease;
-      -ms-transition: all .5s ease;
-          transition: all .5s ease; 
-}
-
-.holder2 span:after {
-  background-color:#fff;
-  content:'';
-  display:block;
-  height:28px;
-  width:52px; 
-  position: absolute;
-  top:1px;
-  left:1px;
-  z-index:2;
-
-  -webkit-border-radius: 14px;
-     -moz-border-radius: 14px;
-          border-radius: 14px;
-
-  -webkit-transition: all .4s ease;
-     -moz-transition: all .4s ease;
-       -o-transition: all .4s ease;
-      -ms-transition: all .4s ease;
-          transition: all .4s ease;
-}
-
-
-.holder2 label{
-  background: #fff;
-  cursor: pointer;
-  display: block;
-  height: 28px;
-  width: 28px;
-  position: absolute;
-  top:1px;
-  left:1px;
-  z-index:3;  
-
-  -webkit-border-radius: 50%;
-     -moz-border-radius: 50%;
-          border-radius: 50%;
-
-  -webkit-transition: all .4s ease;
-     -moz-transition: all .4s ease;
-       -o-transition: all .4s ease;
-      -ms-transition: all .4s ease;
-          transition: all .4s ease;
-
-  -webkit-box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.3);
-     -moz-box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.3);
-      box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.3);
-}
-
-.check-ios2:checked ~ span {
-  background-color:#4FD065;
-}
-
-.check-ios2:checked ~ span:after {
-  height:0;
-  width:0;
-  left:50%;
-  top:50%;
-}
-
-.check-ios2:checked + label {
-  left: 25px;
-}*/
-
-/*-------------------------------------------------------tag*/
-/*div label input {margin-right: 100px;}
-
-.cat{
-  margin: 4px;
-  background-color: #104068;
-  border-radius: 4px;
-  border: 1px solid #fff;
-  overflow: hidden;
-  float: left;
-}
-
-.cat label {
-  float: left; line-height: 3.0em;
-  width: 5.0em; height: 3.0em;
-}
-
-.cat label span {
-  text-align: center;
-  padding: 3px 0;
-  display: block;
-}
-
-.cat label input {
-  position: absolute;
-  display: none;
-  color: #fff !important;
-}
-
-.cat label input + span{color: #fff;}
-
-.cat input:checked + span {
-    color: #ffffff;
-    text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
-}
-
-.action input:checked + span{background-color: #F75A1B;}
-.comedy input:checked + span{background-color: #1BB8F7;}
-.crime input:checked + span{background-color: #D9D65D;}
-.history input:checked + span{background-color: #82D44E;}
-.reality input:checked + span{background-color: #F3A4CF;}
-.news input:checked + span{background-color: #8C1B1B;}
-.scifi input:checked + span{background-color: #AC9BD1;}
-.sports input:checked + span{background-color: #214A09;}*/
