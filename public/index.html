@@ -241,7 +241,9 @@
     else scope.man()
   }
 
-  checkStatus()
+  setInterval( () => {
+    checkStatus()
+  },2000)
 
 </script>
 
