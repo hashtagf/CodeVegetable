@@ -116,7 +116,7 @@
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
-
+    console.log(scope.staFog,scope.fogSta)
     if (scope.stasystem == 'Auto') {
       $('#auto-manual').prop('checked', true)
       console.log('Auto')
@@ -197,7 +197,8 @@
       $("#graphicfog").show();
       scope.fogOn()
       setTimeout(()=> {
-        $('#Fog').prop('checked', false)
+        $('#Fog').prop('checked', false);
+        $('#Fog').checkboxradio("refresh");
         $("#graphicfog").removeAttr("style").hide();
         scope.fogOff()
       }, 10000)
