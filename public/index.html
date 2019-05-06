@@ -371,7 +371,11 @@
             </div>
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="Fog" onclick="changeFog(this)">
-              <label class="custom-control-label" for="Fog"><span class="ml-3">Fog ({{timeCount}})</span></label>
+              <label class="custom-control-label" for="Fog">
+                <span class="ml-3">Fog 
+                  <span ng-if="staFog">({{timeCount}}s)</span>
+                </span>
+              </label>
             </div>
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="waterPump" onclick="changePump(this)">
