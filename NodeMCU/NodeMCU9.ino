@@ -434,5 +434,5 @@ double phValue()
     avgValue += buf[i];
   float ph = (float)avgValue * 5.0 / 1024 / 6; //convert the analog into millivolt
   ph = 3.5 * ph;                               //convert the millivolt into pH value
-  return ph
+  return ph/2;
 }
