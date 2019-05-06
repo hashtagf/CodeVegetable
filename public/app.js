@@ -58,7 +58,7 @@ angular.module('app', [])
           $scope.totalsys[0].stasys = res.data.stasys
         })
         console.log("Auto")
-      }
+      }x
 
       $scope.man = function () {
         $scope.sys[0].sysbtn = 'Manual'
