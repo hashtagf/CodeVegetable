@@ -149,7 +149,7 @@ void loop()
   delay(1000);
 
   int cb = udp.parsePacket();
-  if (!cb)
+  if (cb)
   {
     Serial.println();
     Serial.println("no packet yet");
@@ -204,15 +204,9 @@ void loop()
     minute = (epoch % 3600) / 60;
     second = (epoch % 60);
 
-    //    Serial.print("House : ");
-    //    Serial.println(house);
-    //    Serial.print("Minute : ");
-    //    Serial.println(minute);
-
   } //end else
   // wait ten seconds before asking for the time again
   Serial.println();
-  ///////////////////////////////////////////////////////////////////////NTP
 
   ///////////////////////////////////////////////////////////////////////EC
   // read the analog in value:
@@ -221,7 +215,7 @@ void loop()
   outputValue = map(sensorValue, 0, 1023, 0, 5000);
   // change the analog out value:
   analogWrite(analogOutPin, outputValue);
-
+  sensorValue = sensorValue/100;
   // print the results to the serial monitor:
   Serial.print("EC value = ");
   Serial.print(sensorValue);
@@ -269,12 +263,12 @@ void loop()
   //    delay(5000);
   //    digitalWrite(GR1, LOW);
   //    delay(5000);
-  if (t >= 27.00 || h <= 80.00)
+  if (t >= 28.00 || h <= 80.00)
   {
     digitalWrite(fan, LOW);
     Serial.println("Status fan : ON");
   }
-  else if (t < 27.00 || h > 80.00)
+  else if (t < 28.00 || h > 80.00)
   {
     digitalWrite(fan, HIGH);
     Serial.println("Status fan : OFF");
@@ -434,5 +428,5 @@ double phValue()
     avgValue += buf[i];
   float ph = (float)avgValue * 5.0 / 1024 / 6; //convert the analog into millivolt
   ph = 3.5 * ph;                               //convert the millivolt into pH value
-  return ph
+  return ph/2;
 }
