@@ -346,11 +346,11 @@
               <input type="checkbox" class="custom-control-input" id="Light" onclick="changeLight(this)">
               <label class="custom-control-label" for="Light"><span class="ml-3">Light</span></label>
             </div>
-            <div class="form-row" ng-if="stasystem === 'Auto'">
+            <div class="form-row mt-2" ng-if="stasystem === 'Auto'">
               <!-- Grid column -->
               <div class="col col-12 col-lg-6">
                 <!-- Material input -->
-                <div class="md-form mt-0">
+                <div class="md-form">
                     <input type="time" id="timeStart" class="form-control" mdbInput onchange="changeTimeStart()" ng-model="timeStart">
                     <label for="input">Start time</label>
                 </div>
@@ -358,7 +358,7 @@
               <!-- Grid column -->
               <div class="col col-12 col-lg-6">
                 <!-- Material input -->
-                <div class="md-form mt-0">
+                <div class="md-form"
                     <input type="time" id="timeEnd" class="form-control" mdbInput onclick="changeTimeEnd()" ng-model="timeEnd">
                     <label for="input">End time</label>
                 </div>
