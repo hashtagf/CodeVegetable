@@ -145,7 +145,6 @@ angular.module('app', [])
       $scope.time1 = d.toLocaleTimeString('it-IT')
       let timeStartStr = $scope.timeStart.toLocaleTimeString('it-IT')
       let timeEndStr = $scope.timeEnd.toLocaleTimeString('it-IT')
-      console.log($scope.time1, timeStartStr )
       if ($scope.time1 > timeStartStr && $scope.time1 < timeEndStr) {
         $scope.LEDSta = 'ON'
         $scope.stabtn[0].statusbtn = true
