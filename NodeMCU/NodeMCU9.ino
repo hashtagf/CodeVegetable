@@ -23,7 +23,7 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 const char WEBSITE[] = "api.pushingbox.com"; //pushingbox API server
-const String devid = "vC72A27011256BCC";     //device ID from Pushingbox
+const String devid = "vFDC6B88A22D3229";     //device ID from Pushingbox
 
 const int analogInPin = A0;  //Analog EC input pin
 const int analogOutPin = D8; //Analog EC output pin
@@ -269,12 +269,12 @@ void loop()
   //    delay(5000);
   //    digitalWrite(GR1, LOW);
   //    delay(5000);
-  if (t >= 27.00 || h >= 70.00)
+  if (t >= 27.00 || h <= 80.00)
   {
     digitalWrite(fan, LOW);
     Serial.println("Status fan : ON");
   }
-  else if (t < 27.00 || h < 70.00)
+  else if (t < 27.00 || h > 80.00)
   {
     digitalWrite(fan, HIGH);
     Serial.println("Status fan : OFF");

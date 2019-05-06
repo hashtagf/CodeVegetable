@@ -7,6 +7,8 @@ angular.module('app', [])
     $scope.sheets = []
     $scope.status = 44
 
+    $scope.timeStart = new Date(1970, 0, 1, 05, 00, 0);
+    $scope.timeEnd = new Date(1970, 0, 1, 20, 35, 0);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Data Googlesheets
     //https://sheetsu.com/apis/v1.0/5eac309ffcdc
     //https://sheetsu.com/apis/v1.0/b7e3ea00dedb
@@ -127,9 +129,10 @@ angular.module('app', [])
     $scope.autotime = function () {
       var d = new Date()
       $scope.time1 = d.toLocaleTimeString()
-      console.log($scope.time1)
-
-      if ($scope.time1 > '05:00:00' && $scope.time1 < '20:35:00') {
+      let timeStartStr = $scope.timeStart.toLocaleTimeString()
+      let timeEndStr = $scope.timeEnd.toLocaleTimeString()
+      console.log($scope.time1, timeStartStr )
+      if ($scope.time1 > timeStartStr && $scope.time1 < timeEndStr) {
         $scope.LEDSta = 'ON'
         $scope.stabtn[0].statusbtn = true
         $http.put('/btn/' + $scope.totalbtn[0]._id, $scope.stabtn[0]).then(res => {
@@ -139,7 +142,7 @@ angular.module('app', [])
         $http.get('/ledOn').then(res => {
           console.log("---------------------------------OK")
         })
-      } else if ($scope.time1 >= '20:35:00 ' || $scope.time1 <= '05:00:00') {
+      } else {
         $scope.LEDSta = 'OFF'
         $scope.stabtn[0].statusbtn = false
         $http.put('/btn/' + $scope.totalbtn[0]._id, $scope.stabtn[0]).then(res => {
