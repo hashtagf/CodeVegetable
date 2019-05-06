@@ -7,8 +7,8 @@ angular.module('app', [])
     $scope.sheets = []
     $scope.status = 44
 
-    $scope.timeStart = new Date(1970, 0, 1, 05, 00, 0);
-    $scope.timeEnd = new Date(1970, 0, 1, 20, 35, 0);
+    //$scope.timeStart = new Date(1970, 0, 1, 05, 00, 0);
+    //$scope.timeEnd = new Date(1970, 0, 1, 20, 35, 0);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Data Googlesheets
     //https://sheetsu.com/apis/v1.0/5eac309ffcdc
     //https://sheetsu.com/apis/v1.0/b7e3ea00dedb
