@@ -101,7 +101,7 @@
       var dataFloat = parseFloat(data);
       document.getElementById("humidity").innerHTML = dataFloat.toFixed(2);
     } else if (topic == '/Vegetable001/EC') {
-      document.getElementById("EC").innerHTML = data/100;
+      document.getElementById("EC").innerHTML = data;
     } else if (topic == '/Vegetable001/pH') {
       document.getElementById("pH").innerHTML = data;
     }

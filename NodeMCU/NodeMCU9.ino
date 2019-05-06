@@ -149,7 +149,7 @@ void loop()
   delay(1000);
 
   int cb = udp.parsePacket();
-  if (!cb)
+  if (cb)
   {
     Serial.println();
     Serial.println("no packet yet");
@@ -204,15 +204,9 @@ void loop()
     minute = (epoch % 3600) / 60;
     second = (epoch % 60);
 
-    //    Serial.print("House : ");
-    //    Serial.println(house);
-    //    Serial.print("Minute : ");
-    //    Serial.println(minute);
-
   } //end else
   // wait ten seconds before asking for the time again
   Serial.println();
-  ///////////////////////////////////////////////////////////////////////NTP
 
   ///////////////////////////////////////////////////////////////////////EC
   // read the analog in value:
@@ -224,7 +218,7 @@ void loop()
 
   // print the results to the serial monitor:
   Serial.print("EC value = ");
-  Serial.print(sensorValue);
+  Serial.print(outputValue);
   //  Serial.print("\t output = ");
   //  Serial.println(analogRead(1)* 5.00 / 1024, 2);
 
