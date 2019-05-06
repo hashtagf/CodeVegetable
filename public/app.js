@@ -142,7 +142,7 @@ angular.module('app', [])
         $http.get('/ledOn').then(res => {
           console.log("---------------------------------OK")
         })
-      } else if ($scope.time1 >= timeEndStr || $scope.time1 <= timeStartStr) {
+      } else {
         $scope.LEDSta = 'OFF'
         $scope.stabtn[0].statusbtn = false
         $http.put('/btn/' + $scope.totalbtn[0]._id, $scope.stabtn[0]).then(res => {
