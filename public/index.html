@@ -197,11 +197,15 @@
       $("#graphicfog").show();
       scope.fogOn()
       setTimeout(() => {
+        scope.timeCount = 60
         $('#Fog').prop('checked', false);
         // $('#Fog').checkboxradio("refresh");
         $("#graphicfog").removeAttr("style").hide();
         scope.fogOff()
       }, 60000)
+      setInterval(()=> {
+        scope.timeCount--;
+      },1000)
     }
     else {
       $("#graphicfog").removeAttr("style").hide();
@@ -367,7 +371,7 @@
             </div>
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="Fog" onclick="changeFog(this)">
-              <label class="custom-control-label" for="Fog"><span class="ml-3">Fog</span></label>
+              <label class="custom-control-label" for="Fog"><span class="ml-3">Fog ({{timeCount}})</span></label>
             </div>
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="waterPump" onclick="changePump(this)">
