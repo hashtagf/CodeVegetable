@@ -6,7 +6,7 @@ angular.module('app', [])
     $scope.item = ''
     $scope.sheets = []
     $scope.status = 44
-
+    $scope.timeCount = 60
     //$scope.timeStart = new Date(1970, 0, 1, 05, 00, 0);
     //$scope.timeEnd = new Date(1970, 0, 1, 20, 35, 0);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Data Googlesheets
