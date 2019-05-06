@@ -36,8 +36,8 @@ angular.module('app', [])
         $http.get('/setsys').then(res => {
           $scope.totalsys = res.data
           $scope.stasystem = $scope.totalsys[0].sysbtn
-          $scope.timeStart = $scope.totalsys[0].sysTimeStart
-          $scope.timeEnd = $scope.totalsys[0].sysTimeEnd
+          $scope.timeStart = new Date($scope.totalsys[0].sysTimeStart)
+          $scope.timeEnd = new Date($scope.totalsys[0].sysTimeEnd)
           console.log("getsys",$scope.timeEnd,$scope.totalsys[0].sysTimeEnd)
         })
       }
@@ -143,8 +143,8 @@ angular.module('app', [])
     $scope.autotime = function () {
       var d = new Date()
       $scope.time1 = d.toLocaleTimeString()
-      let timeStartStr = new Date($scope.timeStart).toLocaleTimeString()
-      let timeEndStr = new Date($scope.timeEnd).toLocaleTimeString()
+      let timeStartStr = $scope.timeStart.toLocaleTimeString()
+      let timeEndStr = $scope.timeEnd.toLocaleTimeString()
       console.log($scope.time1, timeStartStr )
       if ($scope.time1 > timeStartStr && $scope.time1 < timeEndStr) {
         $scope.LEDSta = 'ON'
