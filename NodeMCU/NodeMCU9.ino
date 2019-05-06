@@ -263,12 +263,12 @@ void loop()
   //    delay(5000);
   //    digitalWrite(GR1, LOW);
   //    delay(5000);
-  if (t >= 27.00 || h <= 80.00)
+  if (t >= 28.00 || h <= 80.00)
   {
     digitalWrite(fan, LOW);
     Serial.println("Status fan : ON");
   }
-  else if (t < 27.00 || h > 80.00)
+  else if (t < 28.00 || h > 80.00)
   {
     digitalWrite(fan, HIGH);
     Serial.println("Status fan : OFF");
