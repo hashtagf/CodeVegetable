@@ -197,13 +197,14 @@
       $("#graphicfog").show();
       scope.fogOn()
       setTimeout(() => {
+        clearInterval(timeCountDown);
         scope.timeCount = 60
         $('#Fog').prop('checked', false);
         // $('#Fog').checkboxradio("refresh");
         $("#graphicfog").removeAttr("style").hide();
         scope.fogOff()
       }, 60000)
-      setInterval(()=> {
+      var timeCountDown = setInterval(()=> {
         scope.timeCount--;
       },1000)
     }
@@ -373,7 +374,7 @@
               <input type="checkbox" class="custom-control-input" id="Fog" onclick="changeFog(this)">
               <label class="custom-control-label" for="Fog">
                 <span class="ml-3">Fog 
-                  <span ng-if="staFog">({{timeCount}}s)</span>
+                  <span ng-if="staFog">({{timeCount}}s){{staFog}}</span>
                 </span>
               </label>
             </div>
