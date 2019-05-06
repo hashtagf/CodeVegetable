@@ -19,6 +19,7 @@ var Schema4 = mongoose.Schema
 var thingSchema4 = new Schema4({}, { strict: false })
 var evensys = mongoose.model('btnsys', thingSchema4)
 
+
 var app = express()
 
 mongoose.connect('mongodb://localhost:27017/farm')
@@ -210,13 +211,14 @@ app.get('/setsys', function (req, res) {
 app.put('/setsys/:id', function (req, res) {
   evensys.findOneAndUpdate(
     { _id: req.params.id },
-    { $set: { btnsys: req.body.btnsys, sysbtn: req.body.sysbtn, stasys: req.body.stasys } },
+    { $set: { btnsys: req.body.btnsys, sysbtn: req.body.sysbtn, stasys: req.body.stasys, sysTimeStart:req.body.sysTimeStart, sysTimeEnd:req.body.sysTimeEnd } },
     { new: true })
     .exec(function (err, done) {
       if (err) console.log(err)
       res.send(done)
     })
 })
+
 //////////////////////////////////////////////////////////////////////////////////////btn
 
 app.listen(3000)

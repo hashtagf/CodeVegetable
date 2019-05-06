@@ -246,6 +246,7 @@
       scope();
       let timeAr = $('#timeStart').val().split(":")
       scope.timeStart = new Date(1970, 0, 1, timeAr[0], timeAr[1], 0);
+      scope.autoTime()
   }
   changeTimeEnd = () => {
     var scope = angular.
@@ -253,6 +254,7 @@
       scope();
       let timeAr = $('#timeEnd').val().split(":")
       scope.timeEnd = new Date(1970, 0, 1, timeAr[0], timeAr[1], 0);
+      scope.autoTime()
   }
   setInterval( () => {
     checkStatus()
