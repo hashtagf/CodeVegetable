@@ -215,10 +215,10 @@ void loop()
   outputValue = map(sensorValue, 0, 1023, 0, 5000);
   // change the analog out value:
   analogWrite(analogOutPin, outputValue);
-
+  sensorValue = sensorValue/100;
   // print the results to the serial monitor:
   Serial.print("EC value = ");
-  Serial.print(outputValue);
+  Serial.print(sensorValue);
   //  Serial.print("\t output = ");
   //  Serial.println(analogRead(1)* 5.00 / 1024, 2);
 
