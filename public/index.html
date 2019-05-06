@@ -128,6 +128,16 @@
     else {
       $('#auto-manual').prop('checked', false)
       console.log('Manual')
+      if (scope.staLED) {
+        $('#Light').prop('checked', true)
+        $("#graphiclight").show();
+        console.log('Light ON')
+      }
+      else {
+        $('#Light').prop('checked', false)
+        $("#graphiclight").removeAttr("style").hide();
+        console.log('Light OFF')
+      }
     }
 
     if (scope.staFog) {
@@ -161,18 +171,6 @@
       console.log('Water OFF')
     }
 
-    if (scope.staLED) {
-      $('#Light').prop('checked', true)
-      $("#graphiclight").show();
-      console.log('Light ON')
-    }
-    else {
-      $('#Light').prop('checked', false)
-      $("#graphiclight").removeAttr("style").hide();
-      console.log('Light OFF')
-    }
-
-
     console.log('get status success')
   }
 
@@ -198,7 +196,7 @@
     if (e.checked) {
       $("#graphicfog").show();
       scope.fogOn()
-      setTimeout(()=> {
+      setTimeout(() => {
         $('#Fog').prop('checked', false);
         // $('#Fog').checkboxradio("refresh");
         $("#graphicfog").removeAttr("style").hide();
@@ -220,8 +218,8 @@
       $("#graphicwater").show();
     }
     else {
-    scope.pumpOff()
-    $("#graphicwater").removeAttr("style").hide();
+      scope.pumpOff()
+      $("#graphicwater").removeAttr("style").hide();
     }
   }
 
@@ -244,21 +242,21 @@
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
-      let timeAr = $('#timeStart').val().split(":")
-      scope.timeStart = new Date(1970, 0, 1, timeAr[0], timeAr[1], 0);
-      scope.autoTime()
+    let timeAr = $('#timeStart').val().split(":")
+    scope.timeStart = new Date(1970, 0, 1, timeAr[0], timeAr[1], 0);
+    scope.autoTime()
   }
   changeTimeEnd = () => {
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
-      let timeAr = $('#timeEnd').val().split(":")
-      scope.timeEnd = new Date(1970, 0, 1, timeAr[0], timeAr[1], 0);
-      scope.autoTime()
+    let timeAr = $('#timeEnd').val().split(":")
+    scope.timeEnd = new Date(1970, 0, 1, timeAr[0], timeAr[1], 0);
+    scope.autoTime()
   }
-  setInterval( () => {
+  setInterval(() => {
     checkStatus()
-  },2000)
+  }, 2000)
 
 </script>
 
@@ -290,7 +288,7 @@
   </nav>
   <div class="container mt-2">
     <div class="row">
-      <div class="waveWater"  id="graphicwater">
+      <div class="waveWater" id="graphicwater">
         <div class="waveWrapper waveAnimation">
           <div class="waveWrapperInner bgMiddle">
             <div class="wave waveMiddle"
@@ -299,13 +297,13 @@
         </div>
       </div>
       <div class="waveWater" id="graphicfog">
-          <div class="fogWrapper waveAnimation">
-            <div class="fogWrapperInner bgTop">
-              <div class="fog waveTop"
-                style="background-image: url('https://drive.google.com/uc?id=1cI4QvFwA0OsaRNovAOxGR4s2zNr_-_KT')"></div>
-            </div>
+        <div class="fogWrapper waveAnimation">
+          <div class="fogWrapperInner bgTop">
+            <div class="fog waveTop"
+              style="background-image: url('https://drive.google.com/uc?id=1cI4QvFwA0OsaRNovAOxGR4s2zNr_-_KT')"></div>
           </div>
         </div>
+      </div>
       <div class="col-xs-12 col-sm-12 col-md-8">
         <div class="row py-3">
           <img src="icon/plan.png" class="align-top graphic imgplan mx-auto" alt="">
@@ -351,16 +349,18 @@
               <div class="col col-12 col-lg-6">
                 <!-- Material input -->
                 <div class="md-form">
-                    <input type="time" id="timeStart" class="form-control" mdbInput onchange="changeTimeStart()" ng-model="timeStart">
-                    <label for="input">Start time</label>
+                  <input type="time" id="timeStart" class="form-control" mdbInput onchange="changeTimeStart()"
+                    ng-model="timeStart">
+                  <label for="input">Start time</label>
                 </div>
               </div>
               <!-- Grid column -->
               <div class="col col-12 col-lg-6">
                 <!-- Material input -->
                 <div class="md-form">
-                    <input type="time" id="timeEnd" class="form-control" mdbInput onclick="changeTimeEnd()" ng-model="timeEnd">
-                    <label for="input">End time</label>
+                  <input type="time" id="timeEnd" class="form-control" mdbInput onclick="changeTimeEnd()"
+                    ng-model="timeEnd">
+                  <label for="input">End time</label>
                 </div>
               </div>
               <!-- Grid column -->
