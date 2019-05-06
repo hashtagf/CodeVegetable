@@ -36,19 +36,21 @@ angular.module('app', [])
         $http.get('/setsys').then(res => {
           $scope.totalsys = res.data
           $scope.stasystem = $scope.totalsys[0].sysbtn
-          /* $scope.timeStart = $scope.totalsys[0].sysTimeStart
-          $scope.timeEnd = $scope.totalsys[0].sysTimeEnd */
+          $scope.timeStart = $scope.totalsys[0].sysTimeStart
+          $scope.timeEnd = $scope.totalsys[0].sysTimeEnd
+          console.log("getsys",$scope.timeEnd,$scope.totalsys[0].sysTimeEnd)
         })
       }
       getsys()
       $scope.autoTime = function () {
         // $http.post('/setsys', $scope.sys[0]).then(function (response){})
-        /* $scope.sys[0].sysTimeStart = $scope.timeStart
-        $scope.sys[0].sysTimeEnd = $scope.timeEnd */
+        $scope.sys[0].sysTimeStart = $scope.timeStart
+        $scope.sys[0].sysTimeEnd = $scope.timeEnd
         $http.put('/setsys/' + $scope.totalsys[0]._id, $scope.sys[0]).then(res => {
           $scope.totalsys[0].sysTimeStart = res.data.sysTimeStart
+          $scope.totalsys[0].sysTimeEnd = res.data.sysTimeEnd
         })
-        console.log("AutoTime")
+        console.log("AutoTime",$scope.sys[0].sysTimeStart)
       }
       $scope.auto = function () {
         $scope.sys[0].sysbtn = 'Auto'
