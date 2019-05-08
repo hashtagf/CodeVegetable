@@ -203,3 +203,21 @@ body{
 .waveAnimation .waveBottom {
     animation: move_wave 15s linear infinite;
 }
+#demoCanvas {
+    width: 100%;
+}
+
+.tray {
+    /* transform: rotateX(-50deg); */
+}
+.tray div {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    border:1px solid black;
+    /* height: 150px;
+    width: 150px; */
+}
+.vegImg:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}

@@ -778,6 +778,78 @@ angular.module('app', [])
 
       getdatahole()
 
+      $scope.hole = function (id,vegNum) {//////////////////////////////////////////////////hole1
+        console.log("OK Hole ------->1")
+
+        if ($scope.totaldatahole[id].statushole === true) {
+          console.log("hole 1 put")
+          if (veg1 == "1") {
+            $scope.datahole[id].nameveg = $scope.vegetable[0].namev
+            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
+            $scope.datahole[id].statushole = true
+            $http.put('/hole/' + $scope.totaldatahole[id]._id, $scope.datahole[id]).then(res => {
+              console.log("sent hole 1 veg 1 update")
+              $scope.totaldatahole[0].statushole = res.data.status
+            })
+          } else if (veg1 == "2") {
+            $scope.datahole[id].nameveg = $scope.vegetable[1].namev
+            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
+            $scope.datahole[id].statushole = true
+            $http.put('/hole/' + $scope.totaldatahole[id]._id, $scope.datahole[id]).then(res => {
+              console.log("sent hole 1 veg 2 update")
+              $scope.totaldatahole[id].statushole = res.data.status
+            })
+          } else if (veg1 == "3") {
+            $scope.datahole[id].nameveg = $scope.vegetable[2].namev
+            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
+            $scope.datahole[id].statushole = true
+            $http.put('/hole/' + $scope.totaldatahole[id]._id, $scope.datahole[id]).then(res => {
+              console.log("sent hole 1 veg 3 update")
+              $scope.totaldatahole[id].statushole = res.data.status
+            })
+          } else if (veg1 == "4") {
+            $scope.datahole[id].nameveg = $scope.vegetable[3].namev
+            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
+            $scope.datahole[id].statushole = true
+            $http.put('/hole/' + $scope.totaldatahole[id]._id, $scope.datahole[id]).then(res => {
+              console.log("sent hole 1 veg 4 update")
+              $scope.totaldatahole[id].statushole = res.data.status
+            })
+          }//else
+        } else if ($scope.datahole[id].statushole === false) {
+          console.log("hole 1 post")
+          if (veg1 == "1") {
+            $scope.datahole[id].nameveg = $scope.vegetable[0].namev
+            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
+            $scope.datahole[id].statushole = true
+            $http.post('/hole', $scope.datahole[id]).then(function (response) {
+              console.log("sent hole 1 veg 1")
+            })
+          } else if (veg1 == "2") {
+            $scope.datahole[id].nameveg = $scope.vegetable[1].namev
+            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
+            $scope.datahole[id].statushole = true
+            $http.post('/hole', $scope.datahole[id]).then(function (response) {
+              console.log("sent hole 1 veg 2")
+            })
+          } else if (veg1 == "3") {
+            $scope.datahole[id].nameveg = $scope.vegetable[2].namev
+            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
+            $scope.datahole[id].statushole = true
+            $http.post('/hole', $scope.datahole[id]).then(function (response) {
+              console.log("sent hole 1 veg 3")
+            })
+          } else if (veg1 == "4") {
+            $scope.datahole[id].nameveg = $scope.vegetable[3].namev
+            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
+            $scope.datahole[id].statushole = true
+            $http.post('/hole', $scope.datahole[id]).then(function (response) {
+              console.log("sent hole 1 veg 4")
+            })
+          }//else
+        }
+      }//function hole1
+
       $scope.hole1 = function (veg1) {//////////////////////////////////////////////////hole1
         console.log("OK Hole ------->1")
 
