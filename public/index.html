@@ -266,6 +266,7 @@
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
+    console.log(scope.timeFog, '>>', timeFog)
     let timeFog = $('#timeFog').val()
     scope.timeFog = timeFog;
     scope.autoTime()
@@ -376,7 +377,7 @@
               </div>
               <div class="col col-12 col-lg-6">
                 <div class="md-form">
-                  <input mdbInput type="text" id="timeFog" class="form-control" onclick="changeTimeFog()"
+                  <input mdbInput type="text" name="timeFog" id="timeFog" class="form-control" onclick="changeTimeFog()"
                     ng-model="timeFog">
                   <label for="timeFog">On Every time of Fog (minutes)</label>
                 </div>
