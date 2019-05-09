@@ -491,11 +491,15 @@ angular.module('app', [])
 
       $scope.daysDiffFunc = function (d1) {
         var d2 = new Date();
-        var timeDiff = d2.getTime() - new Date(d1).getTime();
-        var DaysDiff = 35 - (timeDiff / (1000 * 3600 * 24));
-        var HoursDiff = 24 - (DaysDiff - Math.floor(DaysDiff))/(1000*3600)
-        var MinsDiff = 60 - (HoursDiff - Math.floor(HoursDiff))/(1000*60)
+        let end = new Date(d1).getTime() + 1000 * 3600 * 24 * 35;
+        var timeDiff = end - d2.getTime()
+        var DaysDiff = timeDiff / (1000 * 3600 * 24);
+        var HoursDiff = (timeDiff - Math.floor(DaysDiff)* (1000 * 3600 * 24))/(1000*3600)
+        var MinsDiff = (timeDiff - Math.floor(HoursDiff)*(1000*3600) - Math.floor(DaysDiff)* (1000 * 3600 * 24))/(1000*60)
         return {"days": Math.floor(DaysDiff), "hours": Math.floor(HoursDiff), "mins": Math.floor(MinsDiff)}
+      }
+      $scope.setClasses = function (flag) {
+        return 'hole' + (flag)?'':' empty' 
       }
       var curt = $scope.totalHole.findIndex(i => i.hole === hole)
 

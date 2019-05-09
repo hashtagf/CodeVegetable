@@ -62,6 +62,7 @@
 						// reset background of potential drop target when the draggable element leaves it
 						if (event.target.className == "hole") {
 							event.target.style.background = "";
+							//dragon = null
 						}
 					}, false);
 					changeFloor = (e) => {
@@ -70,6 +71,7 @@
 							scope();
 							scope.floor = e.id.split(' ')[1]
 					}
+					
 				</script>
 	</head>
 	<body id="mainApp" ng-controller="TodoListController" class="aqua-gradient text-white">
@@ -114,7 +116,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-3 tray" ng-repeat="i in [0, 1, 2, 3]">
-								<div ng-attr-class="hole {{(totaldatahole[i*3+floor*12].statushole)'':'empty'}}" ng-attr-id="{{i*3+floor*12}}">
+								<div class="hole" ng-attr-id="{{i*3+floor*12}}">
 									<div ng-if="totaldatahole[i*3+floor*12].statushole">
 										<img src="../icon/cos.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='cos'">
 										<img src="../icon/lettuce.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='lettuce'">
@@ -165,7 +167,7 @@
 									</div>
 										
 									</div>
-								<div class="hole" ng-attr-id="{{2+i*3+floor*12}}">
+								<div  class="hole" ng-attr-id="{{2+i*3+floor*12}}">
 										<div ng-if="totaldatahole[2+i*3+floor*12].statushole">
 											<img src="../icon/cos.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='cos'">
 											<img src="../icon/lettuce.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='lettuce'">
