@@ -70,6 +70,7 @@
 							element(document.getElementById('mainApp')).
 							scope();
 							scope.floor = e.id.split(' ')[1]
+							$('#'+e.id).addClass("btn-warning");
 					}
 					
 				</script>
@@ -77,7 +78,7 @@
 	<body id="mainApp" ng-controller="TodoListController" class="aqua-gradient text-white">
 		
 		<!-- navbar -->
-		<!-- <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-none pt-3 pb-5" enable-gradients='true'>
+		<nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-none pt-3 pb-5" enable-gradients='true'>
 			<a class="navbar-brand text-white" href="/">
 				<img src="../icon/logo.png" width="auto" height="30" class="d-inline-block align-top ml-2" alt="">
 			</a>
@@ -101,94 +102,90 @@
 					</li>
 				</ul>
 			</div>
-		</nav> -->
+		</nav>
 			<div class="container-fluid">
-				<div class="col-3">
-					<img src="../icon/seed.png" alt="">
-					<div>
-						<img src="../icon/cos.png" class="vegImg" draggable="true" id="cos">
-						<img src="../icon/lettuce.png" class="vegImg" draggable="true" id="lettuce">
-						<img src="../icon/greenoak.png" class="vegImg" draggable="true" id="greenoak">
-						<img src="../icon/redoak.png" class="vegImg" draggable="true" id="redoak">
+					<div class="row">
+				<div class="col-2 text-center">
+					<img src="../icon/seed.png" class="seedMenuIcon">
+					<div class="menuVeg">
+						<img src="../icon/cos.png" class="vegImg" draggable="true" id="cos">คอส<br>
+						<img src="../icon/lettuce.png" class="vegImg" draggable="true" id="lettuce"> ผักกาด<br>
+						<img src="../icon/greenoak.png" class="vegImg" draggable="true" id="greenoak"> กรีนโอ๊ค<br>
+						<img src="../icon/redoak.png" class="vegImg" draggable="true" id="redoak">เรดโอ๊ค<br>
 					</div>
 				</div>
 				<div class="col-8">
 					<div class="container">
-						<div class="row">
-							<div class="col-3 tray" ng-repeat="i in [0, 1, 2, 3]">
+						<div class="row tray">
+							<div class="col-3" ng-repeat="i in [0, 1, 2, 3]">
 								<div class="hole" ng-attr-id="{{i*3+floor*12}}">
 									<div ng-if="totaldatahole[i*3+floor*12].statushole">
-										<img src="../icon/cos.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='cos'">
-										<img src="../icon/lettuce.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='lettuce'">
-										<img src="../icon/greenoak.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='greenoak'">
-										<img src="../icon/redoak.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='redoak'">
-										<!-- <button ng-click="tree(1)" class="btn btn-primary btn-sm" id="buttonhole"
-																ng-if="calday1 < 0">
-																Hole 1<br>Add</button>
-															<button ng-click="tree(1)" class="btn btn-success btn-sm" id="buttonhole"
-																ng-if="calday1 >= 0 && calday1 <= 10">
-																Hole 1<br>{{calday1}} Day<br>Reset</button>
-															<button ng-click="tree(1)" class="btn btn-warning btn-sm" id="buttonhole"
-																ng-if="calday1 >= 11 && calday1 <= 19">
-																Hole 1<br>{{calday1}} Day<br>Reset</button>
-															<button ng-click="tree(1)" class="btn btn-danger btn-sm" id="buttonhole"
-																ng-if="calday1 >= 20">
-																Hole 1<br>{{calday1}} Days<br>Left</button> -->
-										<span><b>{{totaldatahole[i*3+floor*12].nameveg}}</b>
-											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days}}days
-											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).hours}}hours
-											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).mins}}mins
+										<span ng-if="daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days >= 0 
+											&& daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days <= 10">
+											<img src="../icon/cos.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='cos'">
+											<img src="../icon/lettuce.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='lettuce'">
+											<img src="../icon/greenoak.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='greenoak'">
+											<img src="../icon/redoak.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='redoak'">
+										</span>
+										<span ng-if="daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days >= 11 
+											&& daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days <= 19">
+											<img src="../icon/baby2.png">
+										</span>
+										<span ng-if="daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days>=20">
+												<img src="../icon/seeding1.png" width="100px">
+										</span>
+								
+										<span class="tooltiptext"><b>{{totaldatahole[i*3+floor*12].nameveg}}</b><br>
+											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days}} days<br>
+											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).hours}} hours
+											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).mins}} mins
 										</span>
 									</div>
 								</div>
 								<div class="hole" ng-attr-id="{{1+i*3+floor*12}}">
 									<div ng-if="totaldatahole[1+i*3+floor*12].statushole">
-										<img src="../icon/cos.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='cos'">
-										<img src="../icon/lettuce.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='lettuce'">
-										<img src="../icon/greenoak.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='greenoak'">
-										<img src="../icon/redoak.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='redoak'">
-										<!-- <button ng-click="tree(1)" class="btn btn-primary btn-sm" id="buttonhole"
-																ng-if="calday1 < 0">
-																Hole 1<br>Add</button>
-															<button ng-click="tree(1)" class="btn btn-success btn-sm" id="buttonhole"
-																ng-if="calday1 >= 0 && calday1 <= 10">
-																Hole 1<br>{{calday1}} Day<br>Reset</button>
-															<button ng-click="tree(1)" class="btn btn-warning btn-sm" id="buttonhole"
-																ng-if="calday1 >= 11 && calday1 <= 19">
-																Hole 1<br>{{calday1}} Day<br>Reset</button>
-															<button ng-click="tree(1)" class="btn btn-danger btn-sm" id="buttonhole"
-																ng-if="calday1 >= 20">
-																Hole 1<br>{{calday1}} Days<br>Left</button> -->
-										<span><b>{{totaldatahole[i*floor*2].nameveg}}</b>
-											{{daysDiffFunc(totaldatahole[i*floor*2].typeveg).days}}days
-											{{daysDiffFunc(totaldatahole[i*floor*2].typeveg).hours}}hours
-											{{daysDiffFunc(totaldatahole[i*floor*2].typeveg).mins}}mins
+										<span ng-if="daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days >= 0 
+											&& daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days <= 10">
+											<img src="../icon/seeding1.png">
+										</span>
+										<span ng-if="daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days >= 11 
+											&& daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days <= 19">
+											<img src="../icon/seeding2.png">
+										</span>
+										<span ng-if="daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days>=20">
+											<img src="../icon/cos.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='cos'">
+											<img src="../icon/lettuce.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='lettuce'">
+											<img src="../icon/greenoak.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='greenoak'">
+											<img src="../icon/redoak.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='redoak'">
+										</span>
+										<span class="tooltiptext"><b>{{totaldatahole[1+i*3+floor*12].nameveg}}</b><br>
+											{{daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days}} days<br>
+											{{daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).hours}} hours
+											{{daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).mins}} mins
 										</span>
 									</div>
 										
 									</div>
 								<div  class="hole" ng-attr-id="{{2+i*3+floor*12}}">
 										<div ng-if="totaldatahole[2+i*3+floor*12].statushole">
-											<img src="../icon/cos.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='cos'">
-											<img src="../icon/lettuce.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='lettuce'">
-											<img src="../icon/greenoak.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='greenoak'">
-											<img src="../icon/redoak.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='redoak'">
-											<!-- <button ng-click="tree(1)" class="btn btn-primary btn-sm" id="buttonhole"
-																	ng-if="calday1 < 0">
-																	Hole 1<br>Add</button>
-																<button ng-click="tree(1)" class="btn btn-success btn-sm" id="buttonhole"
-																	ng-if="calday1 >= 0 && calday1 <= 10">
-																	Hole 1<br>{{calday1}} Day<br>Reset</button>
-																<button ng-click="tree(1)" class="btn btn-warning btn-sm" id="buttonhole"
-																	ng-if="calday1 >= 11 && calday1 <= 19">
-																	Hole 1<br>{{calday1}} Day<br>Reset</button>
-																<button ng-click="tree(1)" class="btn btn-danger btn-sm" id="buttonhole"
-																	ng-if="calday1 >= 20">
-																	Hole 1<br>{{calday1}} Days<br>Left</button> -->
-											<span><b>{{totaldatahole[2+i*3+floor*12].nameveg}}</b>
-												{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days}}days
-												{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).hours}}hours
-												{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).mins}}mins
+											<span ng-if="daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days >= 0 
+												&& daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days <= 10">
+												<img src="../icon/seeding1.png">
+											</span>
+											<span ng-if="daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days >= 11 
+												&& daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days <= 19">
+												<img src="../icon/seeding2.png">
+											</span>
+											<span ng-if="daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days>=20">
+												<img src="../icon/cos.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='cos'">
+												<img src="../icon/lettuce.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='lettuce'">
+												<img src="../icon/greenoak.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='greenoak'">
+												<img src="../icon/redoak.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='redoak'">
+											</span>
+											<span class="tooltiptext"><b>{{totaldatahole[2+i*3+floor*12].nameveg}}</b><br>
+												{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days}} days<br>
+												{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).hours}} hours
+												{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).mins}} mins
 											</span>
 										</div>
 									</div>
@@ -201,11 +198,12 @@
 				</div>
 				<div class="col-1">
 					<button class="btn" ng-repeat="i in [0, 1, 2]" onclick="changeFloor(this)" ng-attr-id="floor {{i}}">{{(i+1)}}</button>
-					
-					<div>{{floor}}
+
+					<div class="pickupMenu rounded-circle text-center">
 						<img src="../icon/pickup.png" class="pickup" draggable="true">
 					</div>
 				</div>
+			</div>
 			</div>
 
 		</body>
