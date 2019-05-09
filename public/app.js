@@ -41,7 +41,7 @@ angular.module('app', [])
           $scope.stasystem = $scope.totalsys[0].sysbtn
           $scope.timeStart = new Date($scope.totalsys[0].sysTimeStart)
           $scope.timeEnd = new Date($scope.totalsys[0].sysTimeEnd)
-          $scope.timeFog = $scope.totalsys.sysTimeFog
+          $scope.timeFog = $scope.totalsys[0].sysTimeFog
           console.log("getsys", $scope.timeEnd, $scope.totalsys[0].sysTimeEnd)
         })
       }
