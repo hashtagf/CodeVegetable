@@ -183,10 +183,9 @@ angular.module('app', [])
       if (convertTime % timeFog == 0) {
         console.log("---> fogOn Auto")
         $scope.fogOn()
-        setTimeout(() => {
-          $scope.fogOff()
-          console.log("---> fogOff Auto")
-        }, 60000)
+      } else {
+        console.log("---> fogOff Auto")
+        $scope.fogOff()
       }
     }//Auto time
 
