@@ -31,7 +31,7 @@ angular.module('app', [])
         stasys: true,
         sysTimeStart: new Date(1970, 0, 1, 05, 00, 0),
         sysTimeEnd: new Date(1970, 0, 1, 20, 35, 0),
-        sysTimeFog: 60
+        sysTimeFog: 480
       }]
       $scope.totalsys = []
 
