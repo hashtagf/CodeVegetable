@@ -101,7 +101,7 @@
       var dataFloat = parseFloat(data);
       document.getElementById("humidity").innerHTML = dataFloat.toFixed(2);
     } else if (topic == '/Vegetable001/EC') {
-      document.getElementById("EC").innerHTML = data/1000;
+      document.getElementById("EC").innerHTML = data / 1000;
     } else if (topic == '/Vegetable001/pH') {
       document.getElementById("pH").innerHTML = data;
     }
@@ -204,9 +204,9 @@
         $("#graphicfog").removeAttr("style").hide();
         scope.fogOff()
       }, 60000)
-      var timeCountDown = setInterval(()=> {
+      var timeCountDown = setInterval(() => {
         scope.timeCount--;
-      },1000)
+      }, 1000)
     }
     else {
       $("#graphicfog").removeAttr("style").hide();
@@ -257,6 +257,15 @@
       scope();
     let timeAr = $('#timeEnd').val().split(":")
     scope.timeEnd = new Date(1970, 0, 1, timeAr[0], timeAr[1], 0);
+    scope.autoTime()
+  }
+
+  changeTimeFog = () => {
+    var scope = angular.
+      element(document.getElementById('mainApp')).
+      scope();
+    let timeFog = $('#timeFog').val()
+    scope.timeFog = timeFog;
     scope.autoTime()
   }
   setInterval(() => {
@@ -340,10 +349,8 @@
             <div class="custom-control custom-switch py-2">
               <input type="checkbox" class="custom-control-input" id="auto-manual" onclick="changeSystem(this)">
               <label class="custom-control-label text-success" for="auto-manual">
-                <span class="ml-3">Automatic Light</span>
+                <span class="ml-3">Automatic System</span>
               </label>
-              <!-- <label class="custom-control-label text-danger" for="auto-manual" ng-if="stasystem === 'Manual'"><span
-                  class="ml-3">Manaully-Light</span></label> -->
             </div>
             <div class="custom-control custom-switch py-2" ng-if="stasystem === 'Manual'">
               <input type="checkbox" class="custom-control-input" id="Light" onclick="changeLight(this)">
@@ -369,11 +376,21 @@
                 </div>
               </div>
               <!-- Grid column -->
+              <!-- Grid column -->
+              <div class="col col-12 col-lg-6">
+                <!-- Material input -->
+                <div class="md-form">
+                  <input type="text" id="timeFog" class="form-control" mdbInput onclick="changeTimeFog()"
+                    ng-model="timeFog">
+                  <label for="input">Every time of Fog (minutes)</label>
+                </div>
+              </div>
+              <!-- Grid column -->
             </div>
-            <div class="custom-control custom-switch py-2">
+            <div class="custom-control custom-switch py-2" ng-if="stasystem === 'Manual'">
               <input type="checkbox" class="custom-control-input" id="Fog" onclick="changeFog(this)">
               <label class="custom-control-label" for="Fog">
-                <span class="ml-3">Fog 
+                <span class="ml-3">Fog
                   <span ng-if="staFog">({{timeCount}}s)</span>
                 </span>
               </label>

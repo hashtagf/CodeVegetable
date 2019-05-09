@@ -30,7 +30,8 @@ angular.module('app', [])
         sysbtn: 'Auto',
         stasys: true,
         sysTimeStart: new Date(1970, 0, 1, 05, 00, 0),
-        sysTimeEnd: new Date(1970, 0, 1, 20, 35, 0)
+        sysTimeEnd: new Date(1970, 0, 1, 20, 35, 0),
+        sysTimeFog: 60
       }]
       $scope.totalsys = []
 
@@ -40,7 +41,8 @@ angular.module('app', [])
           $scope.stasystem = $scope.totalsys[0].sysbtn
           $scope.timeStart = new Date($scope.totalsys[0].sysTimeStart)
           $scope.timeEnd = new Date($scope.totalsys[0].sysTimeEnd)
-          console.log("getsys",$scope.timeEnd,$scope.totalsys[0].sysTimeEnd)
+          $scope.timeFog = $scope.totalsys.sysTimeFog
+          console.log("getsys", $scope.timeEnd, $scope.totalsys[0].sysTimeEnd)
         })
       }
       getsys()
@@ -48,11 +50,13 @@ angular.module('app', [])
         // $http.post('/setsys', $scope.sys[0]).then(function (response){})
         $scope.sys[0].sysTimeStart = $scope.timeStart
         $scope.sys[0].sysTimeEnd = $scope.timeEnd
+        $scope.sys[0].sysTimeFog = $scope.timeFog
         $http.put('/setsys/' + $scope.totalsys[0]._id, $scope.sys[0]).then(res => {
           $scope.totalsys[0].sysTimeStart = res.data.sysTimeStart
           $scope.totalsys[0].sysTimeEnd = res.data.sysTimeEnd
+          $scope.totalsys[0].sysTimeFog = res.data.sysTimeFog
         })
-        console.log("AutoTime",$scope.sys[0].sysTimeStart)
+        console.log("AutoTime", $scope.sys[0].sysTimeStart)
       }
       $scope.auto = function () {
         $scope.sys[0].sysbtn = 'Auto'
@@ -147,6 +151,10 @@ angular.module('app', [])
       $scope.time1 = d.toLocaleTimeString('it-IT')
       let timeStartStr = $scope.timeStart.toLocaleTimeString('it-IT')
       let timeEndStr = $scope.timeEnd.toLocaleTimeString('it-IT')
+      let timeFog = ($scope.timeFog / 60)
+      let timeHr = $scope.time1.split(':')[0]
+      let timeM = $scope.time1.split(':')[1]
+      let convertTime = timeHr + (timeM / 60)
       if ($scope.time1 > timeStartStr && $scope.time1 < timeEndStr) {
         $scope.LEDSta = 'ON'
         $scope.stabtn[0].statusbtn = true
@@ -167,7 +175,15 @@ angular.module('app', [])
         $http.get('/ledOff').then(res => {
           console.log("---------------------------------OK")
         })
-        
+
+      }
+
+      // Auto TimeFog every x minutes
+      if (convertTime % timeFog === '0') {
+        $scope.fogOn()
+        setTimeout(() => {
+          $scope.fogOff()
+        }, 6000)
       }
     }//Auto time
 
@@ -332,7 +348,6 @@ angular.module('app', [])
         console.log(response)
       })
       $scope.stabtn[2].statusbtn = true///////////////////////////////
-      // $http.post('/btn', $scope.stabtn[1]).then(function (response){})///////////////////////////////
       console.log("fogOn")
       $http.put('/btn/' + $scope.totalbtn[2]._id, $scope.stabtn[2]).then(res => {
         $scope.totalbtn[2].statusbtn = res.data.statusbtn
@@ -494,12 +509,12 @@ angular.module('app', [])
         let end = new Date(d1).getTime() + 1000 * 3600 * 24 * 35;
         var timeDiff = end - d2.getTime()
         var DaysDiff = timeDiff / (1000 * 3600 * 24);
-        var HoursDiff = (timeDiff - Math.floor(DaysDiff)* (1000 * 3600 * 24))/(1000*3600)
-        var MinsDiff = (timeDiff - Math.floor(HoursDiff)*(1000*3600) - Math.floor(DaysDiff)* (1000 * 3600 * 24))/(1000*60)
-        return {"days": Math.floor(DaysDiff), "hours": Math.floor(HoursDiff), "mins": Math.floor(MinsDiff)}
+        var HoursDiff = (timeDiff - Math.floor(DaysDiff) * (1000 * 3600 * 24)) / (1000 * 3600)
+        var MinsDiff = (timeDiff - Math.floor(HoursDiff) * (1000 * 3600) - Math.floor(DaysDiff) * (1000 * 3600 * 24)) / (1000 * 60)
+        return { "days": Math.floor(DaysDiff), "hours": Math.floor(HoursDiff), "mins": Math.floor(MinsDiff) }
       }
       $scope.setClasses = function (flag) {
-        return 'hole' + (flag)?'':' empty' 
+        return 'hole' + (flag) ? '' : ' empty'
       }
       var curt = $scope.totalHole.findIndex(i => i.hole === hole)
 
@@ -705,7 +720,7 @@ angular.module('app', [])
 
       function getdatahole() {
         $http.get('/hole').then(res => {
-          if (JSON.stringify($scope.totaldatahole) !== JSON.stringify(res.data)){
+          if (JSON.stringify($scope.totaldatahole) !== JSON.stringify(res.data)) {
             $scope.totaldatahole = res.data
           }
 
@@ -714,30 +729,30 @@ angular.module('app', [])
 
       getdatahole()
 
-      $scope.hole = function (id,veg) {//////////////////////////////////////////////////hole1
-        
-        let nameMap = {"cos":0,"lettuce":1,"greenoak":2,"redoak":3}
+      $scope.hole = function (id, veg) {//////////////////////////////////////////////////hole1
+
+        let nameMap = { "cos": 0, "lettuce": 1, "greenoak": 2, "redoak": 3 }
         console.log($scope.totaldatahole)
 
         if ($scope.totaldatahole[id]) {
           let obj
           console.log("hole 1 put")
-          if (veg==null)//clear
-            obj ={
+          if (veg == null)//clear
+            obj = {
               "idhole": id,
               "nameveg": veg,
               "typeveg": null,
               "statushole": false
             }
           else {//put
-            obj ={
+            obj = {
               "idhole": id,
               "nameveg": veg,
               "typeveg": new Date(),
               "statushole": true
             }
           }
-          if ((veg==null&&$scope.totaldatahole[id].statushole)||(veg!==null&&!$scope.totaldatahole[id].statushole))  
+          if ((veg == null && $scope.totaldatahole[id].statushole) || (veg !== null && !$scope.totaldatahole[id].statushole))
             $http.put('/hole/' + $scope.totaldatahole[id]._id, obj).then(res => {
               console.log("sent hole 1 veg 1 update")
               //$scope.totaldatahole[id].statushole = res.data.status
@@ -745,7 +760,7 @@ angular.module('app', [])
           //else
         } else {
           console.log("hole 1 post")
-          let obj ={
+          let obj = {
             "idhole": id,
             "nameveg": veg,
             "typeveg": new Date(),
