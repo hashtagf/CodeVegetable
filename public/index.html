@@ -143,11 +143,13 @@
     if (scope.staFog) {
       $('#Fog').prop('checked', true)
       $("#graphicfog").show();
+      scope.fogOff()
       console.log('Fog ON')
     }
     else {
       $('#Fog').prop('checked', false)
       $("#graphicfog").removeAttr("style").hide();
+      scope.fogOff()
       console.log('Fog OFF')
     }
 
@@ -356,37 +358,31 @@
               <input type="checkbox" class="custom-control-input" id="Light" onclick="changeLight(this)">
               <label class="custom-control-label" for="Light"><span class="ml-3">Light</span></label>
             </div>
+            <!-- system Auto -->
             <div class="form-row mt-2" ng-if="stasystem === 'Auto'">
-              <!-- Grid column -->
               <div class="col col-12 col-lg-6">
-                <!-- Material input -->
                 <div class="md-form">
                   <input type="time" id="timeStart" class="form-control" mdbInput onchange="changeTimeStart()"
                     ng-model="timeStart">
                   <label for="input">Start time</label>
                 </div>
               </div>
-              <!-- Grid column -->
               <div class="col col-12 col-lg-6">
-                <!-- Material input -->
                 <div class="md-form">
                   <input type="time" id="timeEnd" class="form-control" mdbInput onclick="changeTimeEnd()"
                     ng-model="timeEnd">
                   <label for="input">End time</label>
                 </div>
               </div>
-              <!-- Grid column -->
-              <!-- Grid column -->
               <div class="col col-12 col-lg-6">
-                <!-- Material input -->
                 <div class="md-form">
                   <input type="text" id="timeFog" class="form-control" mdbInput onclick="changeTimeFog()"
                     ng-model="timeFog">
                   <label for="input">Every time of Fog (minutes)</label>
                 </div>
               </div>
-              <!-- Grid column -->
             </div>
+
             <div class="custom-control custom-switch py-2" ng-if="stasystem === 'Manual'">
               <input type="checkbox" class="custom-control-input" id="Fog" onclick="changeFog(this)">
               <label class="custom-control-label" for="Fog">
