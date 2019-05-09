@@ -513,9 +513,7 @@ angular.module('app', [])
         var MinsDiff = (timeDiff - Math.floor(HoursDiff) * (1000 * 3600) - Math.floor(DaysDiff) * (1000 * 3600 * 24)) / (1000 * 60)
         return { "days": Math.floor(DaysDiff), "hours": Math.floor(HoursDiff), "mins": Math.floor(MinsDiff) }
       }
-      $scope.setClasses = function (flag) {
-        return 'btn-warning'
-      }
+
       var curt = $scope.totalHole.findIndex(i => i.hole === hole)
 
       $scope.tree = function (hole) {

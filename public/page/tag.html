@@ -30,33 +30,34 @@
 						dragged = event.target;
 						// make it half transparent
 						event.target.style.opacity = .99;
+						event.target.style.cursor = 'move';
 					}, false);
 					document.addEventListener("dragend", function(event) {
 						// reset the transparency
 						var scope = angular.
 							element(document.getElementById('mainApp')).
 							scope();
-						console.log(event.target.className,dragon.className)
+						console.log(event.target,dragon)
 						if (event.target.className == "vegImg" && dragon.className=="hole") {
 							scope.hole(dragon.id,event.target.id)
 						}
-						if (event.target.className == "pickup" && dragon.className=="vegInHole") {
+						if (event.target.className == "pickup" && dragon.className=="vegInHole ng-scope") {
 							scope.hole(dragon.id,null)
 						}
 						event.target.style.opacity = "";
 					}, false);
-
 					document.addEventListener("dragenter", function(event) {
 						// highlight potential drop target when the draggable element enters it
 						
 						var scope = angular.
 							element(document.getElementById('mainApp')).
 							scope();
+							console.log(event.target.className,dragged)
 						if (event.target.className == "hole" && dragged.className=="vegImg") {
 							event.target.style.background = "rgba(255,255,255,.5)";
 							dragon = event.target;
 							//scope.hole(event.target.id,dragged.id)
-						} else if (event.target.className == 'vegInHole' && dragged.className=="pickup") {
+						} else if (event.target.className == 'vegInHole ng-scope' && dragged.className=="pickup") {
 							dragon = event.target;
 						}
 					}, false);
@@ -76,7 +77,7 @@
 							//$( ".btn.floor" ).removeClass( "btn-warning" )
 							//$('#'+e.id).addClass("btn-warning");
 					}
-					
+				
 				</script>
 	</head>
 	<body id="mainApp" ng-controller="TodoListController" class="aqua-gradient text-white">
@@ -213,6 +214,7 @@
 									</span>
 								</div>
 							</div>
+
 							<!-- <img src="../icon/tray.png" alt=""> -->
 						</div>
 
@@ -224,7 +226,7 @@
 					<button class="d-block btn" ng-class="floor==i?'btn-warning':''" ng-repeat="i in [0, 1, 2]" onclick="changeFloor(this)" ng-attr-id="floor-{{i}}">{{(i+1)}}</button>
 
 					<div class="pickupMenu rounded-circle text-center">
-						<img src="../icon/pickup.png" class="pickup" draggable="true">
+						<img src="../icon/pickup.png" class="pickup" id="pickup" draggable="true">
 					</div>
 				</div>
 			</div>
