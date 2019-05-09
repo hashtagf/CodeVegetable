@@ -514,7 +514,7 @@ angular.module('app', [])
         return { "days": Math.floor(DaysDiff), "hours": Math.floor(HoursDiff), "mins": Math.floor(MinsDiff) }
       }
       $scope.setClasses = function (flag) {
-        return 'hole' + (flag) ? '' : ' empty'
+        return 'btn-warning'
       }
       var curt = $scope.totalHole.findIndex(i => i.hole === hole)
 
