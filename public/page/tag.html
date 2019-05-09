@@ -119,14 +119,13 @@
 					</div>
 				</div>
 				<div class="col-8">
-					<div class="container">
+					<div class="container farmarea">
 						<div class="row tray justify-content-center">
 							<div class="col-3" ng-repeat="i in [0, 1, 2, 3]">
 								<div class="hole" ng-attr-id="{{i*3+floor*12}}" 
 									ng-class="totaldatahole[i*3+floor*12].statushole&&daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days<=0?'borderFinish':''">
 									<span ng-if="totaldatahole[i*3+floor*12].statushole">
-										<span ng-if="daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days >= 0 
-											&& daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days <= 10">
+										<span ng-if="daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days <= 10">
 											<img src="../icon/cos.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='cos'" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
 											<img src="../icon/lettuce.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='lettuce'" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
 											<img src="../icon/greenoak.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='greenoak'" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
@@ -136,10 +135,16 @@
 											&& daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days <= 19">
 											<img src="../icon/baby2.png" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
 										</span>
-										<span ng-if="daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days>=20">
-												<img src="../icon/seeding1.png" width="100px" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
+										<span ng-if="daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days >= 20 
+											&& daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days <= 29">
+											<img src="../icon/baby.png" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
 										</span>
-								
+										<span ng-if="daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days>=30">
+											<img src="../icon/seeding1.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='cos'" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
+											<img src="../icon/seeding2.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='lettuce'" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
+											<img src="../icon/seeding3.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='greenoak'" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
+											<img src="../icon/seeding4.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='redoak'" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
+										</span>
 										<span class="tooltiptext"><h5>{{totaldatahole[i*3+floor*12].nameveg}}</h5><br>
 											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days}} days<br>
 											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).hours}} hours
@@ -147,53 +152,66 @@
 										</span>
 									</span>
 								</div>
-								<div class="hole" ng-attr-id="{{1+i*3+floor*12}}">
-									<div ng-if="totaldatahole[1+i*3+floor*12].statushole">
-										<span ng-if="daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days >= 0 
-											&& daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days <= 10">
-											<img src="../icon/seeding1.png">
+								<div class="hole" ng-attr-id="{{1+i*3+floor*12}}" 
+									ng-class="totaldatahole[1+i*3+floor*12].statushole&&daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days<=0?'borderFinish':''">
+									<span ng-if="totaldatahole[1+i*3+floor*12].statushole">
+										<span ng-if="daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days <= 10">
+											<img src="../icon/cos.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='cos'" class="vegInHole" ng-attr-id="{{1+i*3+floor*12}}">
+											<img src="../icon/lettuce.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='lettuce'" class="vegInHole" ng-attr-id="{{1+i*3+floor*12}}">
+											<img src="../icon/greenoak.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='greenoak'" class="vegInHole" ng-attr-id="{{1+i*3+floor*12}}">
+											<img src="../icon/redoak.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='redoak'" class="vegInHole" ng-attr-id="{{1+i*3+floor*12}}">
 										</span>
 										<span ng-if="daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days >= 11 
 											&& daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days <= 19">
-											<img src="../icon/seeding2.png">
+											<img src="../icon/baby2.png" class="vegInHole" ng-attr-id="{{1+i*3+floor*12}}">
 										</span>
-										<span ng-if="daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days>=20">
-											<img src="../icon/cos.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='cos'">
-											<img src="../icon/lettuce.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='lettuce'">
-											<img src="../icon/greenoak.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='greenoak'">
-											<img src="../icon/redoak.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='redoak'">
+										<span ng-if="daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days >= 20 
+											&& daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days <= 29">
+											<img src="../icon/baby.png" class="vegInHole" ng-attr-id="{{1+i*3+floor*12}}">
 										</span>
-										<span class="tooltiptext"><b>{{totaldatahole[1+i*3+floor*12].nameveg}}</b><br>
+										<span ng-if="daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days>=30">
+											<img src="../icon/seeding1.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='cos'" class="vegInHole" ng-attr-id="{{1+i*3+floor*12}}">
+											<img src="../icon/seeding2.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='lettuce'" class="vegInHole" ng-attr-id="{{1+i*3+floor*12}}">
+											<img src="../icon/seeding3.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='greenoak'" class="vegInHole" ng-attr-id="{{1+i*3+floor*12}}">
+											<img src="../icon/seeding4.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='redoak'" class="vegInHole" ng-attr-id="{{1+i*3+floor*12}}">
+										</span>
+										<span class="tooltiptext"><h5>{{totaldatahole[1+i*3+floor*12].nameveg}}</h5><br>
 											{{daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days}} days<br>
 											{{daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).hours}} hours
 											{{daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).mins}} mins
 										</span>
-									</div>
-										
-									</div>
-								<div  class="hole" ng-attr-id="{{2+i*3+floor*12}}">
-										<div ng-if="totaldatahole[2+i*3+floor*12].statushole">
-											<span ng-if="daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days >= 0 
-												&& daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days <= 10">
-												<img src="../icon/seeding1.png">
-											</span>
-											<span ng-if="daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days >= 11 
-												&& daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days <= 19">
-												<img src="../icon/seeding2.png">
-											</span>
-											<span ng-if="daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days>=20">
-												<img src="../icon/cos.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='cos'">
-												<img src="../icon/lettuce.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='lettuce'">
-												<img src="../icon/greenoak.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='greenoak'">
-												<img src="../icon/redoak.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='redoak'">
-											</span>
-											<span class="tooltiptext"><b>{{totaldatahole[2+i*3+floor*12].nameveg}}</b><br>
-												{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days}} days<br>
-												{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).hours}} hours
-												{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).mins}} mins
-											</span>
-										</div>
-									</div>
+									</span>
+								</div>
+								<div class="hole" ng-attr-id="{{2+i*3+floor*12}}" 
+									ng-class="totaldatahole[2+i*3+floor*12].statushole&&daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days<=0?'borderFinish':''">
+									<span ng-if="totaldatahole[2+i*3+floor*12].statushole">
+										<span ng-if="daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days <= 10">
+											<img src="../icon/cos.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='cos'" class="vegInHole" ng-attr-id="{{2+i*3+floor*12}}">
+											<img src="../icon/lettuce.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='lettuce'" class="vegInHole" ng-attr-id="{{2+i*3+floor*12}}">
+											<img src="../icon/greenoak.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='greenoak'" class="vegInHole" ng-attr-id="{{2+i*3+floor*12}}">
+											<img src="../icon/redoak.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='redoak'" class="vegInHole" ng-attr-id="{{2+i*3+floor*12}}">
+										</span>
+										<span ng-if="daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days >= 11 
+											&& daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days <= 19">
+											<img src="../icon/baby2.png" class="vegInHole" ng-attr-id="{{2+i*3+floor*12}}">
+										</span>
+										<span ng-if="daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days >= 20 
+											&& daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days <= 29">
+											<img src="../icon/baby.png" class="vegInHole" ng-attr-id="{{2+i*3+floor*12}}">
+										</span>
+										<span ng-if="daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days>=30">
+											<img src="../icon/seeding1.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='cos'" class="vegInHole" ng-attr-id="{{2+i*3+floor*12}}">
+											<img src="../icon/seeding2.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='lettuce'" class="vegInHole" ng-attr-id="{{2+i*3+floor*12}}">
+											<img src="../icon/seeding3.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='greenoak'" class="vegInHole" ng-attr-id="{{2+i*3+floor*12}}">
+											<img src="../icon/seeding4.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='redoak'" class="vegInHole" ng-attr-id="{{2+i*3+floor*12}}">
+										</span>
+										<span class="tooltiptext"><h5>{{totaldatahole[2+i*3+floor*12].nameveg}}</h5><br>
+											{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days}} days<br>
+											{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).hours}} hours
+											{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).mins}} mins
+										</span>
+									</span>
+								</div>
 							</div>
 							<!-- <img src="../icon/tray.png" alt=""> -->
 						</div>

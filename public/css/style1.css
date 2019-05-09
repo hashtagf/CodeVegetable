@@ -216,10 +216,13 @@ body{
 .container-fluid.farm {
     font-family: 'ZCOOL KuaiLe', cursive;
 }
+.farmarea {
+    max-width: 600px!important;
+}
 .tray {
     /* transform: rotateX(-50deg); */
     background-image: url("../icon/dirt1.jpg");
-    padding: 40px 20px;
+    padding: 40px 0px;
     border-radius: 20px;
     margin-top: 10vh;
 }
@@ -265,7 +268,7 @@ body{
 }
 .seedMenuIcon {
     width: 60%;
-    max-width: 150px;
+    max-width: 120px;
 }
 .pickup {
     width: 90%;
@@ -278,7 +281,7 @@ body{
     margin-top: 50%;
 }
 .tray .col-3:first-child,.tray .col-3:nth-child(3) {
-    max-width: 120px;
+    /* max-width: 120px; */
     padding-right: 0px;
 }
 .tooltip {
