@@ -7,6 +7,7 @@ angular.module('app', [])
     $scope.sheets = []
     $scope.status = 44
     $scope.timeCount = 60
+    $scope.totaldatahole = []
     //$scope.timeStart = new Date(1970, 0, 1, 05, 00, 0);
     //$scope.timeEnd = new Date(1970, 0, 1, 20, 35, 0);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Data Googlesheets
@@ -727,126 +728,82 @@ angular.module('app', [])
         { idhole: 36, statushole: false }
       ]
 
-      $scope.totaldatahole = []
 
       function getdatahole() {
         $http.get('/hole').then(res => {
-          $scope.totaldatahole = res.data
-          $scope.holeveg1 = res.data[0].nameveg
-          $scope.holeveg2 = res.data[1].nameveg
-          $scope.holeveg3 = res.data[2].nameveg
-          $scope.holeveg4 = res.data[3].nameveg
-          $scope.holeveg5 = res.data[4].nameveg
-          $scope.holeveg6 = res.data[5].nameveg
+          if (JSON.stringify($scope.totaldatahole) !== JSON.stringify(res.data)){
+            $scope.totaldatahole = res.data
+            $scope.holeveg1 = res.data[0].nameveg
+            $scope.holeveg2 = res.data[1].nameveg
+            $scope.holeveg3 = res.data[2].nameveg
+            $scope.holeveg4 = res.data[3].nameveg
+            $scope.holeveg5 = res.data[4].nameveg
+            $scope.holeveg6 = res.data[5].nameveg
+  
+            $scope.holeveg7 = res.data[6].nameveg
+            $scope.holeveg8 = res.data[7].nameveg
+            $scope.holeveg9 = res.data[8].nameveg
+            $scope.holeveg10 = res.data[9].nameveg
+            $scope.holeveg11 = res.data[10].nameveg
+            $scope.holeveg12 = res.data[11].nameveg
+  
+            $scope.holeveg13 = res.data[12].nameveg
+            $scope.holeveg14 = res.data[13].nameveg
+            $scope.holeveg15 = res.data[14].nameveg
+            $scope.holeveg16 = res.data[15].nameveg
+            $scope.holeveg17 = res.data[16].nameveg
+            $scope.holeveg18 = res.data[17].nameveg
+  
+            $scope.holeveg19 = res.data[18].nameveg
+            $scope.holeveg20 = res.data[19].nameveg
+            $scope.holeveg21 = res.data[20].nameveg
+            $scope.holeveg22 = res.data[21].nameveg
+            $scope.holeveg23 = res.data[22].nameveg
+            $scope.holeveg24 = res.data[23].nameveg
+  
+            $scope.holeveg25 = res.data[24].nameveg
+            $scope.holeveg26 = res.data[25].nameveg
+            $scope.holeveg27 = res.data[26].nameveg
+            $scope.holeveg28 = res.data[27].nameveg
+            $scope.holeveg29 = res.data[28].nameveg
+            $scope.holeveg30 = res.data[29].nameveg
+  
+            $scope.holeveg31 = res.data[30].nameveg
+            $scope.holeveg32 = res.data[31].nameveg
+            $scope.holeveg33 = res.data[32].nameveg
+            $scope.holeveg34 = res.data[33].nameveg
+            $scope.holeveg35 = res.data[34].nameveg
+            $scope.holeveg36 = res.data[35].nameveg
+          }
 
-          $scope.holeveg7 = res.data[6].nameveg
-          $scope.holeveg8 = res.data[7].nameveg
-          $scope.holeveg9 = res.data[8].nameveg
-          $scope.holeveg10 = res.data[9].nameveg
-          $scope.holeveg11 = res.data[10].nameveg
-          $scope.holeveg12 = res.data[11].nameveg
-
-          $scope.holeveg13 = res.data[12].nameveg
-          $scope.holeveg14 = res.data[13].nameveg
-          $scope.holeveg15 = res.data[14].nameveg
-          $scope.holeveg16 = res.data[15].nameveg
-          $scope.holeveg17 = res.data[16].nameveg
-          $scope.holeveg18 = res.data[17].nameveg
-
-          $scope.holeveg19 = res.data[18].nameveg
-          $scope.holeveg20 = res.data[19].nameveg
-          $scope.holeveg21 = res.data[20].nameveg
-          $scope.holeveg22 = res.data[21].nameveg
-          $scope.holeveg23 = res.data[22].nameveg
-          $scope.holeveg24 = res.data[23].nameveg
-
-          $scope.holeveg25 = res.data[24].nameveg
-          $scope.holeveg26 = res.data[25].nameveg
-          $scope.holeveg27 = res.data[26].nameveg
-          $scope.holeveg28 = res.data[27].nameveg
-          $scope.holeveg29 = res.data[28].nameveg
-          $scope.holeveg30 = res.data[29].nameveg
-
-          $scope.holeveg31 = res.data[30].nameveg
-          $scope.holeveg32 = res.data[31].nameveg
-          $scope.holeveg33 = res.data[32].nameveg
-          $scope.holeveg34 = res.data[33].nameveg
-          $scope.holeveg35 = res.data[34].nameveg
-          $scope.holeveg36 = res.data[35].nameveg
         })
       }
 
       getdatahole()
 
-      $scope.hole = function (id,vegNum) {//////////////////////////////////////////////////hole1
-        console.log("OK Hole ------->1")
-
-        if ($scope.totaldatahole[id].statushole === true) {
+      $scope.hole = function (id,veg) {//////////////////////////////////////////////////hole1
+        
+        let nameMap = {"cos":0,"lettuce":1,"greenoak":2,"redoak":3}
+        console.log($scope.totaldatahole)
+        if ($scope.totaldatahole[id].statushole) {
           console.log("hole 1 put")
-          if (veg1 == "1") {
-            $scope.datahole[id].nameveg = $scope.vegetable[0].namev
-            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
-            $scope.datahole[id].statushole = true
-            $http.put('/hole/' + $scope.totaldatahole[id]._id, $scope.datahole[id]).then(res => {
-              console.log("sent hole 1 veg 1 update")
-              $scope.totaldatahole[0].statushole = res.data.status
-            })
-          } else if (veg1 == "2") {
-            $scope.datahole[id].nameveg = $scope.vegetable[1].namev
-            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
-            $scope.datahole[id].statushole = true
-            $http.put('/hole/' + $scope.totaldatahole[id]._id, $scope.datahole[id]).then(res => {
-              console.log("sent hole 1 veg 2 update")
-              $scope.totaldatahole[id].statushole = res.data.status
-            })
-          } else if (veg1 == "3") {
-            $scope.datahole[id].nameveg = $scope.vegetable[2].namev
-            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
-            $scope.datahole[id].statushole = true
-            $http.put('/hole/' + $scope.totaldatahole[id]._id, $scope.datahole[id]).then(res => {
-              console.log("sent hole 1 veg 3 update")
-              $scope.totaldatahole[id].statushole = res.data.status
-            })
-          } else if (veg1 == "4") {
-            $scope.datahole[id].nameveg = $scope.vegetable[3].namev
-            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
-            $scope.datahole[id].statushole = true
-            $http.put('/hole/' + $scope.totaldatahole[id]._id, $scope.datahole[id]).then(res => {
-              console.log("sent hole 1 veg 4 update")
-              $scope.totaldatahole[id].statushole = res.data.status
-            })
-          }//else
-        } else if ($scope.datahole[id].statushole === false) {
+          $scope.datahole[id].nameveg = veg//$scope.vegetable[nameMap[veg]].namev
+          $scope.datahole[id].typeveg = new Date()
+          $scope.datahole[id].statushole = true
+          $http.put('/hole/' + $scope.totaldatahole[id]._id, $scope.datahole[id]).then(res => {
+            console.log("sent hole 1 veg 1 update")
+            $scope.totaldatahole[id].statushole = res.data.status
+          })
+          //else
+        } else {
           console.log("hole 1 post")
-          if (veg1 == "1") {
-            $scope.datahole[id].nameveg = $scope.vegetable[0].namev
-            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
-            $scope.datahole[id].statushole = true
-            $http.post('/hole', $scope.datahole[id]).then(function (response) {
-              console.log("sent hole 1 veg 1")
-            })
-          } else if (veg1 == "2") {
-            $scope.datahole[id].nameveg = $scope.vegetable[1].namev
-            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
-            $scope.datahole[id].statushole = true
-            $http.post('/hole', $scope.datahole[id]).then(function (response) {
-              console.log("sent hole 1 veg 2")
-            })
-          } else if (veg1 == "3") {
-            $scope.datahole[id].nameveg = $scope.vegetable[2].namev
-            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
-            $scope.datahole[id].statushole = true
-            $http.post('/hole', $scope.datahole[id]).then(function (response) {
-              console.log("sent hole 1 veg 3")
-            })
-          } else if (veg1 == "4") {
-            $scope.datahole[id].nameveg = $scope.vegetable[3].namev
-            $scope.datahole[id].typeveg = moment().format("MMM Do YY")
-            $scope.datahole[id].statushole = true
-            $http.post('/hole', $scope.datahole[id]).then(function (response) {
-              console.log("sent hole 1 veg 4")
-            })
-          }//else
+          $scope.datahole[id].nameveg = veg
+          $scope.datahole[id].typeveg = new Date()
+          $scope.datahole[id].statushole = true
+          console.log($scope.datahole[id])
+          $http.post('/hole', $scope.datahole[id]).then(function (response) {
+            console.log(response)
+          })
         }
       }//function hole1
 

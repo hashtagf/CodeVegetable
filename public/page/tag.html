@@ -96,11 +96,14 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-3 tray" ng-repeat="i in [1, 2, 3, 4]">
-								<div class="hole" ng-attr-id="{{i}}">do something numbe
-									<img src="../icon/cos.png" ng-if="!totaldatahole[i]..nameveg">
+								<div class="hole" ng-attr-id="{{i}}">h
+									<img src="../icon/cos.png" ng-if="totaldatahole[i].nameveg=='cos'">
+									<img src="../icon/lettuce.png" ng-if="totaldatahole[i].nameveg=='lettuce'">
+									<img src="../icon/greenoak.png" ng-if="totaldatahole[i].nameveg=='greenoak'">
+									<img src="../icon/redoak.png" ng-if="totaldatahole[i].nameveg=='redoak'">
 								</div>
-								<div class="hole" ng-attr-id="{{(i*2)}}">do something number</div>
-								<div class="hole" ng-attr-id="{{(i*3)}}">do something number</div>
+								<div class="hole" ng-attr-id="{{(i*2)}}">j</div>
+								<div class="hole" ng-attr-id="{{(i*3)}}">{{totaldatahole[i*3].nameveg}}k</div>
 							</div>
 							<img src="../icon/tray.png" alt="">
 						</div>
