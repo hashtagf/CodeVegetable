@@ -180,10 +180,12 @@ angular.module('app', [])
 
       // Auto TimeFog every x minutes
       if (convertTime % timeFog === '0') {
+        console.log("---> fogOn Auto")
         $scope.fogOn()
         setTimeout(() => {
           $scope.fogOff()
-        }, 6000)
+          console.log("---> fogOff Auto")
+        }, 60000)
       }
     }//Auto time
 
