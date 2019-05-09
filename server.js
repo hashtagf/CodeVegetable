@@ -211,7 +211,16 @@ app.get('/setsys', function (req, res) {
 app.put('/setsys/:id', function (req, res) {
   evensys.findOneAndUpdate(
     { _id: req.params.id },
-    { $set: { btnsys: req.body.btnsys, sysbtn: req.body.sysbtn, stasys: req.body.stasys, sysTimeStart:req.body.sysTimeStart, sysTimeEnd:req.body.sysTimeEnd } },
+    {
+      $set: {
+        btnsys: req.body.btnsys,
+        sysbtn: req.body.sysbtn,
+        stasys: req.body.stasys,
+        sysTimeStart: req.body.sysTimeStart,
+        sysTimeEnd: req.body.sysTimeEnd,
+        sysTimeFog: req.body.sysTimeFog
+      }
+    },
     { new: true })
     .exec(function (err, done) {
       if (err) console.log(err)
