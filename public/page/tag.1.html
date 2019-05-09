@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+			<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+			<link rel="stylesheet" href="../css/style1.css">
+			<!-- framework Angular -->
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script src="../app.js"></script>
+
+			
+			<!-- Font Awesome -->
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+			<!-- Bootstrap core CSS -->
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+			<!-- Material Design Bootstrap -->
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
+			<!-- JQuery -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+			<!-- Bootstrap tooltips -->
+			<script type="text/javascript"
+				src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+			<!-- Bootstrap core JavaScript -->
+			<script type="text/javascript"
+				src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+			<script>
+				var queue
+				var stage
+				function init() {
+					stage = new createjs.Stage("demoCanvas");
+					queue = new createjs.LoadQueue(false);
+					queue.on("complete", handleComplete);
+					queue.loadFile({src:"http://playpen.createjs.com/CORS/awesome.jpg", crossOrigin:true, id:"image"});
+					
+					queue.on("complete", handleComplete);
+					queue.loadFile({src:"https://www.organicfacts.net/wp-content/uploads/umeboshi.jpg", crossOrigin:true, id:"image"});
+					
+					//var enemy1 = new createjs.Bitmap(loadImg("http://playpen.createjs.com/CORS/awesome.jpg"))
+					//stage.addChild(enemy1);
+					//stage.update();
+					/* var stage = new createjs.Stage("demoCanvas");
+					createjs.Touch.enable(stage);
+					stage.enableMouseOver(10);
+
+					let bitmapVeg
+					var text
+					var bg = new createjs.Bitmap("../icon/bg.jpg");
+					var seed = new createjs.Bitmap("../icon/seed.png");
+					var veg = ['cos', 'lettuce', 'greenoak', 'redoak']
+
+					//stage.addChild(bg);
+
+					var container = new createjs.Container();
+					stage.addChild(container);
+					// veg
+
+
+					for (var i = 0; i < 4; i++) {
+						bitmapVeg = new createjs.Bitmap("../icon/"+veg[i]+".png");
+						
+						//bitmapVeg = new createjs.Bitmap("https://www.organicfacts.net/wp-content/uploads/umeboshi.jpg");
+						bitmapVeg.x = 150
+						bitmapVeg.y = 100 + (i*110)
+						bitmapVeg.scale = bitmapVeg.originalScale = 0.6;
+						stage.addChild(bitmapVeg);
+
+						text = new createjs.Text(veg[i], "30px Arial", "#000000");
+						text.x = 250;
+						text.y = 140 + (i*110);
+						text.textBaseline = "alphabetic";
+						stage.addChild(text);
+						//bitmapVeg.on("mousedown", function (evt) {
+							//this.parent.addChild(this);
+							//this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
+						//});
+					
+						// the pressmove event is dispatched when the mouse moves after a mousedown on the target until the mouse is released.
+						bitmapVeg.on("pressmove", function (evt) {
+							this.x = evt.stageX + this.offset.x;
+							this.y = evt.stageY + this.offset.y;
+							// indicate that the stage should be updated on the next tick:
+							update = true;
+						});
+					}
+					// fr
+					for (var i = 0; i < 3; i++) {
+						text = new createjs.Text("Fr"+(i+1), "20px Arial", "#ff7700");
+						text.x = 500;
+						text.y = 200 + (i*35);
+						text.textBaseline = "alphabetic";
+						stage.addChild(text);
+					}
+					//bitmapVeg.on("mousedown", function (evt) {
+							//this.parent.addChild(this);
+							//this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
+						//});
+
+					var circle = new createjs.Shape();
+					circle.graphics.beginFill("Crimson").drawCircle(0, 0, 50);
+					circle.x = 100;
+					circle.y = 100;
+					
+					var seedMenu = new createjs.Shape();
+					stage.addChild(seedMenu);
+					stage.addChild(circle);
+					stage.addChild(seed);
+
+					
+
+					createjs.Tween.get(circle, {loop: true})
+						.to({x: 400}, 1000, createjs.Ease.getPowInOut(4))
+						.to({alpha: 0, y: 75}, 500, createjs.Ease.getPowInOut(2))
+						.to({alpha: 0, y: 125}, 100)
+						.to({alpha: 1, y: 100}, 500, createjs.Ease.getPowInOut(2))
+						.to({x: 100}, 800, createjs.Ease.getPowInOut(2));
+					createjs.Ticker.setFPS(60);
+					createjs.Ticker.addEventListener("tick", stage); */
+				}
+				function loadImg(uri) {
+				  var image = document.createElement("img")
+				  image.crossOrigin = "Anonymous"
+				  image.src = uri 
+				  return image
+				}
+				function handleComplete(event) {
+					var img = queue.getResult("image");
+					
+					var bmp = new createjs.Bitmap(img);
+					stage.addChild(bmp);
+					stage.update();
+					
+					bmp.on("click", function(event) {
+						alert(["Clicked", event.target.image.src, event.target.image.crossOrigin]);
+					});
+				}
+			</script>
+	</head>
+	<body ng-controller="TodoListController" class="aqua-gradient text-white" onload="init();">
+		<!-- navbar -->
+		<!-- <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-none pt-3 pb-5" enable-gradients='true'>
+			<a class="navbar-brand text-white" href="/">
+				<img src="../icon/logo.png" width="auto" height="30" class="d-inline-block align-top ml-2" alt="">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+				<ul class="navbar-nav font-weight-bold">
+					<li class="nav-item mx-3">
+						<a class="nav-link text-white" href="/">Home</a>
+					</li>
+					<li class="nav-item mx-3">
+						<a class="nav-link text-white" href="googleSheets.html">Google Sheets</a>
+					</li>
+					<li class="nav-item mx-3">
+						<a class="nav-link text-white" href="tag.html">Status</a>
+					</li>
+					<li class="nav-item mx-3">
+						<a class="nav-link text-white" href="picture.html">Photo</a>
+					</li>
+				</ul>
+			</div>
+		</nav> -->
+
+			<canvas id="demoCanvas" width="800" height="600"></canvas>
+	</body>
+</html>
