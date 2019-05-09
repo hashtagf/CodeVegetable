@@ -215,7 +215,7 @@ void loop()
   outputValue = map(sensorValue, 0, 1023, 0, 5000);
   // change the analog out value:
   analogWrite(analogOutPin, outputValue);
-  sensorValue = sensorValue/100;
+  sensorValue = sensorValue / 100;
   // print the results to the serial monitor:
   Serial.print("EC value = ");
   Serial.print(sensorValue);
@@ -263,12 +263,12 @@ void loop()
   //    delay(5000);
   //    digitalWrite(GR1, LOW);
   //    delay(5000);
-  if (t >= 28.00 || h <= 80.00)
+  if (t >= 30.00 || h <= 80.00)
   {
     digitalWrite(fan, LOW);
     Serial.println("Status fan : ON");
   }
-  else if (t < 28.00 || h > 80.00)
+  else if (t < 30.00 || h > 80.00)
   {
     digitalWrite(fan, HIGH);
     Serial.println("Status fan : OFF");
@@ -339,7 +339,6 @@ unsigned long sendNTPpacket(IPAddress &address)
 
 void onMsghandler(char *topic, uint8_t *msg, unsigned int msglen)
 {
-
   Serial.print("Incoming message --> ");
   Serial.print(topic);
   Serial.print(" : ");
@@ -347,51 +346,17 @@ void onMsghandler(char *topic, uint8_t *msg, unsigned int msglen)
   for (int i = 0; i < msglen; i++)
   {
     strState[i] = (char)msg[i];
-    Serial.print((char)msg[i]);
   }
-  Serial.println();
-
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
-  float f = dht.readTemperature(true);
-
-  if (isnan(h) || isnan(t) || isnan(f))
+  Serial.println(strState[msglen]);
+  if (strState[msglen] == "fanOn")
   {
-    Serial.println("Failed to read from DHT Sensor");
-    return;
+    digitalWrite(fan, LOW);
+    Serial.println("Status fan : ON");
   }
-
-  float hif = dht.computeHeatIndex(f, h);
-  float hic = dht.computeHeatIndex(t, h, false);
-
-  String stateStr = String(strState).substring(0, msglen);
-
-  if (stateStr == "ON")
+  else if (strState[msglen] == "fanOff")
   {
-    digitalWrite(ledPin, LOW);
-    microgear.chat(TargetWeb, "ON");
-
-    WiFiClient client; //Instantiate WiFi object
-
-    //Start or API service using our WiFi Client through PushingBox
-    if (client.connect(WEBSITE, 80))
-    {
-      client.print("GET /pushingbox?devid=" + devid + "&h=" + (String)h + "&t=" + (String)t + "&sensorValue=" + (String)sensorValue + "&pH=" + (String)pH);
-
-      client.println(" HTTP/1.1");
-      client.print("Host: ");
-      client.println(WEBSITE);
-      client.println("User-Agent: ESP8266/1.0");
-      client.println("Connection: close");
-      client.println();
-    }
-    Serial.println("-------------------------------------------------");
-  }
-  else if (stateStr == "OFF")
-  {
-    digitalWrite(ledPin, HIGH);
-    microgear.chat(TargetWeb, "OFF");
-    Serial.println("-------------------------------------------------");
+    digitalWrite(fan, HIGH);
+    Serial.println("Status fan : OFF");
   }
 }
 
@@ -399,6 +364,7 @@ void onConnected(char *attribute, uint8_t *msg, unsigned int msglen)
 {
   Serial.println("Connected to NETPIE...");
   microgear.setAlias(ALIAS);
+  microgear.subscribe("/#");
 }
 
 double phValue()
@@ -428,5 +394,5 @@ double phValue()
     avgValue += buf[i];
   float ph = (float)avgValue * 5.0 / 1024 / 6; //convert the analog into millivolt
   ph = 3.5 * ph;                               //convert the millivolt into pH value
-  return ph/2;
+  return ph / 2;
 }
