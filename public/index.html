@@ -390,10 +390,10 @@
               <label class="custom-control-label" for="Light"><span class="ml-3">Light</span></label>
             </div>
             <!-- system Auto -->
-            
+
             <div class="form-row mt-2" ng-if="stasystem === 'Auto'">
+              <h5>LED</h5>
               <div class="col col-12 col-lg-6">
-                  LED
                 <div class="md-form">
                   <input type="time" id="timeStart" class="form-control" mdbInput onchange="changeTimeStart()"
                     ng-model="timeStart">
@@ -415,12 +415,13 @@
                   <label for="timeFog">On Every time of Fog (minutes)</label>
                 </div>
               </div> -->
-              
+
             <div class="form-row mt-2" ng-if="stasystem === 'Auto'">
-                Fog
+              <h5>Fog</h5>
               <div class="col col-12 col-lg-6">
                 <label class="tempInput" for="tempInput">(more than)Temperature</label>
-                <input class="form-control" type="number" id="tempInput" placeholder="Temperature" onchange="changeTemp()" ng-model="temp">
+                <input class="form-control" type="number" id="tempInput" placeholder="Temperature"
+                  onchange="changeTemp()" ng-model="temp">
                 <!-- <div class="md-form">
                   <input type="number" id="tempInput" class="form-control" mdbInput onchange="changeTemp()"
                     ng-model="temp">
@@ -428,8 +429,9 @@
                 </div> -->
               </div>
               <div class="col col-12 col-lg-6">
-                  <label class="humiInput" for="humiInput">(less than)Humidity</label>
-                  <input class="form-control" type="number" id="humiInput" placeholder="Medium input" onchange="changeHumi()" ng-model="humi">
+                <label class="humiInput" for="humiInput">(less than)Humidity</label>
+                <input class="form-control" type="number" id="humiInput" placeholder="Medium input"
+                  onchange="changeHumi()" ng-model="humi">
                 <!-- <div class="md-form">
                   <input type="number" id="humiInput" class="form-control" mdbInput onchange="changeHumi()"
                     ng-model="humi">
