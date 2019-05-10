@@ -31,7 +31,7 @@ body{
     border-radius:50%;
 }
 /*-------------------------------------------------------buttonhole*/
-label {
+.humiInput,.tempInput {
     font-size: .8rem;
 }
 #tempInput,#humiInput {
