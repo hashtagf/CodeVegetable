@@ -11,9 +11,9 @@
   <!-- Bootstrap core CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/css/mdb.min.css" rel="stylesheet">
   <!-- JQuery -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Bootstrap tooltips -->
   <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
@@ -21,7 +21,7 @@
   <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/js/mdb.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/js/mdb.min.js"></script>
 
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -129,8 +129,8 @@
     if (scope.stasystem == 'Auto') {
       $('#auto-manual').prop('checked', true)
       console.log('Auto')
-      console.log(tempGlobal + '>=' + scope.temp )
-      console.log(humiGlobal + '<=' + scope.humi )
+      console.log(tempGlobal + '>=' + scope.temp)
+      console.log(humiGlobal + '<=' + scope.humi)
       if (tempGlobal >= scope.temp || humiGlobal <= scope.humi) {
         $("#graphicfog").show();
         scope.fogOn()
@@ -406,30 +406,30 @@
                 </div>
               </div>
             </div>
-              <!-- <div class="col col-12 col-lg-12">
+            <!-- <div class="col col-12 col-lg-12">
                 <div class="md-form">
                   <input mdbInput type="text" name="timeFog" id="timeFog" class="form-control"
                     onchange="changeTimeFog()" ng-model="timeFog">
                   <label for="timeFog">On Every time of Fog (minutes)</label>
                 </div>
               </div> -->
-              <div class="form-row mt-2" ng-if="stasystem === 'Auto'">
-                <div class="col col-12 col-lg-6">
-                  <div class="md-form">
-                    <input type="number" id="tempInput" class="form-control" mdbInput onchange="changeTemp()"
-                      ng-model="temp">
-                    <label for="tempInput">Temperature</label>
-                  </div>
-                </div>
-                <div class="col col-12 col-lg-6">
-                  <div class="md-form">
-                    <input type="number" id="humiInput" class="form-control" mdbInput onchange="changeHumi()"
-                      ng-model="humi">
-                    <label for="humiInput">Humidity</label>
-                  </div>
+            <div class="form-row mt-2" ng-if="stasystem === 'Auto'">
+              <div class="col col-12 col-lg-6">
+                <div class="md-form">
+                  <input type="number" id="tempInput" class="form-control" mdbInput onchange="changeTemp()"
+                    ng-model="temp">
+                  <label for="tempInput">(more than)Temperature</label>
                 </div>
               </div>
-            
+              <div class="col col-12 col-lg-6">
+                <div class="md-form">
+                  <input type="number" id="humiInput" class="form-control" mdbInput onchange="changeHumi()"
+                    ng-model="humi">
+                  <label for="humiInput">(less than) Humidity</label>
+                </div>
+              </div>
+            </div>
+
 
             <div class="custom-control custom-switch py-2" ng-if="stasystem === 'Manual'">
               <input type="checkbox" class="custom-control-input" id="Fog" onclick="changeFog(this)">
