@@ -188,14 +188,14 @@ angular.module('app', [])
       }
 
       // Auto TimeFog every x minutes
-      console.log("--------", convertTime, timeFog)
-      if (convertTime % timeFog == 0) {
-        console.log("---> fogOn Auto")
-        $scope.fogOn()
-      } else {
-        console.log("---> fogOff Auto")
-        $scope.fogOff()
-      }
+      // console.log("--------", convertTime, timeFog)
+      // if (convertTime % timeFog == 0) {
+      //   console.log("---> fogOn Auto")
+      //   $scope.fogOn()
+      // } else {
+      //   console.log("---> fogOff Auto")
+      //   $scope.fogOff()
+      // }
     }//Auto time
 
 
