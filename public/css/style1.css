@@ -32,7 +32,7 @@ body{
 }
 /*-------------------------------------------------------buttonhole*/
 label {
-    font-weight: 300;
+    font-size: .8rem;
 }
 #tempInput,#humiInput {
     border: none;
