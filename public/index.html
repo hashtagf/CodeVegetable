@@ -58,6 +58,9 @@
   const ALIAS = "New_Output";     //  ชื่อตัวเอง
   const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
 
+  var tempGlobal = 0;
+  var humiGlobal = 0;
+
   function switchPress(logic) {
     console.log("============>", logic);
     if (logic == 1) {
@@ -97,9 +100,11 @@
     if (topic == '/Vegetable001/Temperature') {
       var dataFloat = parseFloat(data);
       document.getElementById("temp").innerHTML = dataFloat.toFixed(2);
+      tempGlobal = dataFloat.toFixed(2);
     } else if (topic == '/Vegetable001/Humidity') {
       var dataFloat = parseFloat(data);
       document.getElementById("humidity").innerHTML = dataFloat.toFixed(2);
+      humiGlobal = dataFloat.toFixed(2);
     } else if (topic == '/Vegetable001/EC') {
       document.getElementById("EC").innerHTML = data / 1000;
     } else if (topic == '/Vegetable001/pH') {
@@ -140,7 +145,7 @@
       }
     }
 
-    if (scope.staFog) {
+    if (scope.staFog || tempGlobal >= scope.temp || humiGlobal <= scope.humi) {
       $('#Fog').prop('checked', true)
       $("#graphicfog").show();
       console.log('Fog ON')
@@ -270,6 +275,25 @@
     scope.timeFog = timeFog;
     scope.autoTime()
   }
+
+  changeTemp = () => {
+    var scope = angular.
+      element(document.getElementById('mainApp')).
+      scope();
+    let temp = $('#temp').val()
+    scope.temp = temp;
+    scope.autoTime()
+  }
+
+  changeHumi = () => {
+    var scope = angular.
+      element(document.getElementById('mainApp')).
+      scope();
+    let humi = $('#humi').val()
+    scope.humi = humi;
+    scope.autoTime()
+  }
+
   setInterval(() => {
     checkStatus()
   }, 2000)
@@ -369,16 +393,30 @@
               </div>
               <div class="col col-12 col-lg-6">
                 <div class="md-form">
-                  <input type="time" id="timeEnd" class="form-control" mdbInput onclick="changeTimeEnd()"
+                  <input type="time" id="timeEnd" class="form-control" mdbInput onchange="changeTimeEnd()"
                     ng-model="timeEnd">
                   <label for="input">End time</label>
                 </div>
               </div>
-              <div class="col col-12 col-lg-6">
+              <div class="col col-12 col-lg-12">
                 <div class="md-form">
-                  <input mdbInput type="text" name="timeFog" id="timeFog" class="form-control" onclick="changeTimeFog()"
+                  <input mdbInput type="text" name="timeFog" id="timeFog" class="form-control" onchange="changeTimeFog()"
                     ng-model="timeFog">
                   <label for="timeFog">On Every time of Fog (minutes)</label>
+                </div>
+              </div>
+              <div class="col col-12 col-lg-6">
+                <div class="md-form">
+                  <input type="number" id="temp" class="form-control" mdbInput onchange="changeTemp()"
+                    ng-model="temp">
+                  <label for="temp">Temperature</label>
+                </div>
+              </div>
+              <div class="col col-12 col-lg-6">
+                <div class="md-form">
+                  <input type="number" id="humi" class="form-control" mdbInput onchange="changeHumi()"
+                    ng-model="humi">
+                  <label for="input">Humidity</label>
                 </div>
               </div>
             </div>

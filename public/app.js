@@ -31,7 +31,9 @@ angular.module('app', [])
         stasys: true,
         sysTimeStart: new Date(1970, 0, 1, 05, 00, 0),
         sysTimeEnd: new Date(1970, 0, 1, 20, 35, 0),
-        sysTimeFog: 480
+        sysTimeFog: 480,
+        sysTemp: 28,
+        sysHumi: 70
       }]
       $scope.totalsys = []
 
@@ -42,7 +44,9 @@ angular.module('app', [])
           $scope.timeStart = new Date($scope.totalsys[0].sysTimeStart)
           $scope.timeEnd = new Date($scope.totalsys[0].sysTimeEnd)
           $scope.timeFog = $scope.totalsys[0].sysTimeFog
-          console.log("getsys", $scope.timeEnd, $scope.totalsys[0].sysTimeEnd)
+          $scope.temp = $scope.totalsys[0].sysTemp
+          $scope.humi = $scope.totalsys[0].sysHumi
+          // console.log("getsys", $scope.timeEnd, $scope.totalsys[0].sysTimeEnd)
         })
       }
       getsys()
@@ -51,12 +55,14 @@ angular.module('app', [])
         $scope.sys[0].sysTimeStart = $scope.timeStart
         $scope.sys[0].sysTimeEnd = $scope.timeEnd
         $scope.sys[0].sysTimeFog = $scope.timeFog
+        $scope.sys[0].sysTemp = $scope.temp
+        $scope.sys[0].sysHumi = $scope.humi
         $http.put('/setsys/' + $scope.totalsys[0]._id, $scope.sys[0]).then(res => {
           $scope.totalsys[0].sysTimeStart = res.data.sysTimeStart
           $scope.totalsys[0].sysTimeEnd = res.data.sysTimeEnd
           $scope.totalsys[0].sysTimeFog = res.data.sysTimeFog
         })
-        console.log("AutoTime", $scope.sys[0].sysTimeStart)
+        // console.log("AutoTime", $scope.sys[0].sysTimeStart)
       }
       $scope.auto = function () {
         $scope.sys[0].sysbtn = 'Auto'
