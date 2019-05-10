@@ -129,14 +129,16 @@
     if (scope.stasystem == 'Auto') {
       $('#auto-manual').prop('checked', true)
       console.log('Auto')
+      console.log(tempGlobal + '>=' + scope.temp )
+      console.log(humiGlobal + '>=' + scope.humi )
       if (tempGlobal >= scope.temp || humiGlobal <= scope.humi) {
         $("#graphicfog").show();
         scope.fogOn()
-        console.log('>> fogOn')
+        console.log('>>>>>>>> fogOn')
       } else {
         $("#graphicfog").removeAttr("style").hide();
         scope.fogOff()
-        console.log('>> fogOn')
+        console.log('>>>>>>>> fogOn')
       }
     }
     else {
