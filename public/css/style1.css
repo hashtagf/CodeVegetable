@@ -31,7 +31,13 @@ body{
     border-radius:50%;
 }
 /*-------------------------------------------------------buttonhole*/
-
+label {
+    font-weight: 300;
+}
+#tempInput,#humiInput {
+    border: none;
+    border-bottom: 1px solid #ced4da;
+}
 .h1 {
   position: relative;
   margin-top: -14px;
