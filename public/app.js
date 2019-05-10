@@ -44,8 +44,8 @@ angular.module('app', [])
           $scope.timeStart = new Date($scope.totalsys[0].sysTimeStart)
           $scope.timeEnd = new Date($scope.totalsys[0].sysTimeEnd)
           $scope.timeFog = $scope.totalsys[0].sysTimeFog
-          $scope.temp = $scope.totalsys[0].sysTemp
-          $scope.humi = $scope.totalsys[0].sysHumi
+          $scope.temp = parseFloat($scope.totalsys[0].sysTemp)
+          $scope.humi = parseFloat($scope.totalsys[0].sysHumi)
           // console.log("getsys", $scope.timeEnd, $scope.totalsys[0].sysTimeEnd)
         })
       }
