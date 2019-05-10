@@ -407,6 +407,7 @@
                   <label for="input">End time</label>
                 </div>
               </div>
+            </div>
               <!-- <div class="col col-12 col-lg-12">
                 <div class="md-form">
                   <input mdbInput type="text" name="timeFog" id="timeFog" class="form-control"
@@ -414,18 +415,20 @@
                   <label for="timeFog">On Every time of Fog (minutes)</label>
                 </div>
               </div> -->
-              <div class="col col-12 col-lg-6">
-                <div class="md-form">
-                  <input type="number" id="tempInput" class="form-control" mdbInput onchange="changeTemp()"
-                    ng-model="temp">
-                  <label for="tempInput">Temperature</label>
+              <div class="form-row mt-2" ng-if="stasystem === 'Auto'">
+                <div class="col col-12 col-lg-6">
+                  <div class="md-form">
+                    <input type="number" id="tempInput" class="form-control" mdbInput onchange="changeTemp()"
+                      ng-model="temp">
+                    <label for="tempInput">Temperature</label>
+                  </div>
                 </div>
-              </div>
-              <div class="col col-12 col-lg-6">
-                <div class="md-form">
-                  <input type="number" id="humiInput" class="form-control" mdbInput onchange="changeHumi()"
-                    ng-model="humi">
-                  <label for="humiInput">Humidity</label>
+                <div class="col col-12 col-lg-6">
+                  <div class="md-form">
+                    <input type="number" id="humiInput" class="form-control" mdbInput onchange="changeHumi()"
+                      ng-model="humi">
+                    <label for="humiInput">Humidity</label>
+                  </div>
                 </div>
               </div>
             </div>
