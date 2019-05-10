@@ -218,7 +218,9 @@ app.put('/setsys/:id', function (req, res) {
         stasys: req.body.stasys,
         sysTimeStart: req.body.sysTimeStart,
         sysTimeEnd: req.body.sysTimeEnd,
-        sysTimeFog: req.body.sysTimeFog
+        sysTimeFog: req.body.sysTimeFog,
+        sysTemp: req.body.sysTemp,
+        sysHumi: req.body.sysHumi
       }
     },
     { new: true })

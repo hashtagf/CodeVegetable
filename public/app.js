@@ -57,10 +57,13 @@ angular.module('app', [])
         $scope.sys[0].sysTimeFog = $scope.timeFog
         $scope.sys[0].sysTemp = $scope.temp
         $scope.sys[0].sysHumi = $scope.humi
+        console.log($scope.sys[0])
         $http.put('/setsys/' + $scope.totalsys[0]._id, $scope.sys[0]).then(res => {
           $scope.totalsys[0].sysTimeStart = res.data.sysTimeStart
           $scope.totalsys[0].sysTimeEnd = res.data.sysTimeEnd
           $scope.totalsys[0].sysTimeFog = res.data.sysTimeFog
+          $scope.totalsys[0].sysTemp = res.data.sysTemp
+          $scope.totalsys[0].sysHumi = res.data.sysHumi
         })
         // console.log("AutoTime", $scope.sys[0].sysTimeStart)
       }
