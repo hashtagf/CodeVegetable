@@ -132,20 +132,11 @@
       if (tempGlobal >= scope.temp || humiGlobal <= scope.humi) {
         $("#graphicfog").show();
         scope.fogOn()
-        setTimeout(() => {
-          clearInterval(timeCountDown);
-          scope.timeCount = 60
-          $('#Fog').prop('checked', false);
-          // $('#Fog').checkboxradio("refresh");
-          $("#graphicfog").removeAttr("style").hide();
-          scope.fogOff()
-        }, 60000)
-        var timeCountDown = setInterval(() => {
-          scope.timeCount--;
-        }, 1000)
+        console.log('>> fogOn')
       } else {
         $("#graphicfog").removeAttr("style").hide();
         scope.fogOff()
+        console.log('>> fogOn')
       }
     }
     else {
@@ -161,18 +152,17 @@
         $("#graphiclight").removeAttr("style").hide();
         console.log('Light OFF')
       }
-    }
-
-    if (scope.staFog) {
-      $('#Fog').prop('checked', true)
-      $("#graphicfog").show();
-      console.log('Fog ON')
-    }
-    else {
-      $('#Fog').prop('checked', false)
-      $("#graphicfog").removeAttr("style").hide();
-      scope.fogOff()
-      console.log('Fog OFF')
+      if (scope.staFog) {
+        $('#Fog').prop('checked', true)
+        $("#graphicfog").show();
+        console.log('Fog ON')
+      }
+      else {
+        $('#Fog').prop('checked', false)
+        $("#graphicfog").removeAttr("style").hide();
+        scope.fogOff()
+        console.log('Fog OFF')
+      }
     }
 
     if (scope.staPump) {
@@ -224,7 +214,6 @@
         clearInterval(timeCountDown);
         scope.timeCount = 60
         $('#Fog').prop('checked', false);
-        // $('#Fog').checkboxradio("refresh");
         $("#graphicfog").removeAttr("style").hide();
         scope.fogOff()
       }, 60000)
@@ -425,13 +414,15 @@
               </div>
               <div class="col col-12 col-lg-6">
                 <div class="md-form">
-                  <input type="number" id="tempInput" class="form-control" mdbInput onchange="changeTemp()" ng-model="temp">
+                  <input type="number" id="tempInput" class="form-control" mdbInput onchange="changeTemp()"
+                    ng-model="temp">
                   <label for="tempInput">Temperature</label>
                 </div>
               </div>
               <div class="col col-12 col-lg-6">
                 <div class="md-form">
-                  <input type="number" id="humiInput" class="form-control" mdbInput onchange="changeHumi()" ng-model="humi">
+                  <input type="number" id="humiInput" class="form-control" mdbInput onchange="changeHumi()"
+                    ng-model="humi">
                   <label for="humiInput">Humidity</label>
                 </div>
               </div>
