@@ -61,17 +61,6 @@
   var tempGlobal = 0;
   var humiGlobal = 0;
 
-  function switchPress(logic) {
-    console.log("============>", logic);
-    if (logic == 1) {
-      microgear.chat(thing1, "ON");
-      console.log("On")
-    } else if (logic == 0) {
-      microgear.chat(thing1, "OFF");
-      console.log("Off")
-    }
-  }
-
   var microgear = Microgear.create({
     key: KEY,
     secret: SECRET,
@@ -119,18 +108,10 @@
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
-    // console.log('system',scope.stasystem)  
-    // console.log('Fog',scope.staFog,scope.fogSta)
-    // console.log('LEd',scope.staLED,scope.LEDSta)
-    // console.log('Pump',scope.staPump,scope.pumpSta)
-    // console.log('Water',scope.statWater,scope.waterSta)
-    // scope.stasystem = 'Auto'
 
     if (scope.stasystem == 'Auto') {
       $('#auto-manual').prop('checked', true)
       console.log('Auto')
-      console.log(tempGlobal + '>=' + scope.temp)
-      console.log(humiGlobal + '<=' + scope.humi)
       if (tempGlobal >= scope.temp || humiGlobal <= scope.humi) {
         $("#graphicfog").show();
         scope.fogOn()
@@ -245,8 +226,12 @@
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
-    if (e.checked) scope.waterOn()
-    else scope.waterOff()
+    if (e.checked) {
+      scope.waterOn()
+    }
+    else {
+      scope.waterOff()
+    }
   }
 
   changeSystem = (e) => {

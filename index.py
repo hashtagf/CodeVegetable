@@ -1,10 +1,10 @@
 import microgear.client as microgear
 import logging
 import time
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import os
 
-GPIO.setmode(GPIO.BCM)
+# GPIO.setmode(GPIO.BCM)
 
 appid = 'Vegetable001'
 gearkey = 'dfhiaN7XLOFf7S3'
@@ -18,38 +18,47 @@ def connection():
 
 
 def subscription(topic, message):
-    logging.info(topic+" "+message)
-    if message == "lightOn":
+    logging.info(message)
+    if message == "b'lightOn'":
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.LOW)
-    elif message == "lightOff":
+        logging.info("lightOn")
+    elif message == "b'lightOff'":
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.HIGH)
-    elif message == "pumpOn":
+        logging.info("lightOff")
+    elif message == "b'pumpOn'":
         GPIO.setup(22, GPIO.OUT)
         GPIO.output(22, GPIO.LOW)
-    elif message == "pumpOff":
+        logging.info("pumpOn")
+    elif message == "b'pumpOff'":
         GPIO.setup(22, GPIO.OUT)
         GPIO.output(22, GPIO.HIGH)
-    elif message == "fogOn":
+        logging.info("pumpOff")
+    elif message == "b'fogOn'":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.LOW)
-    elif message == "fogOff":
+        logging.info("fogOn")
+    elif message == "b'fogOff'":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.HIGH)
-    elif message == "waterOn":
+        logging.info("fogOff")
+    elif message == "b'waterOn'":
         GPIO.setup(26, GPIO.OUT)
         GPIO.output(26, GPIO.LOW)
-    elif message == "waterOff":
+        logging.info("waterOn")
+    elif message == "b'waterOff'":
         GPIO.setup(26, GPIO.OUT)
         GPIO.output(26, GPIO.HIGH)
-    elif message == "takeCam":
+        logging.info("waterOff")
+    elif message == "b'takeCam'":
         os.system(
             "fswebcam -p YUYV -d /dev/video2 -r 1280x780 --no-banner public/picture/cam3/Floor3.jpg")
         os.system(
             "fswebcam -p YUYV -d /dev/video1 -r 1280x780 --no-banner public/picture/cam2/Floor2.jpg")
         os.system(
             "fswebcam -p YUYV -d /dev/video0 -r 1280x780 --no-banner public/picture/cam1/Floor1.jpg")
+        logging.info("takeCam")
 
 
 def disconnect():
