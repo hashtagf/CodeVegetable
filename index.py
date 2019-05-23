@@ -42,11 +42,11 @@ def subscription(topic, message):
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.HIGH)
         logging.info("fogOff")
-    elif message == "b'waterOn'":
+    elif message == "waterOn'":
         GPIO.setup(26, GPIO.OUT)
         GPIO.output(26, GPIO.LOW)
         logging.info("waterOn")
-    elif message == "b'waterOff'":
+    elif message == "waterOff'":
         GPIO.setup(26, GPIO.OUT)
         GPIO.output(26, GPIO.HIGH)
         logging.info("waterOff")
