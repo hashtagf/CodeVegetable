@@ -19,46 +19,46 @@ def connection():
 
 def subscription(topic, message):
     logging.info('message : ' + message)
-    if message == "b'lightOn'":
+    if message == "lightOn'":
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.LOW)
-        logging.info("lightOn")
-    elif message == "b'lightOff'":
+        logging.info("contorller : lightOn")
+    elif message == "lightOff'":
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.HIGH)
-        logging.info("lightOff")
-    elif message == "b'pumpOn'":
+        logging.info("contorller : lightOff")
+    elif message == "pumpOn'":
         GPIO.setup(22, GPIO.OUT)
         GPIO.output(22, GPIO.LOW)
-        logging.info("pumpOn")
-    elif message == "b'pumpOff'":
+        logging.info("contorller : pumpOn")
+    elif message == "pumpOff'":
         GPIO.setup(22, GPIO.OUT)
         GPIO.output(22, GPIO.HIGH)
-        logging.info("pumpOff")
-    elif message == "b'fogOn'":
+        logging.info("contorller : pumpOff")
+    elif message == "fogOn'":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.LOW)
-        logging.info("fogOn")
-    elif message == "b'fogOff'":
+        logging.info("contorller : fogOn")
+    elif message == "fogOff'":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.HIGH)
-        logging.info("fogOff")
-    elif message == "b'waterOn'":
+        logging.info("contorller : fogOff")
+    elif message == "waterOn'":
         GPIO.setup(26, GPIO.OUT)
         GPIO.output(26, GPIO.LOW)
-        logging.info("waterOn")
-    elif message == "b'waterOff'":
+        logging.info("contorller : waterOn")
+    elif message == "waterOff'":
         GPIO.setup(26, GPIO.OUT)
         GPIO.output(26, GPIO.HIGH)
-        logging.info("waterOff")
-    elif message == "b'takeCam'":
+        logging.info("contorller : waterOff")
+    elif message == "takeCam'":
         os.system(
             "fswebcam -p YUYV -d /dev/video2 -r 1280x780 --no-banner public/picture/cam3/Floor3.jpg")
         os.system(
             "fswebcam -p YUYV -d /dev/video1 -r 1280x780 --no-banner public/picture/cam2/Floor2.jpg")
         os.system(
             "fswebcam -p YUYV -d /dev/video0 -r 1280x780 --no-banner public/picture/cam1/Floor1.jpg")
-        logging.info("takeCam")
+        logging.info("contorller : takeCam")
 
 
 def disconnect():
