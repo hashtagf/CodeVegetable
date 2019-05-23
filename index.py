@@ -19,35 +19,35 @@ def connection():
 
 def subscription(topic, message):
     logging.info('message : ' + message)
-    if message == "lightOn'":
+    if message == "lightOn":
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.LOW)
         logging.info("contorller : lightOn")
-    elif message == "lightOff'":
+    elif message == "lightOff":
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.HIGH)
         logging.info("contorller : lightOff")
-    elif message == "pumpOn'":
+    elif message == "pumpOn":
         GPIO.setup(22, GPIO.OUT)
         GPIO.output(22, GPIO.LOW)
         logging.info("contorller : pumpOn")
-    elif message == "pumpOff'":
+    elif message == "pumpOff":
         GPIO.setup(22, GPIO.OUT)
         GPIO.output(22, GPIO.HIGH)
         logging.info("contorller : pumpOff")
-    elif message == "fogOn'":
+    elif message == "fogOn":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.LOW)
         logging.info("contorller : fogOn")
-    elif message == "fogOff'":
+    elif message == "fogOff":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.HIGH)
         logging.info("contorller : fogOff")
-    elif message == "waterOn'":
+    elif message == "waterOn":
         GPIO.setup(26, GPIO.OUT)
         GPIO.output(26, GPIO.LOW)
         logging.info("contorller : waterOn")
-    elif message == "waterOff'":
+    elif message == "waterOff":
         GPIO.setup(26, GPIO.OUT)
         GPIO.output(26, GPIO.HIGH)
         logging.info("contorller : waterOff")
