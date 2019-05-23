@@ -18,7 +18,6 @@ def connection():
 
 
 def subscription(topic, message):
-    logging.info(message)
     if message == "b'lightOn'":
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.LOW)
