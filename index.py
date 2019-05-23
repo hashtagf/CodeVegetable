@@ -59,6 +59,8 @@ def subscription(topic, message):
         os.system(
             "fswebcam -p YUYV -d /dev/video0 -r 1280x780 --no-banner public/picture/cam1/Floor1.jpg")
         logging.info("contorller : takeCam")
+    else:
+        logging.info("contorller : not Found")
 
 
 def disconnect():
