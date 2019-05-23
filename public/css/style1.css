@@ -6,8 +6,9 @@
   } */
 /*-------------------------------------------------------Width button*/
 body{
-    height: auto;
+    /* height: auto;
     overflow-y: auto;
+    min-height: 100vh; */
 }
 .bg {
     height: 100vh;
