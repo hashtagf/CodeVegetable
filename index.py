@@ -1,10 +1,10 @@
 import microgear.client as microgear
 import logging
 import time
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import os
 
-# GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 
 appid = 'Vegetable001'
 gearkey = 'dfhiaN7XLOFf7S3'
