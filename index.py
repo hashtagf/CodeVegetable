@@ -3,6 +3,7 @@ import logging
 import time
 import RPi.GPIO as GPIO
 import os
+import dropbox
 
 GPIO.setmode(GPIO.BCM)
 
@@ -12,6 +13,13 @@ gearsecret = 'EsJgEv08jtXzSbwdKUxTpSYq7'
 
 microgear.create(gearkey, gearsecret, appid, {'debugmode': True})
 
+
+def saveImg (filename) :
+    dbx = dropbox.Dropbox("cKG3HoKEj5UAAAAAAABN6J8oc2yJIB7q6pDRjVKBNvrX_gs0D0vSSAHCT-QVRnlI")
+    dbx.users_get_current_account()
+    file_path = os.path.join("public/picture/", filename)
+    f = open(file_path, 'rb')
+    dbx.files_upload(f.read(),'/cam/'+filename)
 
 def connection():
     logging.info("Now I am connected with Netpie")
@@ -51,13 +59,16 @@ def subscription(topic, message):
         GPIO.setup(26, GPIO.OUT)
         GPIO.output(26, GPIO.HIGH)
         logging.info("contorller : waterOff")
-    elif message == "takeCam'":
+    elif message == "takeCam":
         os.system(
-            "fswebcam -p YUYV -d /dev/video2 -r 1280x780 --no-banner public/picture/cam3/Floor3.jpg")
+            "fswebcam -p YUYV -d /dev/video2 -r 1280x780 --no-banner public/picture/Floor3.jpg")
         os.system(
-            "fswebcam -p YUYV -d /dev/video1 -r 1280x780 --no-banner public/picture/cam2/Floor2.jpg")
+            "fswebcam -p YUYV -d /dev/video1 -r 1280x780 --no-banner public/picture/Floor2.jpg")
         os.system(
-            "fswebcam -p YUYV -d /dev/video0 -r 1280x780 --no-banner public/picture/cam1/Floor1.jpg")
+            "fswebcam -p YUYV -d /dev/video0 -r 1280x780 --no-banner public/picture/Floor1.jpg")
+        saveImg ('Floor3.jpg')
+        saveImg ('Floor2.jpg')
+        saveImg ('Floor1.jpg')
         logging.info("contorller : takeCam")
     else:
         logging.info("contorller : not Found")
