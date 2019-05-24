@@ -130,11 +130,11 @@ app.get('/waterOff', function (req, res, next) {
 })
 
 app.get('/takeCam', function (req, res, next) {
-  microgear.chat("RaspberryPI", "taleCam")
+  microgear.chat("RaspberryPI", "takeCam")
   res.status(200)
   res.send({
     status: "OK",
-    msg: "taleCam"
+    msg: "takeCam"
   })
 })
 
