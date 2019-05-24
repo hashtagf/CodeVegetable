@@ -48,6 +48,21 @@ angular.module('app', [])
           $scope.humi = parseFloat($scope.totalsys[0].sysHumi)
           // console.log("getsys", $scope.timeEnd, $scope.totalsys[0].sysTimeEnd)
         })
+        if ($scope.totalsys == []) {
+          let obj = {
+            "btnsys" : 1,
+            "stasys" : true,
+            "sysHumi" : 70,
+            "sysTemp" : "29",
+            "sysTimeEnd" : "1970-01-01T15:30:00.000Z",
+            "sysTimeFog" : 480,
+            "sysTimeStart" : "1969-12-31T22:00:00.000Z",
+            "sysbtn" : "Auto"
+          }
+          $http.post('/setsys',obj).then(res => {
+            $scope.totalsys[0] = obj
+          })
+        }
       }
       getsys()
       $scope.autoTime = function () {
