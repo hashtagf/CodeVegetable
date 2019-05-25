@@ -4,7 +4,7 @@ import time
 import RPi.GPIO as GPIO
 import os
 import dropbox
-
+import schedule
 GPIO.setmode(GPIO.BCM)
 
 appid = 'Vegetable001'
@@ -80,8 +80,10 @@ def subscription(topic, message):
 
 def disconnect():
     logging.info("disconnected")
-
-
+def job():
+    print("I'm working...")
+schedule.every(5).minutes.do(job)
+schedule.run_pending()
 microgear.setalias("RaspberryPI")
 microgear.setname("RaspberryPI")
 microgear.on_connect = connection

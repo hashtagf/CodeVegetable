@@ -75,7 +75,7 @@ for (lower, upper) in boundaries:
 		for j in range(0, 12):
 			index = i*3+j
 			if index < len(Holes) and Holes[index]['statushole'] and holes[i][j] is not None:
-				if 'sizebefore' in Holes[index] :
+				if 'sizeafter' in Holes[index] :
 					sizebefore = Holes[index]['sizeafter']
 					sizeafter = holes[i][j]
 				else :
@@ -90,7 +90,6 @@ for (lower, upper) in boundaries:
 					"sizebefore": sizebefore,
 					"sizeafter": sizeafter,
 				})
-				print(r.json())
 	print("fin")
 	cv2.imshow("images", np.hstack([image, output]))
 	cv2.waitKey(0)
