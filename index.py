@@ -60,6 +60,8 @@ def subscription(topic, message):
         GPIO.output(13, GPIO.HIGH)
         logging.info("contorller : waterOff")
     elif message == "takeCam":
+        GPIO.setup(6, GPIO.OUT)
+        GPIO.output(6, GPIO.LOW)
         os.system(
             "fswebcam -p YUYV -d /dev/video2 -r 1280x780 --no-banner public/picture/Floor3.jpg")
         os.system(
@@ -70,6 +72,8 @@ def subscription(topic, message):
         saveImg ('Floor2.jpg')
         saveImg ('Floor1.jpg')
         logging.info("contorller : takeCam")
+        GPIO.setup(6, GPIO.OUT)
+        GPIO.output(6, GPIO.HIGH)
     else:
         logging.info("contorller : not Found")
 
