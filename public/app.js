@@ -770,7 +770,8 @@ angular.module('app', [])
               "nameveg": veg,
               "typeveg": null,
               "statushole": false,
-              "size": null
+              "sizebefore": null,
+              "sizeafter": null
             }
           else {//put
             obj = {
@@ -778,7 +779,7 @@ angular.module('app', [])
               "nameveg": veg,
               "typeveg": new Date(),
               "statushole": true,
-              "size": null
+              "sizeafter": null
             }
           }
           if ((veg == null && $scope.totaldatahole[id].statushole) || (veg !== null && !$scope.totaldatahole[id].statushole))

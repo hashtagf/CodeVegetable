@@ -147,8 +147,8 @@
 											<img src="../icon/seeding4.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='redoak'" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
 										</span>
 										<span class="tooltiptext"><h5>{{totaldatahole[i*3+floor*12].nameveg}}</h5><br>
-											<span ng-if="totaldatahole[i*3+floor*12].size">
-													Grow : {{totaldatahole[i*3+floor*12].size}}%</span> <br>
+											<span ng-if="totaldatahole[i*3+floor*12].sizebefore">
+													Grow : {{(totaldatahole[i*3+floor*12].sizeafter-totaldatahole[i*3+floor*12].sizebefore)/totaldatahole[i*3+floor*12].sizebefore*100}}%</span> <br>
 											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days}} days<br>
 											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).hours}} hours
 											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).mins}} mins

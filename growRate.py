@@ -74,17 +74,22 @@ for (lower, upper) in boundaries:
 	for i in range(0, 3):
 		for j in range(0, 12):
 			index = i*3+j
-			size = 0
-			if index < len(Holes):
-				if (holes[i][j] is not None and 'size' in Holes[index] and Holes[index]['statushole']):
-					size = (holes[i][j] - Holes[index]['size'])/Holes[index]['size']*100
+			if index < len(Holes) and Holes[index]['statushole'] and holes[i][j] is not None:
+				if 'sizebefore' in Holes[index] :
+					sizebefore = Holes[index]['sizeafter']
+					sizeafter = holes[i][j]
+				else :
+					sizeafter = holes[i][j]
+					sizebefore = holes[i][j]
 				r = requests.put("https://smartfarm-cabinet.herokuapp.com/hole/" + Holes[index]['_id'], 
+				print(size)
 				data = {
 					"idhole": Holes[index]['idhole'],
 					"statushole": Holes[index]['statushole'],
 					"nameveg": Holes[index]['nameveg'],
 					"typeveg": Holes[index]['typeveg'],
-					"size": size
+					"sizebefore": sizebefore,
+					"sizeafter": sizeafter,
 				})
 				print(r.json())
 	print("fin")
