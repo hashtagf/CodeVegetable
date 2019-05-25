@@ -769,14 +769,16 @@ angular.module('app', [])
               "idhole": id,
               "nameveg": veg,
               "typeveg": null,
-              "statushole": false
+              "statushole": false,
+              "size": null
             }
           else {//put
             obj = {
               "idhole": id,
               "nameveg": veg,
               "typeveg": new Date(),
-              "statushole": true
+              "statushole": true,
+              "size": null
             }
           }
           if ((veg == null && $scope.totaldatahole[id].statushole) || (veg !== null && !$scope.totaldatahole[id].statushole))

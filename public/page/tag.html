@@ -147,6 +147,8 @@
 											<img src="../icon/seeding4.png" ng-if="totaldatahole[i*3+floor*12].nameveg=='redoak'" class="vegInHole" ng-attr-id="{{i*3+floor*12}}">
 										</span>
 										<span class="tooltiptext"><h5>{{totaldatahole[i*3+floor*12].nameveg}}</h5><br>
+											<span ng-if="totaldatahole[i*3+floor*12].size">
+													Grow : {{totaldatahole[i*3+floor*12].size}}%</span> <br>
 											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).days}} days<br>
 											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).hours}} hours
 											{{daysDiffFunc(totaldatahole[i*3+floor*12].typeveg).mins}} mins
@@ -177,6 +179,8 @@
 											<img src="../icon/seeding4.png" ng-if="totaldatahole[1+i*3+floor*12].nameveg=='redoak'" class="vegInHole" ng-attr-id="{{1+i*3+floor*12}}">
 										</span>
 										<span class="tooltiptext"><h5>{{totaldatahole[1+i*3+floor*12].nameveg}}</h5><br>
+											<span ng-if="totaldatahole[1+i*3+floor*12].size">
+												Grow : {{totaldatahole[1+i*3+floor*12].size}}%</span> <br>
 											{{daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).days}} days<br>
 											{{daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).hours}} hours
 											{{daysDiffFunc(totaldatahole[1+i*3+floor*12].typeveg).mins}} mins
@@ -207,6 +211,8 @@
 											<img src="../icon/seeding4.png" ng-if="totaldatahole[2+i*3+floor*12].nameveg=='redoak'" class="vegInHole" ng-attr-id="{{2+i*3+floor*12}}">
 										</span>
 										<span class="tooltiptext"><h5>{{totaldatahole[2+i*3+floor*12].nameveg}}</h5><br>
+											<span ng-if="totaldatahole[2+i*3+floor*12].size">
+													Grow : {{totaldatahole[2+i*3+floor*12].size}}%</span> <br>
 											{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).days}} days<br>
 											{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).hours}} hours
 											{{daysDiffFunc(totaldatahole[2+i*3+floor*12].typeveg).mins}} mins

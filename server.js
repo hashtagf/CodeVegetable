@@ -194,7 +194,7 @@ app.get('/hole', function (req, res) {
 app.put('/hole/:id', function (req, res) {
   evenhole.findOneAndUpdate(
     { _id: req.params.id },
-    { $set: { idhole: req.body.idhole, statushole: req.body.statushole, nameveg: req.body.nameveg, typeveg: req.body.typeveg } },
+    { $set: { idhole: req.body.idhole, statushole: req.body.statushole, nameveg: req.body.nameveg, typeveg: req.body.typeveg, size: req.body.size } },
     { new: true })
     .exec(function (err, done) {
       if (err) console.log(err)
