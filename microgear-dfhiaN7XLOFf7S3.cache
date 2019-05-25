@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"_":{"key":"dfhiaN7XLOFf7S3","requesttoken":null,"accesstoken":{"token":"UYA8PIkUv0YdfeJX","secret":"IYHl2D5zWa5aizxxpIjD6jVskpLUKroH","endpoint":"pie://gb.netpie.io:1883","revokecode":"NbIFy1qCsyrE+slIMvG56gZxTzM="}}}
+=======
+{"_":{"key":"dfhiaN7XLOFf7S3","requesttoken":null,"accesstoken":{"token":"IuYW5QDoYBqOcM4y","secret":"t3p3k5t5YYM45MXGxZaTb2DHPofbVhLI","endpoint":"pie://gb.netpie.io:1883","revokecode":"Cp1YO+68WDbt3SenWM0aQ83jP+4="}}}
+>>>>>>> 5f0ffb1d1c9a9da0edaa6d85ee3841204a395003

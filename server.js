@@ -4,7 +4,7 @@ var bodyParser = require('body-parser')
 var MicroGear = require('microgear')
 var Schema = mongoose.Schema
 var thingSchema = new Schema({}, { strict: false })
-var DateEat = mongoose.model('SmartFarm', thingSchema)
+var DateEat = mongoose.model('smartfarm', thingSchema)
 
 var Schema2 = mongoose.Schema
 var thingSchema2 = new Schema2({}, { strict: false })
@@ -22,7 +22,7 @@ const APPID = "Vegetable001";
 const KEY = "dfhiaN7XLOFf7S3";
 const SECRET = "EsJgEv08jtXzSbwdKUxTpSYq7";
 
-const ALIAS = "SERVER_API";     //  ชื่อตัวเอง                                //  ชื่อเพื่อนที่จะคุย
+const ALIAS = "SERVER_API";     //  ชื่อตัวเอง
 
 var microgear = MicroGear.create({
   key: KEY,
@@ -54,8 +54,8 @@ var app = express()
 // mongoose.connect('mongodb://localhost:27017/farm')
 mongoose.connect('mongodb://smartfarm:farm1234@ds053678.mlab.com:53678/farm')
 
-app.use(bodyParser.json())
 app.use(express.static('public'))
+app.use(bodyParser.json()); app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/ledOn', function (req, res, next) {
   microgear.chat("RaspberryPI", "lightOn")
@@ -230,9 +230,10 @@ app.put('/btn/:id', function (req, res) {
     { $set: { btnnum: req.body.btnnum, statusbtn: req.body.statusbtn } },
     { new: true })
     .exec(function (err, done) {
-      if (err) console.log(err)
+      if (err) res.send(err)
       res.send(done)
     })
+    
 })
 //////////////////////////////////////////////////////////////////////////////////////btn
 
@@ -279,6 +280,6 @@ app.put('/setsys/:id', function (req, res) {
 })
 
 //////////////////////////////////////////////////////////////////////////////////////btn
-
-app.listen(4000)
-console.log('running on port 4000.')
+const port = process.env.PORT || 4000
+app.listen(port)
+console.log('running on port' + port)
