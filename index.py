@@ -13,13 +13,13 @@ gearsecret = 'EsJgEv08jtXzSbwdKUxTpSYq7'
 
 microgear.create(gearkey, gearsecret, appid, {'debugmode': True})
 
-
+dbx = dropbox.Dropbox("cKG3HoKEj5UAAAAAAABOIPdWvWMDanbCaQP_5q5Sd-NbI9CpIDPCFeZN0EI2xCUa")
+dbx.users_get_current_account()
 def saveImg (filename) :
-    dbx = dropbox.Dropbox("cKG3HoKEj5UAAAAAAABN6J8oc2yJIB7q6pDRjVKBNvrX_gs0D0vSSAHCT-QVRnlI")
-    dbx.users_get_current_account()
-    file_path = os.path.join("public/picture/", filename)
+    file_path = os.path.join("/home/pi/Desktop/CodeVegetable/public/picture/", filename)
     f = open(file_path, 'rb')
-    dbx.files_upload(f.read(),'/cam/'+filename)
+    dbx.files_upload(f.read(),'/'+filename, mode=dropbox.files.WriteMode.overwrite)
+    # dbx.files_upload(f.read(),'/'+filename)
 
 def connection():
     logging.info("Now I am connected with Netpie")
@@ -90,4 +90,6 @@ microgear.on_connect = connection
 microgear.on_message = subscription
 microgear.on_disconnect = disconnect
 microgear.subscribe("/controller")
-microgear.connect(True)
+microgear.connect(False)
+while True:
+    pass
