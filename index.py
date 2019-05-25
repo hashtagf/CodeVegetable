@@ -60,6 +60,8 @@ def subscription(topic, message):
         GPIO.output(13, GPIO.HIGH)
         logging.info("contorller : waterOff")
     elif message == "takeCam":
+        GPIO.setup(17, GPIO.OUT)
+        GPIO.output(17, GPIO.HIGH)
         GPIO.setup(6, GPIO.OUT)
         GPIO.output(6, GPIO.LOW)
         os.system(
@@ -72,6 +74,8 @@ def subscription(topic, message):
         saveImg ('Floor2.jpg')
         saveImg ('Floor1.jpg')
         logging.info("contorller : takeCam")
+        GPIO.setup(17, GPIO.OUT)
+        GPIO.output(17, GPIO.Low)
         GPIO.setup(6, GPIO.OUT)
         GPIO.output(6, GPIO.HIGH)
     else:
