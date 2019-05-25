@@ -103,8 +103,6 @@
 
   // init method
   checkStatus = () => {
-    console.log('get status...')
-
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
@@ -126,43 +124,35 @@
       if (scope.staLED) {
         $('#Light').prop('checked', true)
         $("#graphiclight").show();
-        console.log('Light ON')
       }
       else {
         $('#Light').prop('checked', false)
         $("#graphiclight").removeAttr("style").hide();
-        console.log('Light OFF')
       }
       if (scope.staFog) {
         $('#Fog').prop('checked', true)
         $("#graphicfog").show();
-        console.log('Fog ON')
       }
       else {
         $('#Fog').prop('checked', false)
         $("#graphicfog").removeAttr("style").hide();
-        console.log('Fog OFF')
       }
     }
 
     if (scope.staPump) {
       $('#waterPump').prop('checked', true)
       $("#graphicwater").show();
-      console.log('Pump ON')
     }
     else {
       $('#waterPump').prop('checked', false)
       $("#graphicwater").removeAttr("style").hide();
-      console.log('Pump OFF')
     }
 
     if (scope.staWater) {
       $('#waterFilter').prop('checked', true)
-      console.log('Water ON')
     }
     else {
       $('#waterFilter').prop('checked', false)
-      console.log('Water OFF')
     }
 
     console.log('get status success')

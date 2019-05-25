@@ -52,12 +52,12 @@ def subscription(topic, message):
         GPIO.output(10, GPIO.HIGH)
         logging.info("contorller : fogOff")
     elif message == "waterOn":
-        GPIO.setup(19, GPIO.OUT)
-        GPIO.output(19, GPIO.HIGH)
+        GPIO.setup(13, GPIO.OUT)
+        GPIO.output(13, GPIO.LOW)
         logging.info("contorller : waterOn")
     elif message == "waterOff":
-        GPIO.setup(19, GPIO.OUT)
-        GPIO.output(19, GPIO.LOW)
+        GPIO.setup(13, GPIO.OUT)
+        GPIO.output(13, GPIO.HIGH)
         logging.info("contorller : waterOff")
     elif message == "takeCam":
         os.system(
