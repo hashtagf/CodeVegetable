@@ -280,6 +280,6 @@ app.put('/setsys/:id', function (req, res) {
 })
 
 //////////////////////////////////////////////////////////////////////////////////////btn
-const port = process.env.PORT | 4000
+const port = process.env.PORT || 4000
 app.listen(port)
 console.log('running on port' + port)
