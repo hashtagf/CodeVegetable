@@ -387,7 +387,7 @@ angular.module('app', [])
       $http.get('/fogOff').then(function (response) {
         console.log(response)
       })
-      $scope.stabtn[2].statusbtn = false///////////////////////////////
+      $scope.stabtn[2].statusbtn = false
       // $http.post('/btn', $scope.stabtn[1]).then(function (response){})///////////////////////////////
       console.log("fogOff")
       $http.put('/btn/' + $scope.totalbtn[2]._id, $scope.stabtn[2]).then(res => {
@@ -402,10 +402,10 @@ angular.module('app', [])
       $http.get('/waterOn').then(function (response) {
         console.log(response)
       })
-      $scope.stabtn[3].statusbtn = true///////////////////////////////
+      $scope.stabtn[3].statusbtn = true
       // $http.post('/btn', $scope.stabtn[1]).then(function (response){})///////////////////////////////
       console.log("waterOn")
-      $http.put('/btn/' + $scope.totalbtn[3]._id, ).then(res => {
+      $http.put('/btn/' + $scope.totalbtn[3]._id, $scope.stabtn[3]).then(res => {
         $scope.totalbtn[3].statusbtn = res.data.statusbtn
       })
     }
@@ -415,7 +415,7 @@ angular.module('app', [])
       $http.get('/waterOff').then(function (response) {
         console.log(response)
       })
-      $scope.stabtn[3].statusbtn = false///////////////////////////////
+      $scope.stabtn[3].statusbtn = false
       // $http.post('/btn', $scope.stabtn[1]).then(function (response){})///////////////////////////////
       console.log("waterOff")
       $http.put('/btn/' + $scope.totalbtn[3]._id, $scope.stabtn[3]).then(res => {
