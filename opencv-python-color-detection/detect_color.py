@@ -15,9 +15,6 @@ args = vars(ap.parse_args())
 # load the image
 image = cv2.imread(args["image"])
 
-height, width, channels = image.shape
-gridY = int(height/3)
-gridX = int(width/4)
 # define the list of boundaries
 boundaries = [
 	([146, 95, 46], [195, 100, 50]),
@@ -43,25 +40,19 @@ for (lower, upper) in boundaries:
 	cnts = sorted(cnts, key = cv2.contourArea, reverse = True)
 	cnts = cnts[:12]
 
-	for idx, c in enumerate(cnts) :
+	for c in cnts :
 		rec = cv2.boundingRect(c)
-		area = cv2.contourArea(c)
-		if (area>100):
-			peri = cv2.arcLength(c, True)
-			approx = cv2.approxPolyDP(c, 0.01 * peri, True)
-			#if len(approx) >= 4:
-			screenCnt = approx
-			centerX = int((screenCnt[0][0][0] + screenCnt[int(len(screenCnt)/2)][0][0])/2)
-			centerY = int((screenCnt[int(len(screenCnt)/4)][0][1] + screenCnt[int(len(screenCnt)/4*3)][0][1])/2)
-			centerCo = (centerX , centerY)
-			col = int(centerX/gridX)
-			row = int(centerY/gridY)
-			hole = row*4+col+1
-			cv2.drawContours(image, [screenCnt], -1, (255, 255, 0), 2)
-			cv2.putText(image, "{}".format(str(hole)) + ": {}".format(str(area)), centerCo,
-        	cv2.FONT_HERSHEY_SIMPLEX, 0.5, (250, 0, 1), 2)
+
+		peri = cv2.arcLength(c, True)
+		approx = cv2.approxPolyDP(c, 0.01 * peri, True)
+		#if len(approx) >= 4:
+		screenCnt = approx
+		cv2.drawContours(image, [screenCnt], -1, (255, 255, 0), 2)
+
 	# time.sleep(5)
+	cv2.imshow("Outline", mask)
+
+
 	# show the images
 	cv2.imshow("images", np.hstack([image, output]))
 	cv2.waitKey(0)
-	cv2.destroyAllWindows()
