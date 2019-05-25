@@ -67,30 +67,29 @@ for (lower, upper) in boundaries:
         	cv2.FONT_HERSHEY_SIMPLEX, 0.5, (250, 0, 1), 2)
 	# time.sleep(5)
 	# show the images
-	# r = requests.post("https://smartfarm-cabinet.herokuapp.com/hole/:id", data={'number': 12524, 'type': 'issue', 'action': 'show'})
-	# print(r.status_code, r.reason)
-	getHoles = requests.get("https://smartfarm-cabinet.herokuapp.com/hole")
-	Holes = getHoles.json()
-	for i in range(0, 3):
-		for j in range(0, 12):
-			index = i*3+j
-			if index < len(Holes) and Holes[index]['statushole'] and holes[i][j] is not None:
-				if 'sizeafter' in Holes[index] :
-					sizebefore = Holes[index]['sizeafter']
-					sizeafter = holes[i][j]
-				else :
-					sizeafter = holes[i][j]
-					sizebefore = holes[i][j]
-				r = requests.put("https://smartfarm-cabinet.herokuapp.com/hole/" + Holes[index]['_id'], 
-				data = {
-					"idhole": Holes[index]['idhole'],
-					"statushole": Holes[index]['statushole'],
-					"nameveg": Holes[index]['nameveg'],
-					"typeveg": Holes[index]['typeveg'],
-					"sizebefore": sizebefore,
-					"sizeafter": sizeafter,
-				})
-	print("fin")
+
 	cv2.imshow("images", np.hstack([image, output]))
 	cv2.waitKey(0)
 	cv2.destroyAllWindows()
+getHoles = requests.get("https://smartfarm-cabinet.herokuapp.com/hole")
+Holes = getHoles.json()
+for i in range(0, 3):
+	for j in range(0, 12):
+		index = i*3+j
+		if index < len(Holes) and Holes[index]['statushole'] and holes[i][j] is not None:
+			if 'sizeafter' in Holes[index] :
+				sizebefore = Holes[index]['sizeafter']
+				sizeafter = holes[i][j]
+			else :
+				sizeafter = holes[i][j]
+				sizebefore = holes[i][j]
+			r = requests.put("https://smartfarm-cabinet.herokuapp.com/hole/" + Holes[index]['_id'], 
+			data = {
+				"idhole": Holes[index]['idhole'],
+				"statushole": Holes[index]['statushole'],
+				"nameveg": Holes[index]['nameveg'],
+				"typeveg": Holes[index]['typeveg'],
+				"sizebefore": sizebefore,
+				"sizeafter": sizeafter,
+			})
+print("fin")
