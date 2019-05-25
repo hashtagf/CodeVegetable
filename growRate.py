@@ -82,7 +82,6 @@ for (lower, upper) in boundaries:
 					sizeafter = holes[i][j]
 					sizebefore = holes[i][j]
 				r = requests.put("https://smartfarm-cabinet.herokuapp.com/hole/" + Holes[index]['_id'], 
-				print(size)
 				data = {
 					"idhole": Holes[index]['idhole'],
 					"statushole": Holes[index]['statushole'],
