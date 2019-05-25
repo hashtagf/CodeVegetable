@@ -22,7 +22,7 @@ const APPID = "Vegetable001";
 const KEY = "dfhiaN7XLOFf7S3";
 const SECRET = "EsJgEv08jtXzSbwdKUxTpSYq7";
 
-const ALIAS = "SERVER_API";     //  ชื่อตัวเอง                                //  ชื่อเพื่อนที่จะคุย
+const ALIAS = "SERVER_API";     //  ชื่อตัวเอง
 
 var microgear = MicroGear.create({
   key: KEY,

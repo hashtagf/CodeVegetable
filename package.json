@@ -2,7 +2,7 @@
   "name": "testangular",
   "version": "1.0.0",
   "description": "",
-  "main": "/public/app.js",
+  "main": "server.js",
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js"
@@ -22,6 +22,7 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.16.3",
+    "heroku": "^7.24.4",
     "microgear": "^0.8.1",
     "mongoose": "^4.9.7",
     "python-shell": "^0.4.0"
