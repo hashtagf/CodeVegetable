@@ -779,6 +779,7 @@ angular.module('app', [])
               "nameveg": veg,
               "typeveg": new Date(),
               "statushole": true,
+              "sizebefore": null,
               "sizeafter": null
             }
           }
