@@ -79,7 +79,6 @@ def subscription(topic, message):
         saveImg ('Floor1.jpg')
         logging.info("contorller : takeCam")
         GPIO.output(17, GPIO.LOW)
-        GPIO.output(6, GPIO.HIGH)
     else:
         logging.info("contorller : not Found")
 
