@@ -30,10 +30,14 @@ def subscription(topic, message):
     if message == "lightOn":
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.LOW)
+        GPIO.setup(6, GPIO.OUT)
+        GPIO.output(6, GPIO.LOW)
         logging.info("contorller : lightOn")
     elif message == "lightOff":
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.HIGH)
+        GPIO.setup(6, GPIO.OUT)
+        GPIO.output(6, GPIO.HIGH)
         logging.info("contorller : lightOff")
     elif message == "pumpOn":
         GPIO.setup(22, GPIO.OUT)
@@ -75,7 +79,7 @@ def subscription(topic, message):
         saveImg ('Floor1.jpg')
         logging.info("contorller : takeCam")
         GPIO.setup(17, GPIO.OUT)
-        GPIO.output(17, GPIO.Low)
+        GPIO.output(17, GPIO.LOW)
         GPIO.setup(6, GPIO.OUT)
         GPIO.output(6, GPIO.HIGH)
     else:
