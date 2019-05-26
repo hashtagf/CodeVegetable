@@ -67,7 +67,7 @@ def subscription(topic, message):
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.HIGH)
         GPIO.setup(6, GPIO.OUT)
-        GPIO.output(6, GPIO.LOW)
+        GPIO.output(6, GPIO.HIGH)
         os.system(
             "fswebcam -p YUYV -d /dev/video2 -r 1280x780 --no-banner public/picture/Floor3.jpg")
         os.system(
