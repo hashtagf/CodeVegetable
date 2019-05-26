@@ -7,6 +7,7 @@ import argparse
 import cv2
 import imutils
 import requests
+import time
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", help = "path to the image")
@@ -25,13 +26,13 @@ for countFloor in range(0, 3):
 	# load the image
 	# image = cv2.imread(args["image"])
 	image = cv2.imread('Floor'+ str(countFloor+1)+ '.jpg')
-
+	print("load img" + str(countFloor))
 	height, width, channels = image.shape
 	gridY = int(height/3)
 	gridX = int(width/4)
 	# define the list of boundaries
 	boundaries = [
-		([30,60,60], [50,255,255]),
+		([30,60,60], [90,255,255]),
 		([1,0,0], [255,160,160])
 	]
 	holes = [[],[],[]]
@@ -78,7 +79,7 @@ for countFloor in range(0, 3):
 	        		cv2.FONT_HERSHEY_SIMPLEX, 0.5, (250, 0, 1), 2)
 		# time.sleep(5)
 		# show the images
-
+		cv2.imshow("image", output)
 		cv2.imshow("images", np.hstack([image, output]))
 		cv2.waitKey(0)
 		cv2.destroyAllWindows()
