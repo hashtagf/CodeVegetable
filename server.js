@@ -19,8 +19,8 @@ var thingSchema4 = new Schema4({}, { strict: false })
 var evensys = mongoose.model('btnsys', thingSchema4)
 
 const APPID = "Vegetable001";
-const KEY = "dfhiaN7XLOFf7S3";
-const SECRET = "EsJgEv08jtXzSbwdKUxTpSYq7";
+const KEY = "xOWBLi8n4B7rjLi";
+const SECRET = "Y5HSsNTp1wJmtgeRhXV5wcsZx";
 
 const ALIAS = "SERVER_API";     //  ชื่อตัวเอง
 
@@ -194,7 +194,7 @@ app.get('/hole', function (req, res) {
 app.put('/hole/:id', function (req, res) {
   evenhole.findOneAndUpdate(
     { _id: req.params.id },
-    { $set: { idhole: req.body.idhole, statushole: req.body.statushole, nameveg: req.body.nameveg, typeveg: req.body.typeveg, sizebefore: req.body.sizebefore,sizeafter: req.body.sizeafter } },
+    { $set: { idhole: req.body.idhole, statushole: req.body.statushole, nameveg: req.body.nameveg, typeveg: req.body.typeveg, sizebefore: req.body.sizebefore, sizeafter: req.body.sizeafter } },
     { new: true })
     .exec(function (err, done) {
       if (err) console.log(err)
@@ -233,7 +233,7 @@ app.put('/btn/:id', function (req, res) {
       if (err) res.send(err)
       res.send(done)
     })
-    
+
 })
 //////////////////////////////////////////////////////////////////////////////////////btn
 
