@@ -15,70 +15,6 @@ const serviceAccount = require("./smartfarm-noti-firebase-adminsdk-h3gkr-da5eef9
 const databaseURL = "https://smartfarm-noti.firebaseio.com";
 const URL =
   "https://fcm.googleapis.com/v1/projects/smartfarm-noti/messages:send";
-const deviceToken =
-  "cnq6vJ-Kv5w:APA91bFdvMSN8Lfpn9tVfCPJpmmmPOvas7l4RefAk3fAO-QYDLmcDtarpRyhaln6l4s7V7HWSpO8NG_tlaT14yBRzC5BCpxU5whMp7gbmyJ2luWcLnOHcTIdgRm8Cgc-AP6ZGGmzzQAu";
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: databaseURL
-});
-
-function getAccessToken() {
-  return new Promise(function(resolve, reject) {
-    var key = serviceAccount;
-    var jwtClient = new google.auth.JWT(
-      key.client_email,
-      null,
-      key.private_key,
-      SCOPES,
-      null
-    );
-    jwtClient.authorize(function(err, tokens) {
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve(tokens.access_token);
-    });
-  });
-}
-
-async function init() {
-  const body = {
-    message: {
-      data: { key: "value" },
-      notification: {
-        title: "Notification title",
-        body: "Notification body"
-      },
-      webpush: {
-        headers: {
-          Urgency: "high"
-        },
-        notification: {
-          requireInteraction: "true"
-        }
-      },
-      token: deviceToken
-    }
-  };
-
-  try {
-    const accessToken = await getAccessToken();
-    console.log("accessToken: ", accessToken);
-    const { data } = await axios.post(URL, JSON.stringify(body), {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`
-      }
-    });
-    console.log("name: ", data.name);
-  } catch (err) {
-    console.log("err: ", err.message);
-  }
-}
-
-init();
 
 var Schema = mongoose.Schema;
 var thingSchema = new Schema({}, { strict: false });
@@ -134,6 +70,73 @@ mongoose.connect("mongodb://smartfarm:farm1234@ds053678.mlab.com:53678/farm");
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/notification-online", function(req, res, next) {
+  const deviceToken =
+    "cnq6vJ-Kv5w:APA91bFdvMSN8Lfpn9tVfCPJpmmmPOvas7l4RefAk3fAO-QYDLmcDtarpRyhaln6l4s7V7HWSpO8NG_tlaT14yBRzC5BCpxU5whMp7gbmyJ2luWcLnOHcTIdgRm8Cgc-AP6ZGGmzzQAu";
+
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: databaseURL
+  });
+
+  function getAccessToken() {
+    return new Promise(function(resolve, reject) {
+      var key = serviceAccount;
+      var jwtClient = new google.auth.JWT(
+        key.client_email,
+        null,
+        key.private_key,
+        SCOPES,
+        null
+      );
+      jwtClient.authorize(function(err, tokens) {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(tokens.access_token);
+      });
+    });
+  }
+
+  async function init() {
+    const body = {
+      message: {
+        data: { key: "value" },
+        notification: {
+          title: "Notification title",
+          body: "Notification body"
+        },
+        webpush: {
+          headers: {
+            Urgency: "high"
+          },
+          notification: {
+            requireInteraction: "true"
+          }
+        },
+        token: deviceToken
+      }
+    };
+
+    try {
+      const accessToken = await getAccessToken();
+      console.log("accessToken: ", accessToken);
+      const { data } = await axios.post(URL, JSON.stringify(body), {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+      console.log("name: ", data.name);
+    } catch (err) {
+      console.log("err: ", err.message);
+    }
+  }
+
+  init();
+});
 
 app.get("/ledOn", function(req, res, next) {
   microgear.chat("RaspberryPI", "lightOn");
