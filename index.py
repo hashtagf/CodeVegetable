@@ -114,25 +114,25 @@ while True:
         microgear.publish("/Humidity",humidityIn,{'retain':True})
         microgear.publish("/TemperatureOut",temperatureOut,{'retain':True})
         microgear.publish("/HumidityOut",humidityOut,{'retain':True})
-    if (temperatureIn > temperatureOut and humidityIn < humidityOut) :
-        if (humidityIn > 95) :
-            if fanOut :
-                GPIO.output(pinfanOut,GPIO.LOW)
-                fanOut = False
+        if (temperatureIn > temperatureOut and humidityIn < humidityOut) :
+            if (humidityIn > 95) :
+                if fanOut :
+                    GPIO.output(pinfanOut,GPIO.LOW)
+                    fanOut = False
+            else :
+                if not fanOut :
+                    GPIO.output(pinfanOut,GPIO.HIGH)
+                    fanOut = True
+            if not fanIn :
+                GPIO.output(pinfanIn,GPIO.HIGH)
+                fanIn = True
+            logging.info("Status fan : ON")
         else :
-            if not fanOut :
-                GPIO.output(pinfanOut,GPIO.HIGH)
+            if fanIn or fanOut:
+                GPIO.output(pinfanOut,GPIO.LOW)
+                GPIO.output(pinfanIn,GPIO.LOW)
                 fanOut = True
-        if not fanIn :
-            GPIO.output(pinfanIn,GPIO.HIGH)
-            fanIn = True
-        logging.info("Status fan : ON")
-    else :
-        if fanIn or fanOut:
-            GPIO.output(pinfanOut,GPIO.LOW)
-            GPIO.output(pinfanIn,GPIO.LOW)
-            fanOut = True
-            fanIn = True
-        
-        logging.info("Status fan : OFF")
+                fanIn = True
+
+            logging.info("Status fan : OFF")
     time.sleep(10)
