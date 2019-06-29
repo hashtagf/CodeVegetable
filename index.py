@@ -110,6 +110,7 @@ while True:
     humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
     if humidityIn is not None and humidityOut is not None:
         logging.info(str(temperatureIn) + ' ' +str(temperatureOut))
+        print 'Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperature, humidity)
         microgear.publish("/Temperature",temperatureIn,{'retain':True})
         microgear.publish("/Humidity",humidityIn,{'retain':True})
         microgear.publish("/TemperatureOut",temperatureOut,{'retain':True})
@@ -133,6 +134,7 @@ while True:
                 GPIO.output(pinfanIn,GPIO.LOW)
                 fanOut = True
                 fanIn = True
-
             logging.info("Status fan : OFF")
+    else:
+        print 'Failed to get reading. Try again!'
     time.sleep(10)
