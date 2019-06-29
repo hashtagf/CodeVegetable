@@ -110,6 +110,10 @@ microgear.connect(False)
 while True:
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
     humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
+    if humidityIn is None :
+        print "cannot get temp in"
+    if humidityOut is None :
+        print "cannot get temp out"
     if humidityIn is not None and humidityOut is not None:
         print "gettemp"
         logging.info(str(temperatureIn) + ' ' +str(temperatureOut))
