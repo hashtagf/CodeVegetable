@@ -106,6 +106,8 @@ microgear.on_disconnect = disconnect
 microgear.subscribe("/controller")
 fanIn = False
 fanOut = False
+GPIO.output(pinfanIn,GPIO.LOW)
+GPIO.output(pinfanOut,GPIO.LOW)
 microgear.connect(False)
 while True:
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
