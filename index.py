@@ -5,8 +5,15 @@ import RPi.GPIO as GPIO
 import os
 import dropbox
 # import schedule
+import Adafruit_DHT
+sensor = Adafruit_DHT.DHT22
 GPIO.setmode(GPIO.BCM)
-
+pinDHTin = 20
+pinDHTout = 21
+pinfanOut = 16
+pinfanIn = 12
+GPIO.setup(pinfanOut,GPIO.OUT)
+GPIO.setup(pinfanIn,GPIO.OUT)
 appid = 'Vegetable001'
 gearkey = 'dfhiaN7XLOFf7S3'
 gearsecret = 'EsJgEv08jtXzSbwdKUxTpSYq7'
@@ -97,4 +104,22 @@ microgear.on_disconnect = disconnect
 microgear.subscribe("/controller")
 microgear.connect(False)
 while True:
-    pass
+    humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
+    humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
+    if humidityIn is not None and humidityOut is not None:
+        microgear.publish("/Temperature",temperatureIn,{'retain':True})
+        microgear.publish("/Humidity",humidityIn,{'retain':True});
+        microgear.publish("/TemperatureOut",temperatureOut,{'retain':True});
+        microgear.publish("/HumidityOut",humidityOut,{'retain':True});
+    if (temperatureIn > temperatureOut and humidityIn < humidityOut) :
+        if (humidityIn > 95) :
+            GPIO.output(pinfanOut,GPIO.LOW)
+        else :
+            GPIO.output(pinfanOut,GPIO.HIGH)
+        GPIO.output(pinfanIn,GPIO.HIGH)
+        println("Status fan : ON")
+    else :
+        GPIO.output(pinfanOut,GPIO.LOW)
+        GPIO.output(pinfanIn,GPIO.LOW)
+        Serial.println("Status fan : OFF")
+    time.sleep(10)

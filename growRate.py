@@ -18,6 +18,10 @@ time.sleep(10)
 url = ['https://www.dropbox.com/s/flwpm8qezb68lyo/Floor1.jpg?raw=1',
 	'https://www.dropbox.com/s/jd15vcofp5e8kza/Floor2.jpg?raw=1',
 	'https://www.dropbox.com/s/r5232m9ta2bfvg9/Floor3.jpg?raw=1']
+holes = [[],[],[]]
+for i in range(0, 3):
+	for j in range(0, 12):
+		holes[i].append(None)
 for countFloor in range(0, 3):
 	filename = 'Floor'+ str(countFloor+1)+ '.jpg'
 	r = requests.get(url[countFloor], allow_redirects=True)
@@ -35,10 +39,7 @@ for countFloor in range(0, 3):
 		([30,60,60], [90,255,255]),
 		([1,0,0], [255,160,160])
 	]
-	holes = [[],[],[]]
-	for i in range(0, 3):
-		for j in range(0, 12):
-			holes[i].append(None)
+
 	hsv = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
 	hsv = cv2.GaussianBlur(hsv, (5, 5), 0)
 	# loop over the boundaries
@@ -85,23 +86,24 @@ for countFloor in range(0, 3):
 		cv2.destroyAllWindows()
 	getHoles = requests.get("https://smartfarm-cabinet.herokuapp.com/hole")
 	Holes = getHoles.json()
-	for i in range(0, 3):
-		for j in range(0, 12):
-			index = i*3+j
-			if index < len(Holes) and Holes[index]['statushole'] and holes[i][j] is not None:
-				if 'sizeafter' in Holes[index] :
-					sizebefore = Holes[index]['sizeafter']
-					sizeafter = holes[i][j]
-				else :
-					sizeafter = holes[i][j]
-					sizebefore = holes[i][j]
-				r = requests.put("https://smartfarm-cabinet.herokuapp.com/hole/" + Holes[index]['_id'], 
-				data = {
-					"idhole": Holes[index]['idhole'],
-					"statushole": Holes[index]['statushole'],
-					"nameveg": Holes[index]['nameveg'],
-					"typeveg": Holes[index]['typeveg'],
-					"sizebefore": sizebefore,
-					"sizeafter": sizeafter,
-				})
+	
+	for j in range(0, 12):
+		index = (countFloor*12+j)-1
+		if index < len(Holes) and Holes[index]['statushole'] and holes[countFloor][j] is not None:
+			print(index, 'sizeafter' in Holes[index])
+			if 'sizeafter' in Holes[index] :
+				sizebefore = Holes[index]['sizeafter']
+				sizeafter = holes[countFloor][j]
+			else :
+				sizeafter = holes[countFloor][j]
+				sizebefore = holes[countFloor][j]
+			r = requests.put("https://smartfarm-cabinet.herokuapp.com/hole/" + Holes[index]['_id'], 
+			data = {
+				"idhole": Holes[index]['idhole'],
+				"statushole": Holes[index]['statushole'],
+				"nameveg": Holes[index]['nameveg'],
+				"typeveg": Holes[index]['typeveg'],
+				"sizebefore": sizebefore,
+				"sizeafter": sizeafter,
+			})
 	print("fin")
