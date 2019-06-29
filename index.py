@@ -102,25 +102,37 @@ microgear.on_connect = connection
 microgear.on_message = subscription
 microgear.on_disconnect = disconnect
 microgear.subscribe("/controller")
+fanIn = False
+fanOut = False
 microgear.connect(False)
 while True:
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
     humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
     if humidityIn is not None and humidityOut is not None:
-        print(temperatureIn + ' '+ temperatureOut)
+        logging.info("tempIn:"+temperatureIn + ' tempOut:'+ temperatureOut)
         microgear.publish("/Temperature",temperatureIn,{'retain':True})
         microgear.publish("/Humidity",humidityIn,{'retain':True})
         microgear.publish("/TemperatureOut",temperatureOut,{'retain':True})
         microgear.publish("/HumidityOut",humidityOut,{'retain':True})
     if (temperatureIn > temperatureOut and humidityIn < humidityOut) :
         if (humidityIn > 95) :
-            GPIO.output(pinfanOut,GPIO.LOW)
+            if fanOut :
+                GPIO.output(pinfanOut,GPIO.LOW)
+                fanOut = False
         else :
-            GPIO.output(pinfanOut,GPIO.HIGH)
-        GPIO.output(pinfanIn,GPIO.HIGH)
-        print("Status fan : ON")
+            if not fanOut :
+                GPIO.output(pinfanOut,GPIO.HIGH)
+                fanOut = True
+        if not fanIn :
+            GPIO.output(pinfanIn,GPIO.HIGH)
+            fanIn = True
+        logging.info("Status fan : ON")
     else :
-        GPIO.output(pinfanOut,GPIO.LOW)
-        GPIO.output(pinfanIn,GPIO.LOW)
-        print("Status fan : OFF")
+        if fanIn or fanOut:
+            GPIO.output(pinfanOut,GPIO.LOW)
+            GPIO.output(pinfanIn,GPIO.LOW)
+            fanOut = True
+            fanIn = True
+        
+        logging.info("Status fan : OFF")
     time.sleep(10)
