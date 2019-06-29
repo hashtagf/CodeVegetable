@@ -109,7 +109,7 @@ while True:
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
     humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
     if humidityIn is not None and humidityOut is not None:
-        logging.info("tempIn:"+temperatureIn + ' tempOut:'+ temperatureOut)
+        logging.info(str(temperatureIn),str(temperatureOut))
         microgear.publish("/Temperature",temperatureIn,{'retain':True})
         microgear.publish("/Humidity",humidityIn,{'retain':True})
         microgear.publish("/TemperatureOut",temperatureOut,{'retain':True})
