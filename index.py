@@ -107,19 +107,20 @@ while True:
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
     humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
     if humidityIn is not None and humidityOut is not None:
+        print(temperatureIn + ' '+ temperatureOut)
         microgear.publish("/Temperature",temperatureIn,{'retain':True})
-        microgear.publish("/Humidity",humidityIn,{'retain':True});
-        microgear.publish("/TemperatureOut",temperatureOut,{'retain':True});
-        microgear.publish("/HumidityOut",humidityOut,{'retain':True});
+        microgear.publish("/Humidity",humidityIn,{'retain':True})
+        microgear.publish("/TemperatureOut",temperatureOut,{'retain':True})
+        microgear.publish("/HumidityOut",humidityOut,{'retain':True})
     if (temperatureIn > temperatureOut and humidityIn < humidityOut) :
         if (humidityIn > 95) :
             GPIO.output(pinfanOut,GPIO.LOW)
         else :
             GPIO.output(pinfanOut,GPIO.HIGH)
         GPIO.output(pinfanIn,GPIO.HIGH)
-        println("Status fan : ON")
+        print("Status fan : ON")
     else :
         GPIO.output(pinfanOut,GPIO.LOW)
         GPIO.output(pinfanIn,GPIO.LOW)
-        Serial.println("Status fan : OFF")
+        print("Status fan : OFF")
     time.sleep(10)
