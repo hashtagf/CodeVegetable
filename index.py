@@ -12,6 +12,8 @@ pinDHTin = 20
 pinDHTout = 21
 pinfanOut = 16
 pinfanIn = 12
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 GPIO.setup(pinfanOut,GPIO.OUT)
 GPIO.setup(pinfanIn,GPIO.OUT)
 appid = 'Vegetable001'
@@ -109,6 +111,7 @@ while True:
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
     humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
     if humidityIn is not None and humidityOut is not None:
+        print "gettemp"
         logging.info(str(temperatureIn) + ' ' +str(temperatureOut))
         print 'Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperature, humidity)
         microgear.publish("/Temperature",temperatureIn,{'retain':True})
@@ -117,24 +120,23 @@ while True:
         microgear.publish("/HumidityOut",humidityOut,{'retain':True})
         if (temperatureIn > temperatureOut and humidityIn < humidityOut) :
             if (humidityIn > 95) :
-                if fanOut :
-                    GPIO.output(pinfanOut,GPIO.LOW)
-                    fanOut = False
+                fanOut = False
             else :
-                if not fanOut :
-                    GPIO.output(pinfanOut,GPIO.HIGH)
-                    fanOut = True
-            if not fanIn :
-                GPIO.output(pinfanIn,GPIO.HIGH)
-                fanIn = True
+                fanOut = True
+            fanIn = True
             logging.info("Status fan : ON")
         else :
-            if fanIn or fanOut:
-                GPIO.output(pinfanOut,GPIO.LOW)
-                GPIO.output(pinfanIn,GPIO.LOW)
-                fanOut = True
-                fanIn = True
+            fanOut = True
+            fanIn = True
             logging.info("Status fan : OFF")
     else:
         print 'Failed to get reading. Try again!'
+    if fanIn :
+        GPIO.output(pinfanIn,GPIO.HIGH)
+    else :
+        GPIO.output(pinfanIn,GPIO.LOW)
+    if fanOut :
+        GPIO.output(pinfanOut,GPIO.HIGH)
+    else :
+        GPIO.output(pinfanOut,GPIO.LOW)
     time.sleep(10)
