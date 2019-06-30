@@ -7,11 +7,10 @@ import dropbox
 # import schedule
 import Adafruit_DHT
 sensor = Adafruit_DHT.DHT22
-GPIO.setmode(GPIO.BCM)
-pinDHTin = 20
-pinDHTout = 21
-pinfanOut = 16
-pinfanIn = 12
+pinDHTin = 12
+pinDHTout = 16
+pinfanOut = 20
+pinfanIn = 21
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(pinfanOut,GPIO.OUT)
@@ -118,8 +117,9 @@ while True:
         print "cannot get temp out"
     if humidityIn is not None and humidityOut is not None:
         print "gettemp"
-        logging.info(str(temperatureIn) + ' ' +str(temperatureOut))
-        print 'Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperature, humidity)
+        # logging.info(str(temperatureIn) + ' ' +str(temperatureOut))
+        print 'TempIn={0:0.1f}*C  HumidityIn={1:0.1f}%'.format(temperatureIn, humidityIn)
+        print 'TempOut={0:0.1f}*C  HumidityOut={1:0.1f}%'.format(temperatureOut, humidityOut)
         microgear.publish("/Temperature",temperatureIn,{'retain':True})
         microgear.publish("/Humidity",humidityIn,{'retain':True})
         microgear.publish("/TemperatureOut",temperatureOut,{'retain':True})
