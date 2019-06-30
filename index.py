@@ -107,7 +107,14 @@ fanIn = False
 fanOut = False
 GPIO.output(pinfanIn,GPIO.LOW)
 GPIO.output(pinfanOut,GPIO.LOW)
-microgear.connect(False)
+connection = True
+while connection:
+    try:
+        microgear.connect(False)
+        connection = False 
+        break
+    except:
+        connection = True
 while True:
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
     humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
