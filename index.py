@@ -111,9 +111,10 @@ connection = True
 while connection:
     try:
         microgear.connect(False)
-        connection = False 
+        connection = False
         break
     except:
+        time.sleep(10)
         connection = True
 while True:
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
