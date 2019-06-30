@@ -119,8 +119,6 @@ while True:
         # logging.info(str(temperatureIn) + ' ' +str(temperatureOut))
         print 'TempIn={0:0.1f}*C  HumidityIn={1:0.1f}%'.format(temperatureIn, humidityIn)
         print 'TempOut={0:0.1f}*C  HumidityOut={1:0.1f}%'.format(temperatureOut, humidityOut)
-        temperatureIn = 32.1
-        temperatureOut = 28.7
         microgear.publish("/Temperature",temperatureIn,{'retain':True})
         microgear.publish("/Humidity",humidityIn,{'retain':True})
         microgear.publish("/TemperatureOut",temperatureOut,{'retain':True})
