@@ -116,15 +116,16 @@ while True:
     if humidityOut is None :
         print "cannot get temp out"
     if humidityIn is not None and humidityOut is not None:
-        print "gettemp"
         # logging.info(str(temperatureIn) + ' ' +str(temperatureOut))
         print 'TempIn={0:0.1f}*C  HumidityIn={1:0.1f}%'.format(temperatureIn, humidityIn)
         print 'TempOut={0:0.1f}*C  HumidityOut={1:0.1f}%'.format(temperatureOut, humidityOut)
+        temperatureIn = 32.1
+        temperatureOut = 28.7
         microgear.publish("/Temperature",temperatureIn,{'retain':True})
         microgear.publish("/Humidity",humidityIn,{'retain':True})
         microgear.publish("/TemperatureOut",temperatureOut,{'retain':True})
         microgear.publish("/HumidityOut",humidityOut,{'retain':True})
-        if (temperatureIn > temperatureOut and humidityIn < humidityOut) :
+        if (temperatureIn > temperatureOut) :
             if (humidityIn > 95) :
                 fanOut = False
             else :
@@ -132,8 +133,8 @@ while True:
             fanIn = True
             logging.info("Status fan : ON")
         else :
-            fanOut = True
-            fanIn = True
+            fanOut = False
+            fanIn = False
             logging.info("Status fan : OFF")
     else:
         print 'Failed to get reading. Try again!'
