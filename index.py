@@ -11,6 +11,9 @@ pinDHTin = 12
 pinDHTout = 16
 pinfanOut = 20
 pinfanIn = 21
+
+tempLimit = None
+humiLimit = None
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(pinfanOut,GPIO.OUT)
@@ -58,7 +61,12 @@ def subscription(topic, message):
     elif message == "fogOn":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.LOW)
-        logging.info("contorller : fogOn")
+        if temperatureIn is not None and temperatureOut is not None and temperatureIn > temperatureOut - 4:
+            GPIO.output(10, GPIO.LOW)
+            logging.info("contorller : fogOn")
+        else :
+            GPIO.output(10, GPIO.HIGH)
+            logging.info("contorller : fogOff, outside is too hot")
     elif message == "fogOff":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.HIGH)
@@ -87,6 +95,12 @@ def subscription(topic, message):
         saveImg ('Floor1.jpg')
         logging.info("contorller : takeCam")
         GPIO.output(17, GPIO.LOW)
+    elif message == "humiLimit":
+        global humiLimit
+        humiLimit = float(message)
+    elif message == "tempLimit":
+        global tempLimit
+        tempLimit = float(message)
     else:
         logging.info("contorller : not Found")
 
@@ -145,6 +159,7 @@ while True:
             fanIn = False
             logging.info("Status fan : OFF")
     else:
+        GPIO.output(10, GPIO.HIGH)
         print 'Failed to get reading. Try again!'
     if fanIn :
         GPIO.output(pinfanIn,GPIO.HIGH)
