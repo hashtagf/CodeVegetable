@@ -169,4 +169,4 @@ while True:
         GPIO.output(pinfanOut,GPIO.HIGH)
     else :
         GPIO.output(pinfanOut,GPIO.LOW)
-    time.sleep(20)
+    time.sleep(5)
