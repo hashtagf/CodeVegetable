@@ -24,6 +24,11 @@ gearsecret = 'EsJgEv08jtXzSbwdKUxTpSYq7'
 
 microgear.create(gearkey, gearsecret, appid, {'debugmode': True})
 
+humidityIn = None
+temperatureIn = None
+humidityOut = None
+temperatureOut = None
+
 dbx = dropbox.Dropbox("cKG3HoKEj5UAAAAAAABOIPdWvWMDanbCaQP_5q5Sd-NbI9CpIDPCFeZN0EI2xCUa")
 def saveImg (filename) :
     dbx.users_get_current_account()
