@@ -2,9 +2,8 @@ var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var MicroGear = require("microgear");
-
-// firebase
 const admin = require("firebase-admin");
+const functions = require("firebase-functions");
 const { google } = require("googleapis");
 const axios = require("axios");
 
@@ -63,7 +62,6 @@ microgear.resettoken(function(err) {
 });
 
 var app = express();
-
 // mongoose.connect('mongodb://localhost:27017/farm')
 mongoose.connect("mongodb://smartfarm:farm1234@ds053678.mlab.com:53678/farm");
 
@@ -71,75 +69,129 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/notification-online", function(req, res, next) {
-  const deviceToken =
-    "cnq6vJ-Kv5w:APA91bFdvMSN8Lfpn9tVfCPJpmmmPOvas7l4RefAk3fAO-QYDLmcDtarpRyhaln6l4s7V7HWSpO8NG_tlaT14yBRzC5BCpxU5whMp7gbmyJ2luWcLnOHcTIdgRm8Cgc-AP6ZGGmzzQAu";
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: databaseURL
+});
 
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: databaseURL
+const db = admin.firestore();
+let deviceToken = [];
+db.collection("token")
+  .get()
+  .then(snapshot => {
+    snapshot.forEach(doc => {
+      init(doc.id);
+    });
+  })
+  .catch(err => {
+    console.log("Error getting documents", err);
   });
 
-  function getAccessToken() {
-    return new Promise(function(resolve, reject) {
-      var key = serviceAccount;
-      var jwtClient = new google.auth.JWT(
-        key.client_email,
-        null,
-        key.private_key,
-        SCOPES,
-        null
-      );
-      jwtClient.authorize(function(err, tokens) {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(tokens.access_token);
-      });
-    });
-  }
+// const deviceToken =
+//   "cnq6vJ-Kv5w:APA91bFdvMSN8Lfpn9tVfCPJpmmmPOvas7l4RefAk3fAO-QYDLmcDtarpRyhaln6l4s7V7HWSpO8NG_tlaT14yBRzC5BCpxU5whMp7gbmyJ2luWcLnOHcTIdgRm8Cgc-AP6ZGGmzzQAu";
 
-  async function init() {
-    const body = {
-      message: {
-        data: { key: "value" },
-        notification: {
-          title: "Notification title",
-          body: "Notification body"
-        },
-        webpush: {
-          headers: {
-            Urgency: "high"
-          },
-          notification: {
-            requireInteraction: "true"
-          }
-        },
-        token: deviceToken
+function getAccessToken() {
+  return new Promise(function(resolve, reject) {
+    var key = serviceAccount;
+    var jwtClient = new google.auth.JWT(
+      key.client_email,
+      null,
+      key.private_key,
+      SCOPES,
+      null
+    );
+    jwtClient.authorize(function(err, tokens) {
+      if (err) {
+        reject(err);
+        return;
       }
-    };
+      resolve(tokens.access_token);
+    });
+  });
+}
 
-    try {
-      const accessToken = await getAccessToken();
-      console.log("accessToken: ", accessToken);
-      const { data } = await axios.post(URL, JSON.stringify(body), {
+async function init(deviceToken) {
+  const body = {
+    message: {
+      data: { key: "value" },
+      notification: {
+        title: "SMARTFARM-CABINET",
+        body: "Notification Online"
+      },
+      webpush: {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`
+          Urgency: "high"
+        },
+        notification: {
+          requireInteraction: "true"
         }
-      });
-      console.log("name: ", data.name);
-    } catch (err) {
-      console.log("err: ", err.message);
+      },
+      token: deviceToken
     }
-  }
+  };
 
-  init();
-});
+  try {
+    const accessToken = await getAccessToken();
+    console.log("accessToken: ", accessToken);
+    const { data } = await axios.post(URL, JSON.stringify(body), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    console.log("name: ", data.name);
+  } catch (err) {
+    console.log("err: ", err.message);
+  }
+}
+
+async function sendNotification(title, body, token) {
+  const body = {
+    message: {
+      data: { key: "value" },
+      notification: {
+        title: title,
+        body: body
+      },
+      webpush: {
+        headers: {
+          Urgency: "high"
+        },
+        notification: {
+          requireInteraction: "true"
+        }
+      },
+      token: token
+    }
+  };
+
+  try {
+    const accessToken = await getAccessToken();
+    console.log("accessToken: ", accessToken);
+    const { data } = await axios.post(URL, JSON.stringify(body), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    console.log("name: ", data.name);
+  } catch (err) {
+    console.log("err: ", err.message);
+  }
+}
 
 app.get("/ledOn", function(req, res, next) {
   microgear.chat("RaspberryPI", "lightOn");
+  db.collection("token")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        sendNotification("LED ON", "เปิดไฟ", doc.id);
+      });
+    })
+    .catch(err => {
+      console.log("Error getting documents", err);
+    });
   res.status(200);
   res.send({
     status: "OK",
