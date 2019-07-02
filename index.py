@@ -66,7 +66,7 @@ def subscription(topic, message):
     elif message == "fogOn":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.LOW)
-        if temperatureIn is not None and temperatureOut is not None and temperatureIn > temperatureOut - 4:
+        if temperatureIn is not None and temperatureOut is not None and temperatureIn > temperatureOut - 2:
             GPIO.output(10, GPIO.LOW)
             logging.info("contorller : fogOn")
         else :
