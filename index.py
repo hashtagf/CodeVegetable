@@ -113,12 +113,6 @@ def subscription(topic, message):
         saveImg ('Floor1.jpg')
         logging.info("contorller : takeCam")
         GPIO.output(17, GPIO.LOW)
-    elif message == "humiLimit":
-        global humiLimit
-        humiLimit = float(message)
-    elif message == "tempLimit":
-        global tempLimit
-        tempLimit = float(message)
     else:
         logging.info("contorller : " + topic + ' '+message)
 
