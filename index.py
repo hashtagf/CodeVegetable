@@ -109,7 +109,7 @@ def subscription(topic, message):
         global tempLimit
         tempLimit = float(message)
     else:
-        logging.info("contorller : not Found")
+        logging.info("contorller : " + topic + ' '+message)
 
 
 def disconnect():
