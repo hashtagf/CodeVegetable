@@ -86,6 +86,7 @@
   });
 
   microgear.on('message', function (topic, data) {
+    console.log(topic,data)
     if (topic == '/Vegetable001/Temperature') {
       var dataFloat = parseFloat(data);
       document.getElementById("temp").innerHTML = dataFloat.toFixed(2);
@@ -224,12 +225,12 @@
   }
 
   changeSystem = (e) => {
+    microgear.publish("/controller/system",'auto',{'retain':true});
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
     if (e.checked) {
       scope.auto()
-      microgear.publish("/controller/system",'auto',{'retain':true});
     }
     else {
       scope.man()

@@ -123,7 +123,7 @@ microgear.setname("RaspberryPI")
 microgear.on_connect = connection
 microgear.on_message = subscription
 microgear.on_disconnect = disconnect
-microgear.subscribe("/controller")
+microgear.subscribe("/controller/#")
 fanIn = False
 fanOut = False
 GPIO.output(pinfanIn,GPIO.LOW)
