@@ -86,7 +86,7 @@
   });
 
   microgear.on('message', function (topic, data) {
-    console.log(topic,data)
+    // console.log(topic,data)
     if (topic == '/Vegetable001/Temperature') {
       var dataFloat = parseFloat(data);
       document.getElementById("temp").innerHTML = dataFloat.toFixed(2);

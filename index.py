@@ -169,7 +169,7 @@ while True:
     if humidityOut is None :
         print "cannot get temp out"
     if humidityIn is not None and humidityOut is not None:
-        # logging.info(str(temperatureIn) + ' ' +str(temperatureOut))
+        logging.info(str(temperatureIn) + ' ' +str(temperatureOut))
         print 'TempIn={0:0.1f}*C  HumidityIn={1:0.1f}%'.format(temperatureIn, humidityIn)
         print 'TempOut={0:0.1f}*C  HumidityOut={1:0.1f}%'.format(temperatureOut, humidityOut)
         microgear.publish("/Temperature",temperatureIn,{'retain':True})
@@ -196,6 +196,7 @@ while True:
                 logging.info("contorller auto: fogOff")
     else:
         GPIO.output(10, GPIO.HIGH)
+        logging.warning('Failed to get reading. Try again!')
         print 'Failed to get reading. Try again!'
     if fanIn :
         GPIO.output(pinfanIn,GPIO.HIGH)
