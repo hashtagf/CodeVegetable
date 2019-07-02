@@ -13,9 +13,11 @@ pinDHTin = 12
 pinDHTout = 16
 pinfanOut = 20
 pinfanIn = 21
+systemType = 'manual'
 
 tempLimit = None
 humiLimit = None
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(pinfanOut,GPIO.OUT)
@@ -45,6 +47,15 @@ def connection():
 
 def subscription(topic, message):
     logging.info('message : ' + message)
+    if topic == "/Vegetable001/controller/system":
+        global systemType
+        systemType = message
+    if topic == "/Vegetable001/controller/tempLimit":
+        global tempLimit
+        tempLimit = float(message)
+    if topic == "/Vegetable001/controller/humiLimit":
+        global humiLimit
+        humiLimit = float(message)
     if message == "lightOn":
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.LOW)
@@ -68,12 +79,12 @@ def subscription(topic, message):
     elif message == "fogOn":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.LOW)
-        if temperatureIn is not None and temperatureOut is not None and temperatureIn > temperatureOut - 2:
+        """ if temperatureIn is not None and temperatureOut is not None and temperatureIn > temperatureOut - 2:
             GPIO.output(10, GPIO.LOW)
             logging.info("contorller : fogOn")
         else :
             GPIO.output(10, GPIO.HIGH)
-            logging.info("contorller : fogOff, outside is too hot")
+            logging.info("contorller : fogOff, outside is too hot") """
     elif message == "fogOff":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.HIGH)
@@ -182,6 +193,13 @@ while True:
             fanOut = False
             fanIn = False
             logging.info("Status fan : OFF")
+        if systemType == 'auto' :
+            if (temperatureIn > tempLimit and tempLimit > temperatureOut - 2) or humidityIn < humiLimit:
+                GPIO.output(10, GPIO.LOW)
+                logging.info("contorller : fogOn")
+            else :
+                GPIO.output(10, GPIO.HIGH)
+                logging.info("contorller : fogOff, outside is too hot")
     else:
         GPIO.output(10, GPIO.HIGH)
         print 'Failed to get reading. Try again!'

@@ -225,12 +225,12 @@
   }
 
   changeSystem = (e) => {
-    microgear.publish("/controller/system",'auto',{'retain':true});
     var scope = angular.
       element(document.getElementById('mainApp')).
       scope();
     if (e.checked) {
       scope.auto()
+      microgear.publish("/controller/system",'auto',{'retain':true});
     }
     else {
       scope.man()
