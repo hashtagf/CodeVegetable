@@ -49,7 +49,6 @@ def connection():
 
 def subscription(topic, message):
     logging.info('message : ' + message)
-    fetchSystem()
 
     if topic == "/Vegetable001/controller/system":
         global systemType
@@ -61,6 +60,7 @@ def subscription(topic, message):
         global humiLimit
         humiLimit = float(message)
     if message == "lightOn":
+        fetchSystem()
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.LOW)
         GPIO.setup(6, GPIO.OUT)
@@ -127,7 +127,7 @@ def job():
     print("I'm working...")
 def fetchSystem ():
     contents = urllib2.urlopen("http://smartfarm-cabinet.herokuapp.com/setsys").read()
-    logging.info(contents)
+    logging.info(contents[0])
 
 PORT = 8000
 class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
@@ -144,7 +144,7 @@ def startServerHttp ():
     print "serving at port", PORT
     thread = threading.Thread(target=httpd.serve_forever)
     thread.start()
-    logging.info("start http server port:"+str(PORT))
+    logging.info("start http server port:" + str(PORT))
 
 startServerHttp()
 
