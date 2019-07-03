@@ -136,8 +136,8 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         content_len = int(self.headers.getheader('content-length', 0))
         post_body = self.rfile.read(content_len)
         print post_body
-        # microgear.publish("/pH",post_body.split(",")[0],{'retain':True})
-        # microgear.publish("/EC",post_body.split(",")[1],{'retain':True})
+        microgear.publish("/pH",post_body.split(",")[0],{'retain':True})
+        microgear.publish("/EC",post_body.split(",")[1],{'retain':True})
 def startServerHttp ():
     Handler = ServerHandler
     httpd = SocketServer.TCPServer(("", PORT), Handler)
