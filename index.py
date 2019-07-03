@@ -153,7 +153,7 @@ def startServerHttp ():
     logging.info("start http server port:" + str(PORT))
 
 startServerHttp()
-
+fetchSystem()
 # schedule.every(5).minutes.do(job)
 # schedule.run_pending()
 microgear.setalias("RaspberryPI")
