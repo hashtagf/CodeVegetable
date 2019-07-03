@@ -158,9 +158,9 @@ Handler = ServerHandler
 
 httpd = SocketServer.TCPServer(("", PORT), Handler)
 
-print "serving at port", PORT
 httpd.serve_forever()
-
+print "serving at port", PORT
+logging.info("server running")
 while True:
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
     humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
