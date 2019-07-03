@@ -6,6 +6,8 @@ import os
 import dropbox
 import SimpleHTTPServer
 import SocketServer
+import urllib2
+import threading
 # import schedule
 import Adafruit_DHT
 sensor = Adafruit_DHT.DHT22
@@ -47,6 +49,8 @@ def connection():
 
 def subscription(topic, message):
     logging.info('message : ' + message)
+    fetchSystem()
+
     if topic == "/Vegetable001/controller/system":
         global systemType
         systemType = message
@@ -121,6 +125,29 @@ def disconnect():
     logging.info("disconnected")
 def job():
     print("I'm working...")
+def fetchSystem ():
+    contents = urllib2.urlopen("http://smartfarm-cabinet.herokuapp.com/setsys").read()
+    print(contents)
+
+PORT = 8000
+class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+
+    def do_POST(self):
+        content_len = int(self.headers.getheader('content-length', 0))
+        post_body = self.rfile.read(content_len)
+        print post_body
+        # microgear.publish("/pH",post_body.split(",")[0],{'retain':True})
+        # microgear.publish("/EC",post_body.split(",")[1],{'retain':True})
+def startServerHttp ():
+    Handler = ServerHandler
+    httpd = SocketServer.TCPServer(("", PORT), Handler)
+    print "serving at port", PORT
+    thread = threading.Thread(target=httpd.serve_forever)
+    thread.start()
+    logging.info("start http server"+PORT)
+
+startServerHttp()
+
 # schedule.every(5).minutes.do(job)
 # schedule.run_pending()
 microgear.setalias("RaspberryPI")
@@ -145,22 +172,6 @@ while connection:
         connection = True
         logging.warning("disconnect")
 
-PORT = 8000
-class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
-
-    def do_POST(self):
-        content_len = int(self.headers.getheader('content-length', 0))
-        post_body = self.rfile.read(content_len)
-        print post_body
-        microgear.publish("/pH",post_body.split(",")[0],{'retain':True})
-        microgear.publish("/EC",post_body.split(",")[1],{'retain':True})
-Handler = ServerHandler
-
-httpd = SocketServer.TCPServer(("", PORT), Handler)
-
-httpd.serve_forever()
-print "serving at port", PORT
-logging.info("server running")
 while True:
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
     humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
