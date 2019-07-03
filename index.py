@@ -215,14 +215,14 @@ while True:
             logging.info("Status fan : OFF")
         if systemType == 'Auto':
             if (temperatureIn > tempLimit and tempLimit > temperatureOut - 2) or humidityIn < humiLimit:
-                GPIO.output(10, GPIO.LOW)
+                writePin(10,False)
                 logging.info("contorller auto: fogOn")
             else :
-                GPIO.output(10, GPIO.HIGH)
+                writePin(10,True)
                 logging.info("contorller auto: fogOff")
     else:
         if systemType == 'Auto':
-            GPIO.output(10, GPIO.HIGH)
+            writePin(10,True)
             logging.info("contorller auto: fogOff")
         logging.warning('Failed to get reading. Try again!')
         print 'Failed to get reading. Try again!'
