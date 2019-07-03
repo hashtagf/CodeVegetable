@@ -179,7 +179,7 @@ while connection:
         logging.warning("disconnect")
 
 while True:
-    if systemType == 'auto':
+    if systemType == 'Auto':
         now = datetime.utcnow()
         if timeStart > now and now < timeEnd:
             writePin(17,False)
@@ -214,7 +214,7 @@ while True:
             fanOut = False
             fanIn = False
             logging.info("Status fan : OFF")
-        if systemType == 'auto':
+        if systemType == 'Auto':
             if (temperatureIn > tempLimit and tempLimit > temperatureOut - 2) or humidityIn < humiLimit:
                 GPIO.output(10, GPIO.LOW)
                 logging.info("contorller auto: fogOn")
@@ -222,7 +222,7 @@ while True:
                 GPIO.output(10, GPIO.HIGH)
                 logging.info("contorller auto: fogOff")
     else:
-        if systemType == 'auto':
+        if systemType == 'Auto':
             GPIO.output(10, GPIO.HIGH)
             logging.info("contorller auto: fogOff")
         logging.warning('Failed to get reading. Try again!')
