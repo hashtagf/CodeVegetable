@@ -180,7 +180,7 @@ fetchSystem()
 while True:
     if systemType == 'Auto':
         now = datetime.utcnow()
-        if timeStart > now and now < timeEnd:
+        if timeStart < now and now < timeEnd:
             writePin(17,False)
             writePin(6,False)
             logging.info("contorller auto: lightOn")
