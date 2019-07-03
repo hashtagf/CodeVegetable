@@ -184,11 +184,11 @@ while True:
         if timeStart > now and now < timeEnd:
             writePin(17,False)
             writePin(6,False)
-            logging.info("contorller : lightOn")
+            logging.info("contorller auto: lightOn")
         else :
             writePin(17,True)
             writePin(6,True)
-            logging.info("contorller : lightOff")
+            logging.info("contorller auto: lightOff")
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
     humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
     if humidityIn is None :
@@ -222,8 +222,9 @@ while True:
                 GPIO.output(10, GPIO.HIGH)
                 logging.info("contorller auto: fogOff")
     else:
-        GPIO.output(10, GPIO.HIGH)
-        logging.info("contorller auto: fogOff")
+        if systemType == 'auto':
+            GPIO.output(10, GPIO.HIGH)
+            logging.info("contorller auto: fogOff")
         logging.warning('Failed to get reading. Try again!')
         print 'Failed to get reading. Try again!'
     if fanIn :
