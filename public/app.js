@@ -186,9 +186,9 @@ angular.module('app', [])
           $scope.totalbtn[0].statusbtn = res.data.statusbtn
         })
         console.log("ledOn")
-        $http.get('/ledOn').then(res => {
+        /* $http.get('/ledOn').then(res => {
           console.log("---------------------------------OK")
-        })
+        }) */
       } else {
         $scope.LEDSta = 'OFF'
         $scope.stabtn[0].statusbtn = false
@@ -196,9 +196,9 @@ angular.module('app', [])
           $scope.totalbtn[0].statusbtn = res.data.statusbtn
         })
         console.log("ledOff")
-        $http.get('/ledOff').then(res => {
+        /* $http.get('/ledOff').then(res => {
           console.log("---------------------------------OK")
-        })
+        }) */
 
       }
 

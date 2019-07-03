@@ -421,6 +421,7 @@ app.put("/setsys/:id", function(req, res) {
     .exec(function(err, done) {
       if (err) console.log(err);
       res.send(done);
+      microgear.chat("RaspberryPI", "btnupdate");
     });
 });
 

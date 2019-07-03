@@ -111,7 +111,7 @@
     if (scope.stasystem == 'Auto') {
       $('#auto-manual').prop('checked', true)
       console.log('Auto')
-      if (tempGlobal >= scope.temp || humiGlobal <= scope.humi) {
+      if (tempGlobal > scope.temp || humiGlobal < scope.humi) {
         $("#graphicfog").show();
         // scope.fogOn()
       } else {
@@ -230,11 +230,9 @@
       scope();
     if (e.checked) {
       scope.auto()
-      microgear.publish("/controller/system",'auto',{'retain':true});
     }
     else {
       scope.man()
-      microgear.publish("/controller/system",'manual',{'retain':true});
     }
   }
   changeTimeStart = () => {
@@ -271,7 +269,6 @@
     let temp = $('#tempInput').val()
     scope.temp = temp;
     scope.autoTime()
-    microgear.publish("/controller/tempLimit",temp,{'retain':true});
   }
 
   changeHumi = () => {
@@ -281,7 +278,6 @@
     let humi = $('#humiInput').val()
     scope.humi = humi;
     scope.autoTime()
-    microgear.publish("/controller/humiLimit",humi,{'retain':true});
   }
 
   setInterval(() => {

@@ -6,8 +6,10 @@ import os
 import dropbox
 import SimpleHTTPServer
 import SocketServer
-import urllib2
 import threading
+import requests
+from datetime import datetime
+
 # import schedule
 import Adafruit_DHT
 sensor = Adafruit_DHT.DHT22
@@ -15,10 +17,13 @@ pinDHTin = 12
 pinDHTout = 16
 pinfanOut = 20
 pinfanIn = 21
+
 systemType = 'manual'
 
-tempLimit = None
-humiLimit = None
+tempLimit = 30
+humiLimit = 80
+timeStart = None
+timeEnd = None
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -42,25 +47,21 @@ def saveImg (filename) :
     f = open(file_path, 'rb')
     dbx.files_upload(f.read(),'/'+filename, mode=dropbox.files.WriteMode.overwrite)
     # dbx.files_upload(f.read(),'/'+filename)
-
+def writePin (pin, flag):
+    GPIO.setup(pin, GPIO.OUT)
+    if flag:
+        GPIO.output(pin, GPIO.HIGH)
+    else :
+        GPIO.output(pin, GPIO.LOW)
 def connection():
     logging.info("Now I am connected with Netpie")
 
 
 def subscription(topic, message):
     logging.info('message : ' + message)
-
-    if topic == "/Vegetable001/controller/system":
-        global systemType
-        systemType = message
-    if topic == "/Vegetable001/controller/tempLimit":
-        global tempLimit
-        tempLimit = float(message)
-    if topic == "/Vegetable001/controller/humiLimit":
-        global humiLimit
-        humiLimit = float(message)
+    if message == "btnupdate":
+        fetchSystem()
     if message == "lightOn":
-        # fetchSystem()
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, GPIO.LOW)
         GPIO.setup(6, GPIO.OUT)
@@ -126,9 +127,14 @@ def disconnect():
 def job():
     print("I'm working...")
 def fetchSystem ():
-    contents = urllib2.urlopen("http://smartfarm-cabinet.herokuapp.com/setsys").read()
-    logging.info(contents[0].sysbtn)
-
+    global systemType,tempLimit,humiLimit,timeStart,timeEnd
+    response = requests.get("http://smartfarm-cabinet.herokuapp.com/setsys")
+    json_response = response.json()
+    systemType = json_response[0]['sysbtn']
+    tempLimit = float(json_response[0]['sysTemp'])
+    humiLimit = float(json_response[0]['sysHumi'])
+    timeStart = datetime.strptime(json_response[0]['sysTimeStart'], '%Y-%m-%dT%H:%M:%S.%fZ')
+    timeEnd = datetime.strptime(json_response[0]['sysTimeEnd'], '%Y-%m-%dT%H:%M:%S.%fZ')
 PORT = 8000
 class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
@@ -173,6 +179,16 @@ while connection:
         logging.warning("disconnect")
 
 while True:
+    if systemType == 'auto':
+        now = datetime.utcnow()
+        if timeStart > now and now < timeEnd:
+            writePin(17,False)
+            writePin(6,False)
+            logging.info("contorller : lightOn")
+        else :
+            writePin(17,True)
+            writePin(6,True)
+            logging.info("contorller : lightOff")
     humidityIn, temperatureIn = Adafruit_DHT.read_retry(sensor, pinDHTin)
     humidityOut, temperatureOut = Adafruit_DHT.read_retry(sensor, pinDHTout)
     if humidityIn is None :
@@ -198,7 +214,7 @@ while True:
             fanOut = False
             fanIn = False
             logging.info("Status fan : OFF")
-        if systemType == 'auto' and tempLimit is not None and humiLimit is not None:
+        if systemType == 'auto':
             if (temperatureIn > tempLimit and tempLimit > temperatureOut - 2) or humidityIn < humiLimit:
                 GPIO.output(10, GPIO.LOW)
                 logging.info("contorller auto: fogOn")
@@ -207,6 +223,7 @@ while True:
                 logging.info("contorller auto: fogOff")
     else:
         GPIO.output(10, GPIO.HIGH)
+        logging.info("contorller auto: fogOff")
         logging.warning('Failed to get reading. Try again!')
         print 'Failed to get reading. Try again!'
     if fanIn :
