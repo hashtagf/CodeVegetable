@@ -127,7 +127,7 @@ def job():
     print("I'm working...")
 def fetchSystem ():
     contents = urllib2.urlopen("http://smartfarm-cabinet.herokuapp.com/setsys").read()
-    print(contents)
+    logging.info(contents)
 
 PORT = 8000
 class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
@@ -144,7 +144,7 @@ def startServerHttp ():
     print "serving at port", PORT
     thread = threading.Thread(target=httpd.serve_forever)
     thread.start()
-    logging.info("start http server"+PORT)
+    logging.info("start http server port:"+str(PORT))
 
 startServerHttp()
 
