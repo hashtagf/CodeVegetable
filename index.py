@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 import microgear.client as microgear
 import logging
 import time
@@ -8,7 +9,9 @@ import SimpleHTTPServer
 import SocketServer
 import threading
 import requests
-from datetime import datetime
+from datetime import datetime,timedelta
+# import pytz
+# from pytz import timezone,utc
 
 # import schedule
 import Adafruit_DHT
@@ -108,9 +111,9 @@ def subscription(topic, message):
         GPIO.setup(6, GPIO.OUT)
         GPIO.output(6, GPIO.LOW)
         os.system(
-            "fswebcam -p YUYV -d /dev/video2 -r 1280x780 --no-banner public/picture/Floor3.jpg")
+            "fswebcam -p YUYV -d /dev/video2 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor3.jpg")
         os.system(
-            "fswebcam -p YUYV -d /dev/video1 -r 1280x780 --no-banner public/picture/Floor2.jpg")
+            "fswebcam -p YUYV -d /dev/video1 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor2.jpg")
         os.system(
             "fswebcam -p YUYV -d /dev/video0 -r 1280x780 --no-banner public/picture/Floor1.jpg")
         saveImg ('Floor3.jpg')
@@ -133,8 +136,8 @@ def fetchSystem ():
     systemType = json_response[0]['sysbtn']
     tempLimit = float(json_response[0]['sysTemp'])
     humiLimit = float(json_response[0]['sysHumi'])
-    timeStart = datetime.strptime(json_response[0]['sysTimeStart'], '%Y-%m-%dT%H:%M:%S.%fZ')
-    timeEnd = datetime.strptime(json_response[0]['sysTimeEnd'], '%Y-%m-%dT%H:%M:%S.%fZ')
+    timeStart = convertTime(datetime.strptime(json_response[0]['sysTimeStart'], '%Y-%m-%dT%H:%M:%S.%fZ'))
+    timeEnd = convertTime(datetime.strptime(json_response[0]['sysTimeEnd'], '%Y-%m-%dT%H:%M:%S.%fZ'))
 PORT = 8000
 class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
@@ -144,6 +147,10 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         print post_body
         microgear.publish("/pH",post_body.split(",")[0],{'retain':True})
         microgear.publish("/EC",post_body.split(",")[1],{'retain':True})
+def convertTime (time):
+    temp = time + timedelta(hours = 7)
+    return temp.time()
+                    
 def startServerHttp ():
     Handler = ServerHandler
     httpd = SocketServer.TCPServer(("", PORT), Handler)
@@ -179,8 +186,9 @@ while connection:
 fetchSystem()
 while True:
     if systemType == 'Auto':
-        now = datetime.utcnow()
-        if timeStart < now and now < timeEnd:
+        now = datetime.now().time()
+        print now,timeStart,timeEnd
+        if (timeStart < now and now < timeEnd) or timeStart == timeEnd:
             writePin(17,False)
             writePin(6,False)
             logging.info("contorller auto: lightOn")
