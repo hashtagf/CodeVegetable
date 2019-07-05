@@ -111,7 +111,7 @@ def subscription(topic, message):
         GPIO.output(17, GPIO.HIGH)
         GPIO.setup(6, GPIO.OUT)
         GPIO.output(6, GPIO.LOW)
-        currentDT = datetime.datetime.now()
+        currentDT = datetime.now()
         filename = currentDT.strftime("%Y-%m-%d-%H-%M-%S") + '.jpg'
         os.system(
             "fswebcam -p YUYV -d /dev/video1 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor3/"+filename)
