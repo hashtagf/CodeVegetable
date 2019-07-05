@@ -449,10 +449,10 @@
 
 </html>
 
-<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-messaging.js"></script>
 <script>
 
   var firebaseConfig = {
@@ -477,8 +477,6 @@
   // [END set_public_vapid_key]
 
   // IDs of divs that display Instance ID token UI or request permission UI.
-  const tokenDivId = "token_div";
-  const permissionDivId = "permission_div";
   const tokenStore = firebase.firestore().collection("token");
   // [START refresh_token]
   // Callback fired if Instance ID token is updated.
