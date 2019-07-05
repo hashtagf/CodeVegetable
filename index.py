@@ -46,7 +46,7 @@ temperatureOut = None
 dbx = dropbox.Dropbox("cKG3HoKEj5UAAAAAAABOIPdWvWMDanbCaQP_5q5Sd-NbI9CpIDPCFeZN0EI2xCUa")
 def saveImg (path, filename) :
     dbx.users_get_current_account()
-    file_path = os.path.join("/home/pi/Desktop/CodeVegetable/public/picture/" + path, filename)
+    file_path = os.path.join("/home/pi/Desktop/CodeVegetable/public/picture/" + path+"/", filename)
     f = open(file_path, 'rb')
     dbx.files_upload(f.read(),'/'+path +'/'+filename, mode=dropbox.files.WriteMode.overwrite)
     dbx.files_get_temporary_link('/'+path +'/'+filename)
