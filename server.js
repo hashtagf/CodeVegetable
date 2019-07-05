@@ -145,13 +145,13 @@ async function init(deviceToken) {
   }
 }
 
-async function sendNotification(title, body, token) {
+async function sendNotification(title, text, token) {
   const body = {
     message: {
       data: { key: "value" },
       notification: {
         title: title,
-        body: body
+        body: text
       },
       webpush: {
         headers: {
@@ -179,6 +179,24 @@ async function sendNotification(title, body, token) {
     console.log("err: ", err.message);
   }
 }
+
+app.get("/testNoti", function(req, res, next) {
+  db.collection("token")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        sendNotification("LED ON", "เปิดไฟ", doc.id);
+      });
+    })
+    .catch(err => {
+      console.log("Error getting documents", err);
+    });
+  res.status(200);
+  res.send({
+    status: "OK",
+    msg: "testNoti"
+  });
+});
 
 app.get("/ledOn", function(req, res, next) {
   microgear.chat("RaspberryPI", "lightOn");
