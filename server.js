@@ -201,6 +201,13 @@ app.get("/ledOn", function(req, res, next) {
 
 app.get("/ledOff", function(req, res, next) {
   microgear.chat("RaspberryPI", "lightOff");
+  db.collection("token")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        sendNotification("LED OFF", "ปิดไฟ", doc.id);
+      });
+    });
   res.status(200);
   res.send({
     status: "OK",
@@ -210,6 +217,13 @@ app.get("/ledOff", function(req, res, next) {
 
 app.get("/pumpOn", function(req, res, next) {
   microgear.chat("RaspberryPI", "pumpOn");
+  db.collection("token")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        sendNotification("PUMP ON", "ปั้มน้ำกำลังทำงาน", doc.id);
+      });
+    });
   res.status(200);
   res.send({
     status: "OK",
@@ -219,6 +233,13 @@ app.get("/pumpOn", function(req, res, next) {
 
 app.get("/pumpOff", function(req, res, next) {
   microgear.chat("RaspberryPI", "pumpOff");
+  db.collection("token")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        sendNotification("PUMP OFF", "ปั้มน้ำหยุดทำงาน", doc.id);
+      });
+    });
   res.status(200);
   res.send({
     status: "OK",
@@ -228,6 +249,13 @@ app.get("/pumpOff", function(req, res, next) {
 
 app.get("/fogOn", function(req, res, next) {
   microgear.chat("RaspberryPI", "fogOn");
+  db.collection("token")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        sendNotification("FOG ON", "ระบบหมอกทำงาน", doc.id);
+      });
+    });
   res.status(200);
   res.send({
     status: "OK",
@@ -237,6 +265,13 @@ app.get("/fogOn", function(req, res, next) {
 
 app.get("/fogOff", function(req, res, next) {
   microgear.chat("RaspberryPI", "fogOff");
+  db.collection("token")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        sendNotification("FOG OFF", "ระบบหมอกหยุดทำงาน", doc.id);
+      });
+    });
   res.status(200);
   res.send({
     status: "OK",
@@ -246,6 +281,13 @@ app.get("/fogOff", function(req, res, next) {
 
 app.get("/waterOn", function(req, res, next) {
   microgear.chat("RaspberryPI", "waterOn");
+  db.collection("token")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        sendNotification("WATER ON", "เปิดใช้งานเครื่องกรองน้ำ", doc.id);
+      });
+    });
   res.status(200);
   res.send({
     status: "OK",
@@ -255,6 +297,13 @@ app.get("/waterOn", function(req, res, next) {
 
 app.get("/waterOff", function(req, res, next) {
   microgear.chat("RaspberryPI", "waterOff");
+  db.collection("token")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        sendNotification("WATER OFF", "ปิดการทำงานเครื่องกรองน้ำ", doc.id);
+      });
+    });
   res.status(200);
   res.send({
     status: "OK",
