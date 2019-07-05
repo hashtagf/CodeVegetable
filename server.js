@@ -180,12 +180,12 @@ async function sendNotification(title, text, token) {
   }
 }
 
-app.get("/testNoti", function(req, res, next) {
+app.get("/sendNoti/:title/:text", function(req, res, next) {
   db.collection("token")
     .get()
     .then(snapshot => {
       snapshot.forEach(doc => {
-        sendNotification("LED ON", "เปิดไฟ", doc.id);
+        sendNotification(req.params.title, req.params.text, doc.id);
       });
     })
     .catch(err => {
