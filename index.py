@@ -44,11 +44,12 @@ humidityOut = None
 temperatureOut = None
 
 dbx = dropbox.Dropbox("cKG3HoKEj5UAAAAAAABOIPdWvWMDanbCaQP_5q5Sd-NbI9CpIDPCFeZN0EI2xCUa")
-def saveImg (filename) :
+def saveImg (path, filename) :
     dbx.users_get_current_account()
-    file_path = os.path.join("/home/pi/Desktop/CodeVegetable/public/picture/", filename)
+    file_path = os.path.join("/home/pi/Desktop/CodeVegetable/public/picture/" + path, filename)
     f = open(file_path, 'rb')
-    dbx.files_upload(f.read(),'/'+filename, mode=dropbox.files.WriteMode.overwrite)
+    dbx.files_upload(f.read(),'/'+path +'/'+filename, mode=dropbox.files.WriteMode.overwrite)
+    dbx.files_get_temporary_link('/'+path +'/'+filename)
     # dbx.files_upload(f.read(),'/'+filename)
 def writePin (pin, flag):
     GPIO.setup(pin, GPIO.OUT)
@@ -110,20 +111,22 @@ def subscription(topic, message):
         GPIO.output(17, GPIO.HIGH)
         GPIO.setup(6, GPIO.OUT)
         GPIO.output(6, GPIO.LOW)
+        currentDT = datetime.datetime.now()
+        filename = currentDT.strftime("%Y-%m-%d-%H-%M-%S") + '.jpg'
         os.system(
-            "fswebcam -p YUYV -d /dev/video2 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor3.jpg")
+            "fswebcam -p YUYV -d /dev/video1 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor3/"+filename)
         os.system(
-            "fswebcam -p YUYV -d /dev/video1 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor2.jpg")
+            "fswebcam -p YUYV -d /dev/video0 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor2/"+filename)
         os.system(
-            "fswebcam -p YUYV -d /dev/video0 -r 1280x780 --no-banner public/picture/Floor1.jpg")
-        saveImg ('Floor3.jpg')
-        saveImg ('Floor2.jpg')
-        saveImg ('Floor1.jpg')
+            "fswebcam -p YUYV -d /dev/video2 -r 1280x780 -set brightness=50% --no-banner public/picture/Floor1/"+filename)
+        saveImg ('Floor3',filename)
+        saveImg ('Floor2', filename)
+        saveImg ('Floor1', filename)
+        microgear.publish("/img",filename,{'retain':True})
         logging.info("contorller : takeCam")
         GPIO.output(17, GPIO.LOW)
     else:
         logging.info("contorller : " + topic + ' '+message)
-
 
 def disconnect():
     logging.info("disconnected")
