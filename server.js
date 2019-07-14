@@ -157,7 +157,6 @@ async function init(deviceToken) {
 
   try {
     const accessToken = await getAccessToken();
-    console.log("accessToken: ", accessToken);
     const { data } = await axios.post(URL, JSON.stringify(body), {
       headers: {
         "Content-Type": "application/json",
@@ -171,6 +170,7 @@ async function init(deviceToken) {
 }
 
 async function sendNotification(title, text, token) {
+  console.log(token)
   const body = {
     message: {
       data: { key: "value" },
@@ -198,6 +198,8 @@ async function sendNotification(title, text, token) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`
       }
+    }).then(res => {
+      console.log(res.data) 
     });
     console.log("name: ", data.name);
   } catch (err) {

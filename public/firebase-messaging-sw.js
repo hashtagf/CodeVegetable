@@ -62,3 +62,4 @@ messaging.setBackgroundMessageHandler(function(payload) {
   );
 });
 // [END background_handler]
+// importScripts("https://cdn.pushalert.co/sw-12734.js");

@@ -3,3 +3,17 @@
   "//_comment2": "It is the same for all projects, this is not your project's sender ID",
   "gcm_sender_id": "103953800507"
 }
+// {
+//     "name": "Smartfarm-cabinet68 Push Notification",
+//     "short_name": "smartfarm-cabinet68",
+//     "gcm_sender_id": "539876079581",
+//     "start_url": "/",
+//     "display": "standalone",
+//     "icons": [
+//         {
+//             "src": "https://cdn.pushalert.co/img/pushalert-square-icon.png",
+//             "sizes": "192x192",
+//             "type": "image/png"
+//         }
+//     ]
+// }
