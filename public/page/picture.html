@@ -74,12 +74,12 @@
     });
   
     microgear.on('message', function (topic, data) {
-      // console.log(topic,data)
-      if (topic == '/Floor3') {
+      console.log(topic,data)
+      if (topic == '/Vegetable001/Floor3') {
         document.getElementById("Floor3").src = data+'';
-      } else if (topic == '/Floor2') {
+      } else if (topic == '/Vegetable001/Floor2') {
         document.getElementById("Floor2").src = data+'';
-      } else if (topic == '/Floor1') {
+      } else if (topic == '/Vegetable001/Floor1') {
         document.getElementById("Floor1").src = data+'';
       }
     });
