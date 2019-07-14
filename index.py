@@ -48,12 +48,16 @@ def saveImg (path, filename) :
     dbx.users_get_current_account()
     file_path = os.path.join("/home/pi/Desktop/CodeVegetable/public/picture/" + path+"/", filename)
     f = open(file_path, 'rb')
-    g = f
-    dbx.files_upload(f.read(),'/'+path +'/'+filename, mode=dropbox.files.WriteMode.overwrite)
+    
+    dbx.files_upload(f.read(),'/'+path +'.jpg', mode=dropbox.files.WriteMode.overwrite)
+    g = open(file_path, 'rb')
+    
+    dbx.files_upload(g.read(),'/'+path +'/'+filename, mode=dropbox.files.WriteMode.overwrite)
+    os.remove("/home/pi/Desktop/CodeVegetable/public/picture/" + path+"/" + filename)
     # result = dbx.files_get_temporary_link('/'+path +'/'+filename)
     # print(result.link)
     # microgear.publish("/" + path,result.link,{'retain':True})
-    dbx.file_copy('/' + path + '/' + filename, '/' + path + '.jpg')
+    # dbx.file_copy('/' + path + '/' + filename, '/' + path + '.jpg')
 def writePin (pin, flag):
     GPIO.setup(pin, GPIO.OUT)
     if flag:
@@ -116,7 +120,7 @@ def subscription(topic, message):
             os.system(
                 "fswebcam -p YUYV -d /dev/video0 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor2/"+filename)
             os.system(
-                "fswebcam -p YUYV -d /dev/video2 -r 1280x780 -set brightness=50% --no-banner public/picture/Floor1/"+filename)
+                "fswebcam -p YUYV -d /dev/video2 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor1/"+filename)
             saveImg ('Floor3',filename)
             saveImg ('Floor2', filename)
             saveImg ('Floor1', filename)
