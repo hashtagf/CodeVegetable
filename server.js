@@ -50,10 +50,35 @@ microgear.on("connected", function() {
 });
 
 microgear.on("present", function(event) {
+  console.log("present")
+  if(event.type == "offline" && event.alias == "RaspberryPI") {
+    db.collection("token")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        sendNotification("RaspberryPI OFFLINE", "Please Reconnect..", doc.id);
+      });
+    })
+    .catch(err => {
+      console.log("Error getting documents", err);
+    });
+  } else if (event.type == "online" && event.alias == "RaspberryPI") {
+    db.collection("token")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        sendNotification("RaspberryPI ONLINE", "ONLINE", doc.id);
+      });
+    })
+    .catch(err => {
+      console.log("Error getting documents", err);
+    });
+  }
   console.log(event);
 });
 
 microgear.on("absent", function(event) {
+  console.log("absent")
   console.log(event);
 });
 
@@ -185,6 +210,7 @@ app.get("/sendNoti/:title/:text", function(req, res, next) {
     .get()
     .then(snapshot => {
       snapshot.forEach(doc => {
+        console.log(doc.id)
         sendNotification(req.params.title, req.params.text, doc.id);
       });
     })
