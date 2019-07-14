@@ -48,12 +48,13 @@ def saveImg (path, filename) :
     dbx.users_get_current_account()
     file_path = os.path.join("/home/pi/Desktop/CodeVegetable/public/picture/" + path+"/", filename)
     f = open(file_path, 'rb')
+    g = f
     dbx.files_upload(f.read(),'/'+path +'/'+filename, mode=dropbox.files.WriteMode.overwrite)
     result = dbx.files_get_temporary_link('/'+path +'/'+filename)
     print(result.link)
     # microgear.publish("/" + path,result.link,{'retain':True})
-
-    dbx.files_upload(f.read(),'/' + path + '.jpg')
+    # dbx.file_copy('/' + path + '/' + filename, '/' + path + '.jpg')
+    dbx.files_upload(g.read(),'/' + path + '.jpg', mode=dropbox.files.WriteMode.overwrite)
 def writePin (pin, flag):
     GPIO.setup(pin, GPIO.OUT)
     if flag:
