@@ -49,7 +49,8 @@ def saveImg (path, filename) :
     file_path = os.path.join("/home/pi/Desktop/CodeVegetable/public/picture/" + path+"/", filename)
     f = open(file_path, 'rb')
     dbx.files_upload(f.read(),'/'+path +'/'+filename, mode=dropbox.files.WriteMode.overwrite)
-    dbx.files_get_temporary_link('/'+path +'/'+filename)
+    result = dbx.files_get_temporary_link('/'+path +'/'+filename)
+    print(result.link)
     # dbx.files_upload(f.read(),'/'+filename)
 def writePin (pin, flag):
     GPIO.setup(pin, GPIO.OUT)
