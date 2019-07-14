@@ -50,11 +50,10 @@ def saveImg (path, filename) :
     f = open(file_path, 'rb')
     g = f
     dbx.files_upload(f.read(),'/'+path +'/'+filename, mode=dropbox.files.WriteMode.overwrite)
-    dbx.files_upload(g.read(),'/' + path + '.jpg', mode=dropbox.files.WriteMode.overwrite)
     # result = dbx.files_get_temporary_link('/'+path +'/'+filename)
     # print(result.link)
     # microgear.publish("/" + path,result.link,{'retain':True})
-    # dbx.file_copy('/' + path + '/' + filename, '/' + path + '.jpg')
+    dbx.file_copy('/' + path + '/' + filename, '/' + path + '.jpg')
 def writePin (pin, flag):
     GPIO.setup(pin, GPIO.OUT)
     if flag:
