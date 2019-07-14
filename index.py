@@ -51,6 +51,8 @@ def saveImg (path, filename) :
     dbx.files_upload(f.read(),'/'+path +'/'+filename, mode=dropbox.files.WriteMode.overwrite)
     result = dbx.files_get_temporary_link('/'+path +'/'+filename)
     print(result.link)
+    microgear.publish("/" + path,result.link,{'retain':True})
+
     # dbx.files_upload(f.read(),'/'+filename)
 def writePin (pin, flag):
     GPIO.setup(pin, GPIO.OUT)
@@ -226,7 +228,7 @@ while True:
             fanIn = False
             logging.info("Status fan : OFF")
         if systemType == 'Auto':
-            if (temperatureIn > tempLimit and tempLimit > temperatureOut - 2) or humidityIn < humiLimit:
+            if (temperatureIn > tempLimit and 2 > abs(temperatureOut - temperatureIn) or humidityIn < humiLimit:
                 writePin(10,False)
                 logging.info("contorller auto: fogOn")
             else :
