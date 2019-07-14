@@ -38,52 +38,7 @@
     UPLOADCARE_LOCALE = "th";
     UPLOADCARE_PUBLIC_KEY = "4353b3181184265c3b4a";
   </script>
-  <script>
-    const APPID = "Vegetable001";
-    const KEY = "xOWBLi8n4B7rjLi";
-    const SECRET = "Y5HSsNTp1wJmtgeRhXV5wcsZx";
-  
-    const ALIAS = "New_Output";     //  ชื่อตัวเอง
-    const thing1 = "NodeMCU1";                                   //  ชื่อเพื่อนที่จะคุย
-  
-    var tempGlobal = 0;
-    var humiGlobal = 0;
-  
-    var microgear = Microgear.create({
-      key: KEY,
-      secret: SECRET,
-      alias: ALIAS
-    });
-  
-    microgear.on('connected', function () {
-      microgear.setAlias(ALIAS);
-      microgear.subscribe("/#");
-      console.log('connect NETPIE')
-    });
-  
-    microgear.on('present', function (event) {
-      console.log(event);
-    });
-  
-    microgear.on('absent', function (event) {
-      console.log(event);
-    });
-  
-    microgear.resettoken(function (err) {
-      microgear.connect(APPID);
-    });
-  
-    microgear.on('message', function (topic, data) {
-      console.log(topic,data)
-      if (topic == '/Vegetable001/Floor3') {
-        document.getElementById("Floor3").src = data+'';
-      } else if (topic == '/Vegetable001/Floor2') {
-        document.getElementById("Floor2").src = data+'';
-      } else if (topic == '/Vegetable001/Floor1') {
-        document.getElementById("Floor1").src = data+'';
-      }
-    });
-  </script>
+
   <!-- Compiled and minified CSS -->
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"> -->
   <!-- Compiled and minified JavaScript -->
@@ -160,8 +115,7 @@
           </div>
           <div class="panel-body zoom">
             <center>
-              <img src="" id="Floor3" class="img-responsive img-fluid z-depth-1" alt="Cinque Terre" width="500px">
-              <!-- <img src="https://www.dropbox.com/s/r5232m9ta2bfvg9/Floor3.jpg?raw=1" class="img-responsive img-fluid z-depth-1" alt="Cinque Terre" width="500px"> -->
+              <img src="https://www.dropbox.com/s/aose71tth6emh31/Floor3.jpg?raw=1" id="Floor3" class="img-responsive img-fluid z-depth-1" alt="Cinque Terre" width="500px">
             </center>
           </div>
         </div>
@@ -180,7 +134,7 @@
           <div class="panel-body zoom">
             <center>
 
-              <img src="" id="Floor2" class="img-responsive img-fluid z-depth-1" alt="Cinque Terre" width="500px">
+              <img src="https://www.dropbox.com/s/0b4ks949vmya6um/Floor2.jpg?raw=1" id="Floor2" class="img-responsive img-fluid z-depth-1" alt="Cinque Terre" width="500px">
             </center>
           </div>
         </div>
@@ -198,7 +152,7 @@
           </div>
           <div class="panel-body zoom">
             <center>
-              <img src="" id="Floor1" class="img-responsive img-fluid z-depth-1" alt="Cinque Terre" width="500px">
+              <img src="https://www.dropbox.com/s/5wrvxxso8th5ipg/Floor1.jpg?raw=1" id="Floor1" class="img-responsive img-fluid z-depth-1" alt="Cinque Terre" width="500px">
             </center>
           </div>
         </div>
