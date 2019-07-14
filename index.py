@@ -226,7 +226,7 @@ while True:
             fanIn = False
             logging.info("Status fan : OFF")
         if systemType == 'Auto':
-            if (temperatureIn > tempLimit and 2 > abs(temperatureOut - temperatureIn) or humidityIn < humiLimit:
+            if (temperatureIn > tempLimit and 2 > abs(temperatureOut - temperatureIn)) or humidityIn < humiLimit:
                 writePin(10,False)
                 logging.info("contorller auto: fogOn")
             else :
