@@ -51,9 +51,9 @@ def saveImg (path, filename) :
     dbx.files_upload(f.read(),'/'+path +'/'+filename, mode=dropbox.files.WriteMode.overwrite)
     result = dbx.files_get_temporary_link('/'+path +'/'+filename)
     print(result.link)
-    microgear.publish("/" + path,result.link,{'retain':True})
+    # microgear.publish("/" + path,result.link,{'retain':True})
 
-    # dbx.files_upload(f.read(),'/'+filename)
+    dbx.files_upload(f.read(),'/' + path + '.jpg')
 def writePin (pin, flag):
     GPIO.setup(pin, GPIO.OUT)
     if flag:
@@ -91,12 +91,6 @@ def subscription(topic, message):
     elif message == "fogOn":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.LOW)
-        """ if temperatureIn is not None and temperatureOut is not None and temperatureIn > temperatureOut - 2:
-            GPIO.output(10, GPIO.LOW)
-            logging.info("contorller : fogOn")
-        else :
-            GPIO.output(10, GPIO.HIGH)
-            logging.info("contorller : fogOff, outside is too hot") """
     elif message == "fogOff":
         GPIO.setup(10, GPIO.OUT)
         GPIO.output(10, GPIO.HIGH)
@@ -116,17 +110,21 @@ def subscription(topic, message):
         GPIO.output(6, GPIO.LOW)
         currentDT = datetime.now()
         filename = currentDT.strftime("%Y-%m-%d-%H-%M-%S") + '.jpg'
-        os.system(
-            "fswebcam -p YUYV -d /dev/video1 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor3/"+filename)
-        os.system(
-            "fswebcam -p YUYV -d /dev/video0 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor2/"+filename)
-        os.system(
-            "fswebcam -p YUYV -d /dev/video2 -r 1280x780 -set brightness=50% --no-banner public/picture/Floor1/"+filename)
-        saveImg ('Floor3',filename)
-        saveImg ('Floor2', filename)
-        saveImg ('Floor1', filename)
-        microgear.publish("/img",filename,{'retain':True})
-        logging.info("contorller : takeCam")
+        try:
+            os.system(
+                "fswebcam -p YUYV -d /dev/video1 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor3/"+filename)
+            os.system(
+                "fswebcam -p YUYV -d /dev/video0 -r 1280x780 --set brightness=50% --no-banner public/picture/Floor2/"+filename)
+            os.system(
+                "fswebcam -p YUYV -d /dev/video2 -r 1280x780 -set brightness=50% --no-banner public/picture/Floor1/"+filename)
+            saveImg ('Floor3',filename)
+            saveImg ('Floor2', filename)
+            saveImg ('Floor1', filename)
+            logging.info("contorller : takeCam")
+        except:
+            logging.info("contorller : cannot takeCam")
+
+        
         GPIO.output(17, GPIO.LOW)
     else:
         logging.info("contorller : " + topic + ' '+message)
